@@ -5,10 +5,12 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import GraphicalInterface from '@/components/GraphicalInterface/GraphicalInterface.tsx';
 import TerminalInterface from '@/components/TerminalInterface/TerminalInterface.tsx';
+
 import CountdownComponent from '@/components/CountdownComponent/CountdownComponent.tsx';
 import EventsPage from '@/components/EventsPage/EventsPage.tsx';
 import SponsorsPage from '@/components/SponsorsPage/SponsorsPage.tsx';
 import TeamPage from '@/components/TeamPage/TeamPage.tsx';
+
 
 const router = createBrowserRouter([
   {
