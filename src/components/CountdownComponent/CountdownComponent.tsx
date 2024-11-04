@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-
 // a functional component
 const CountdownComponent: React.FC = () => {
   const targetDate = '2024-12-24T23:59:59'; // for now let's say 'time until christmas'
