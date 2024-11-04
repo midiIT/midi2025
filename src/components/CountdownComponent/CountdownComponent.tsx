@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
+// type of calculateTimeLeft
+type TimeLeft = {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
 // a functional component
 const CountdownComponent: React.FC = () => {
-  const targetDate = '2024-12-24T23:59:59'; // for now let's say 'time until christmas'
+  // const targetDate = '2025-04-09T23:59:59'; // April 10th is MIDI
+  const targetDate = import.meta.env.VITE_MIDI_DATE;
+  console.log("targetDate: " + targetDate);
 
   // helper function
-  const calculateTimeLeft = () => {
+  const calculateTimeLeft = () : TimeLeft => {
     const now = new Date();
     const difference = new Date(targetDate).getTime() - now.getTime(); // in milliseconds
 
@@ -31,7 +41,7 @@ const CountdownComponent: React.FC = () => {
     }, 1000);
 
     return () => clearInterval(timer); // cleanup func
-  }, [targetDate]);
+  }, []);
 
   // with little tailwind css
   return (
