@@ -6,6 +6,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import GraphicalInterface from '@/components/GraphicalInterface/GraphicalInterface.tsx';
 import TerminalInterface from '@/components/TerminalInterface/TerminalInterface.tsx';
 
+import CountdownComponent from '@/components/CountdownComponent/CountdownComponent.tsx';
+import EventsPage from '@/components/EventsPage/EventsPage.tsx';
+import SponsorsPage from '@/components/SponsorsPage/SponsorsPage.tsx';
+import TeamPage from '@/components/TeamPage/TeamPage.tsx';
+
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -18,6 +24,22 @@ const router = createBrowserRouter([
   {
     path: 'cli',
     element: <TerminalInterface />,
+  },
+  {
+    path: 'countdown',
+    element: <CountdownComponent />,
+  },
+  {
+    path: 'events',
+    element: <EventsPage />,
+  },
+  {
+    path: 'sponsors',
+    element: <SponsorsPage />,
+  },
+  {
+    path: 'team',
+    element: <TeamPage />,
   },
 ]);
 
