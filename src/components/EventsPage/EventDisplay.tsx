@@ -7,7 +7,7 @@ interface EventDisplayProps {
 
 const EventDisplay: React.FC<EventDisplayProps> = ({ eventDate }) => {
     const eventInfo = events.find(event => event.date === eventDate);
-
+    
     return (
         <div className="max-w-sm w-full bg-gray-100 p-6 rounded-lg">
             {eventInfo ? (
