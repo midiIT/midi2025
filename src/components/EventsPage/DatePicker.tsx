@@ -8,7 +8,7 @@ interface DatePickerProps {
 const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
     const year = 2024;
     const month = 11;
-    const weekdayHeaders = ["S", "M", "T", "W", "T", "F", "S"];
+    const weekdayHeaders = ["Sk", "Pr", "An", "Tr", "Kt", "Pn", "Š"];
 
     const [selectedDate, setSelectedDate] = useState<Date>(new Date(Date.UTC(year, month - 1, new Date(events[0].date).getDate())));
         
