@@ -54,11 +54,12 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
                         onClick={() => {
                             if (date && events.find(event => event.date === date.toISOString().split('T')[0])) handleClick(date);
                         }}
-                        className={`cursor-pointer rounded-full w-10 h-10 flex items-center justify-center
+                        className={`cursor-pointer rounded-full w-10 h-10 flex flex-col items-center justify-center
                             ${date ? (selectedDate?.getDate() === date?.getDate() ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800") : "bg-gray-300"}
-                            ${date ? "hover:bg-blue-300 hover:text-white" : ""}`}
+                            ${date ? "hover:bg-blue-300 hover:text-white" : ""}
+                            ${date && events.find(event => event.date == date.toISOString().split('T')[0]) ? "border-2 border-blue-500 hover:border-none" : ""}`}
                     >
-                        {date ? date.getDate() : ""}
+                        <span>{date ? date.getDate() : ""}</span>
                     </div>
                 ))}
             </div>
