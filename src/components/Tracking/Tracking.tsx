@@ -13,16 +13,16 @@ const Tracking: React.FC<Props> = ({ element }) => {
     if (loaded.current) return;
     loaded.current = true;
 
-    if (!searchParams.has('tracking')) return;
+    if (!searchParams.has('t')) return;
 
-    const trackingUrl = searchParams.get('tracking');
+    const trackingUrl = searchParams.get('t');
 
     void fetch(`http://localhost:3001/api/tracking/${trackingUrl}`, {
       method: 'PUT',
     });
 
     setSearchParams(prev => {
-      prev.delete('tracking');
+      prev.delete('t');
       return prev;
     });
   });
