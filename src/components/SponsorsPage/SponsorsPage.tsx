@@ -1,13 +1,13 @@
 import goldImage from '@/images/gold.png';
 import silverImage from '@/images/silver.png';
 import bronzeImage from '@/images/bronze.png';
-import standardImage from '@/images/standart.png';
+import standardImage from '@/images/standard.png';
 
 enum SponsorTier {
   gold,
   silver,
   bronze,
-  standart,
+  standard,
 }
 
 interface Sponsor {
@@ -21,7 +21,7 @@ const sponsors: Sponsor[] = [
   { href: "https://lt.wikipedia.org/wiki/Auksas", src: goldImage, alt: "Gold Sponsor", tier: SponsorTier.gold },
   { href: "https://lt.wikipedia.org/wiki/Sidabras", src: silverImage, alt: "Silver Sponsor", tier: SponsorTier.silver },
   { href: "https://lt.wikipedia.org/wiki/Bronza", src: bronzeImage, alt: "Bronze Sponsor", tier: SponsorTier.bronze },
-  { href: "https://lt.wikipedia.org/wiki/Standartas", src: standardImage, alt: "Standard Sponsor", tier: SponsorTier.standart },
+  { href: "https://lt.wikipedia.org/wiki/Standartas", src: standardImage, alt: "Standard Sponsor", tier: SponsorTier.standard },
 ];
 
 function renderSponsorSection(tier: SponsorTier, sponsors: Sponsor[]) {
@@ -35,7 +35,7 @@ function renderSponsorSection(tier: SponsorTier, sponsors: Sponsor[]) {
     [SponsorTier.gold]: 'text-gold border-gold',
     [SponsorTier.silver]: 'text-silver border-silver',
     [SponsorTier.bronze]: 'text-bronze border-bronze',
-    [SponsorTier.standart]: 'text-standard border-standard',
+    [SponsorTier.standard]: 'text-standard border-standard',
   };
 
   return (
@@ -67,7 +67,6 @@ function SponsorsPage() {
     <div className="p-6">
       <h1 className="text-3xl font-bold text-center mb-10">Sponsors Page</h1>
       {Object.values(SponsorTier)
-        .filter((tier) => typeof tier === 'number')
         .map((tier) => renderSponsorSection(tier as SponsorTier, sponsors))}
     </div>
   );
