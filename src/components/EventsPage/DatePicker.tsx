@@ -23,7 +23,6 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
 
         const lastDayOfMonth = convertSundayToMondayStart(daysArray[daysArray.length - 1].getDay());
         daysArray.push(...Array(6 - lastDayOfMonth).fill(null));
-        console.log(daysArray)
         
         return daysArray;
     };
