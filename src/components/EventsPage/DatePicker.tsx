@@ -8,21 +8,29 @@ interface DatePickerProps {
 const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
     const year = 2024;
     const month = 11;
-    const weekdayHeaders = ["Sk", "Pr", "An", "Tr", "Kt", "Pn", "Š"];
+    const weekdayHeaders = ["Pr", "An", "Tr", "Kt", "Pn", "Š", "Sk"];
 
     const [selectedDate, setSelectedDate] = useState<Date>(new Date(Date.UTC(year, month - 1, new Date(events[0].date).getDate())));
         
     const getDaysInMonth = () => {
         const daysInMonth = new Date(year, month, 0).getDate();
-        const firstDayOfMonth = new Date(year, month - 1, 1).getDay();
+        const firstDayOfMonth = convertSundayToMondayStart(new Date(year, month - 1, 1).getDay());
         const daysArray = Array(firstDayOfMonth).fill(null);
 
         for (let day = 1; day <= daysInMonth; day++) {
             daysArray.push(new Date(Date.UTC(year, month - 1, day)));
         }
+
+        const lastDayOfMonth = convertSundayToMondayStart(daysArray[daysArray.length - 1].getDay());
+        daysArray.push(...Array(6 - lastDayOfMonth).fill(null));
+        console.log(daysArray)
         
         return daysArray;
     };
+
+    const convertSundayToMondayStart = (day: number) => {
+        return (day + 6) % 7
+    }
 
     const handleClick = (date: Date) => {
         setSelectedDate(date);
