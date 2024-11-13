@@ -11,7 +11,7 @@ export default {
       },
       backgroundImage: {
         'matrica-background': 'url(@/images/matrica.gif)',
-        'tv-background': 'url(@/images/background.jpg)'
+        'tv-background': 'url(@/images/background.jpg)',
       },
     },
   },
