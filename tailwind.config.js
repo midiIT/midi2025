@@ -9,10 +9,6 @@ export default {
         bronze: '#CD7F32',
         standard: '#D3D3D3',
       },
-      backgroundImage: {
-        'matrica-background': 'url(@/images/matrica.gif)',
-        'tv-background': 'url(@/images/background.jpg)',
-      },
     },
   },
   plugins: [],
