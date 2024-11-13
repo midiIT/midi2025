@@ -11,7 +11,7 @@ type TimeLeft = {
 // a functional component
 const CountdownComponent: React.FC = () => {
   const targetDate = import.meta.env.VITE_MIDI_DATE;
-  
+
   // helper function
   const calculateTimeLeft = (): TimeLeft => {
     const now = new Date();
@@ -39,7 +39,7 @@ const CountdownComponent: React.FC = () => {
     }, 1000);
 
     return () => clearInterval(timer); // cleanup func
-  }, []);
+  });
 
   // with little tailwind css
   return (
@@ -48,7 +48,7 @@ const CountdownComponent: React.FC = () => {
       <p className="text-lg font-mono bg-blue-800 p-4 rounded-md">
         {timeLeft.days} <span className="font-semibold">Days</span>,{' '}
         {timeLeft.hours} <span className="font-semibold">Hours</span>,{' '}
-        {timeLeft.minutes} <span className="font-semibold">Minutes</span>, {' '}
+        {timeLeft.minutes} <span className="font-semibold">Minutes</span>,{' '}
         {timeLeft.seconds} <span className="font-semibold">Seconds</span>
       </p>
     </div>

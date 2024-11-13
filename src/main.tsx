@@ -2,7 +2,11 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from '@/App';
 import './index.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouteObject,
+  RouterProvider,
+} from 'react-router-dom';
 import GraphicalInterface from '@/components/GraphicalInterface/GraphicalInterface.tsx';
 import TerminalInterface from '@/components/TerminalInterface/TerminalInterface.tsx';
 
@@ -10,9 +14,9 @@ import CountdownComponent from '@/components/CountdownComponent/CountdownCompone
 import EventsPage from '@/components/EventsPage/EventsPage.tsx';
 import SponsorsPage from '@/components/SponsorsPage/SponsorsPage.tsx';
 import TeamPage from '@/components/TeamPage/TeamPage.tsx';
+import Tracking from '@/components/Tracking/Tracking.tsx';
 
-
-const router = createBrowserRouter([
+const routes = addTracking([
   {
     path: '/',
     element: <App />,
@@ -42,6 +46,15 @@ const router = createBrowserRouter([
     element: <TeamPage />,
   },
 ]);
+
+const router = createBrowserRouter(routes);
+
+function addTracking(routes: RouteObject[]): RouteObject[] {
+  return routes.map(route => ({
+    ...route,
+    element: <Tracking element={route.element} />,
+  }));
+}
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
