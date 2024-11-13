@@ -1,0 +1,51 @@
+[
+  
+    {
+      "OGpicture": "images/image1.jfif",
+      "pixelPicture": "images/image1pixel.png",
+      "name": "Vardenis",
+      "position": "Karalius",
+      "phone": "+370696969",
+      "email": "email@email.email"
+    },
+    {
+      "OGpicture": "images/img22pixel.png",
+      "pixelPicture": "images/olen.jfif",
+      "name": "Olen",
+      "position": "O",
+      "phone": "+3704200000",
+      "email": "tavo@tevas.tavomama"
+    },
+    {
+      "OGpicture": "images/image3.png",
+      "pixelPicture": "images/image3pixel.png",
+      "name": "Domas",
+      "position": "Vadovas",
+      "phone": "123",
+      "email": "kur@va.dovas"
+    },
+    {
+        "OGpicture": "images/image4.jfif",
+        "pixelPicture": "images/image4pixel.png",
+        "name": "Kritine",
+        "position": "Kritikas",
+        "phone": "+370696969",
+        "email": "email@email.email"
+      },
+      {
+        "OGpicture": "images/image5.jfif",
+        "pixelPicture": "images/image5pixel.png",
+        "name": "AAAAAA",
+        "position": "BBBBBBB",
+        "phone": "+3704200000",
+        "email": "tavo@tevas.tavomama"
+      },
+      {
+        "OGpicture": "images/image6.jpg",
+        "pixelPicture": "images/image6pixel.png",
+        "name": "CCCC",
+        "position": "DDDD",
+        "phone": "123",
+        "email": "emeilas"
+      }
+  ]
