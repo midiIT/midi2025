@@ -156,7 +156,7 @@ const CRTDisplay: React.FC<CRTDisplayProps> = ({
                 />
 
                 {/* Content */}
-                <div className="relative h-full z-30 p-8 font-mono text-green-400 overflow-auto">
+                <div className="relative h-full z-40 p-8 font-mono text-green-400 overflow-auto">
                   {children}
                 </div>
 
