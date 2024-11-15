@@ -1,5 +1,6 @@
 import './PixelImage.css';
 import teamMembers from '@/data/team.json';
+import { useState } from 'react';
 
 // Assuming the team data is typed
 interface TeamMember {
@@ -13,7 +14,7 @@ interface TeamMember {
 
 function TeamPage() {
   return (
-    <div className="bg-[#f5f5dc] min-h-screen flex flex-col justify-center items-center p-6">
+    <div className="bg-light-yellow min-h-screen flex flex-col justify-center items-center p-6">
       <h1>Team page</h1>
       <TeamGrid />
     </div>
@@ -49,12 +50,16 @@ const TeamGrid = () => {
                 src={member.pixelPicture}
                 alt="Pixelated"
                 className={`w-full h-full absolute top-0 left-0 transition duration-500 ease-in-out ${
-                  hoveredMember === index ? 'opacity-100 glitch-effect' : 'opacity-0'
+                  hoveredMember === index
+                    ? 'opacity-100 glitch-effect'
+                    : 'opacity-0'
                 }`}
               />
             </div>
             <div className="p-4">
-              <h3 className="text-2xl font-semibold text-gray-800">{member.name}</h3>
+              <h3 className="text-2xl font-semibold text-gray-800">
+                {member.name}
+              </h3>
               <p className="text-sm text-gray-500 mb-2">{member.position}</p>
               <div className="flex items-center text-gray-700 mb-2">
                 <span className="material-icons mr-2">Tel. nr: </span>
