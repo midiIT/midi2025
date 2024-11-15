@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import './PixelImage.css';
+import teamMembers from '@/data/team.json';
 
 // Assuming the team data is typed
 interface TeamMember {
@@ -11,18 +11,16 @@ interface TeamMember {
   email: string;
 }
 
-import teamMembers from '@/team.json';
-
 function TeamPage() {
   return (
     <div className="bg-[#f5f5dc] min-h-screen flex flex-col justify-center items-center p-6">
       <h1>Team page</h1>
-      <Lolzies />
+      <NormalusPavadinimas />
     </div>
   );
 }
 
-const Lolzies = () => {
+const NormalusPavadinimas = () => {
   // Initialize hover state for each member
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
