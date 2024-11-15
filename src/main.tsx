@@ -11,7 +11,6 @@ import EventsPage from '@/components/EventsPage/EventsPage.tsx';
 import SponsorsPage from '@/components/SponsorsPage/SponsorsPage.tsx';
 import TeamPage from '@/components/TeamPage/TeamPage.tsx';
 
-
 const router = createBrowserRouter([
   {
     path: '/',
