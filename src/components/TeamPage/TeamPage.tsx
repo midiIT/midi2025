@@ -15,12 +15,12 @@ function TeamPage() {
   return (
     <div className="bg-[#f5f5dc] min-h-screen flex flex-col justify-center items-center p-6">
       <h1>Team page</h1>
-      <NormalusPavadinimas />
+      <TeamGrid />
     </div>
   );
 }
 
-const NormalusPavadinimas = () => {
+const TeamGrid = () => {
   // Initialize hover state for each member
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
