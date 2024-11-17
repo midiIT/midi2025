@@ -1,0 +1,11 @@
+.twitch-player {
+  width: 400px !important;
+  height: 300px !important;
+}
+
+@media (min-width: 1024px) {
+  .twitch-player {
+    width: 1280px !important;
+    height: 600px !important;
+  }
+}
