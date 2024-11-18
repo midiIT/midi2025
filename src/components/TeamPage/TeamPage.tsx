@@ -1,6 +1,8 @@
+
 import './PixelImage.css';
 import teamMembers from '@/data/team.json';
 import { useState } from 'react';
+import pixelBackground from '@/public/images/background.jpg'
 
 // Assuming the team data is typed
 interface TeamMember {
@@ -12,10 +14,15 @@ interface TeamMember {
   email: string;
 }
 
+
+
 function TeamPage() {
   return (
-    <div className="bg-light-yellow min-h-screen flex flex-col justify-center items-center p-6">
-      <h1>Team page</h1>
+    <div className="bg-[url('/images/background.jpg')] min-h-screen flex flex-col justify-center items-center p-6">
+    <h1 className="text-5xl font-extrabold text-center text-black">
+  Your Big Header Text
+</h1>
+
       <TeamGrid />
     </div>
   );
