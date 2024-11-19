@@ -1,3 +1,4 @@
+
 import './PixelImage.css';
 import teamMembers from '@/data/team.json';
 import { useState } from 'react';
@@ -12,10 +13,15 @@ interface TeamMember {
   email: string;
 }
 
+
+
 function TeamPage() {
   return (
-    <div className="bg-light-yellow min-h-screen flex flex-col justify-center items-center p-6">
-      <h1>Team page</h1>
+    <div className="bg-[url('/images/background.jpg')] min-h-screen flex flex-col justify-center items-center p-6">
+    <h1 className="text-5xl font-extrabold text-center text-black">
+  Your Big Header Text
+</h1>
+
       <TeamGrid />
     </div>
   );
@@ -27,7 +33,7 @@ const TeamGrid = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mt-32 mx-32 ">
         {teamMembers.map((member: TeamMember, index: number) => (
           <div
             key={index}
