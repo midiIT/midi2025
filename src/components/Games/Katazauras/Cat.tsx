@@ -1,6 +1,5 @@
-// src/components/Games/Katazauras/Cat.tsx
-
 import React from 'react';
+import catImage from '@/images/cat.png';
 
 interface CatProps {
   x: number;
@@ -14,9 +13,12 @@ const Cat: React.FC<CatProps> = ({ x, y }) => {
         position: 'absolute',
         left: x,
         top: y,
-        width: 20,
-        height: 20,
-        backgroundColor: 'black',
+        width: 60,
+        height: 40,
+        backgroundImage: `url(${catImage})`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
       }}
     />
   );
