@@ -1,0 +1,9 @@
+-Added test-game.tsx in the src folder
+-Added "start-game": "vite --config vite.config.ts" in package.json under scripts
+-Added "<script type="module" src="/src/test-game.tsx"></script>" in index.html
+(after testing game, this should be changed back to "<script type="module" src="/src/main.tsx"></script>")
+
+To run the game "npm run start-game" in console
+
+After starting game, you should press somewhere in the game window.
+Otherwise cat will not jump (Enter).
