@@ -7,3 +7,10 @@ To run the game "npm run start-game" in console
 
 After starting game, you should press somewhere in the game window.
 Otherwise cat will not jump (Enter).
+
+I don't like that there is a scrollbar on the side because it serves no purpose,
+but this window is just for testing so I guess it does not mattes.
+
+Also sometimes it looks like randomly placed obstacles are too close to each other
+so cats jums are too short/long and getting throw those obstacles is impossible.
+Tried to change this - did not work :(
