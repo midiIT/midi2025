@@ -9,8 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "husky",
-    "prettier": "prettier --write .",
-    "start-game": "vite --config vite.config.ts"
+    "prettier": "prettier --write ."
   },
   "dependencies": {
     "react": "^18.3.1",
