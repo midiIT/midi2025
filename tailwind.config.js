@@ -9,11 +9,9 @@ export default {
         bronze: '#CD7F32',
         standard: '#D3D3D3',
         'light-yellow': '#f5f5dc',
-        purple: '#c39bd3'
+        purple: '#c39bd3',
       },
     },
   },
   plugins: [],
 };
-
-
