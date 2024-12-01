@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Cat from './Cat';
 import Obstacle from './Obstacle';
 import obstacle1 from '@/images/katazaugasImages/obWall.png';
@@ -8,7 +8,7 @@ import obstacle3 from '@/images/katazaugasImages/obVape.png';
 interface CatType {
   x: number;
   y: number;
-  dy: number; // for jumping and gravity
+  dy: number;
   jumping: boolean;
   jumpsLeft: number;
 }
@@ -22,8 +22,10 @@ interface ObstacleType {
 }
 
 const obstacleImages = [obstacle1, obstacle2, obstacle3];
-const GROUND_LEVEL = 320; // where lands
+const GROUND_LEVEL = 320;
 const PATH_HEIGHT = 40;
+const CAT_SIZE = 40;
+const OBSTACLE_SIZE = 40;
 
 const Game: React.FC = () => {
   const [cat, setCat] = useState<CatType>({
@@ -33,81 +35,72 @@ const Game: React.FC = () => {
     jumping: false,
     jumpsLeft: 2,
   });
+
   const [obstacles, setObstacles] = useState<ObstacleType[]>([]);
   const [score, setScore] = useState<number>(0);
-  const gameInterval = useRef<number | null>(null); // starts as null and will hold a number later
+  const gameInterval = useRef<number | null>(null);
+
+  const updateGame = useCallback(() => {
+    setCat(prevCat => {
+      let newY = prevCat.y + prevCat.dy;
+      let newDy = prevCat.dy + (prevCat.jumping ? 0.6 : 0);
+
+      if (newY >= GROUND_LEVEL) {
+        newY = GROUND_LEVEL;
+        newDy = 0;
+        return { ...prevCat, y: newY, dy: newDy, jumping: false, jumpsLeft: 2 };
+      }
+
+      return { ...prevCat, y: newY, dy: newDy };
+    });
+
+    setObstacles(prevObstacles => {
+      const updatedObstacles = prevObstacles
+        .map(obstacle => ({ ...obstacle, x: obstacle.x - 5 })) // Move obstacles left
+        .filter(obstacle => obstacle.x + OBSTACLE_SIZE > 0); // Remove off-screen obstacles
+
+      updatedObstacles.forEach(obstacle => {
+        if (detectCollision(cat, obstacle)) {
+          alert('Womp womp. Skill issue. Final Score: ' + score);
+          resetGame();
+        }
+      });
+
+      if (Math.random() < 0.02) {
+        const randomImage =
+          obstacleImages[Math.floor(Math.random() * obstacleImages.length)];
+        updatedObstacles.push({
+          x: 1200,
+          y: GROUND_LEVEL + 10,
+          width: OBSTACLE_SIZE,
+          height: OBSTACLE_SIZE,
+          image: randomImage,
+        });
+      }
+
+      setScore(prevScore => prevScore + 1);
+      return updatedObstacles;
+    });
+  }, [cat, score]);
 
   useEffect(() => {
-    const updateGame = () => {
-      setCat(prevCat => {
-        let newY = prevCat.y + prevCat.dy;
-        let newDy = prevCat.dy + (prevCat.jumping ? 0.6 : 0); // Gravity
-
-        if (newY >= GROUND_LEVEL) {
-          newY = GROUND_LEVEL;
-          newDy = 0;
-          return {
-            ...prevCat,
-            y: newY,
-            dy: newDy,
-            jumping: false,
-            jumpsLeft: 2, // For double jum
-          };
-        }
-
-        return { ...prevCat, y: newY, dy: newDy };
-      });
-
-      setObstacles(prevObstacles => {
-        const updatedObstacles = prevObstacles
-          .map(obstacle => ({ ...obstacle, x: obstacle.x - 5 })) // Move obstacles to the left
-          .filter(obstacle => obstacle.x + obstacle.width > 0); // Remove obstacles that go off-screen
-
-        updatedObstacles.forEach(obstacle => {
-          if (detectCollision(cat, obstacle)) {
-            alert('Womp Womp. Skill issue. Final Score: ' + score);
-            resetGame();
-          }
-        });
-
-        if (Math.random() < 0.02) {
-          const randomImage =
-            obstacleImages[Math.floor(Math.random() * obstacleImages.length)];
-          updatedObstacles.push({
-            x: 1200,
-            y: GROUND_LEVEL + 10, // + 10 so that obstacles would be on the ground (no idea why they are not)
-            width: 40,
-            height: 40,
-            image: randomImage,
-          });
-        }
-
-        setScore(prevScore => prevScore + 1);
-        return updatedObstacles;
-      });
-    };
-
     gameInterval.current = window.setInterval(updateGame, 20);
     return () => {
-      if (gameInterval.current !== null) clearInterval(gameInterval.current);
+      if (gameInterval.current !== null) {
+        clearInterval(gameInterval.current);
+      }
     };
-  }, [cat, obstacles, score]);
+  }, [updateGame]);
 
-  const detectCollision = (cat: CatType, obstacle: ObstacleType) => {
-    const safeMargin = 10; // to reduse collision
+  const detectCollision = (cat: CatType, obstacle: ObstacleType): boolean => {
+    const safeMargin = 10;
     return (
       cat.x + safeMargin < obstacle.x + obstacle.width - safeMargin &&
-      cat.x + 40 - safeMargin > obstacle.x + safeMargin &&
+      cat.x + CAT_SIZE - safeMargin > obstacle.x + safeMargin &&
       cat.y + safeMargin < obstacle.y + obstacle.height - safeMargin &&
-      cat.y + 40 - safeMargin > obstacle.y + safeMargin
+      cat.y + CAT_SIZE - safeMargin > obstacle.y + safeMargin
     );
   };
-
-  // const handleJump = () => { // only 1 jump
-  //   if (!cat.jumping) {
-  //     setCat((prevCat) => ({ ...prevCat, jumping: true, dy: -12 }));
-  //   }
-  // };
 
   const handleJump = () => {
     setCat(prevCat => {
@@ -119,7 +112,7 @@ const Game: React.FC = () => {
           jumpsLeft: prevCat.jumpsLeft - 1,
         };
       }
-      return prevCat; // No change if no jumps are left
+      return prevCat;
     });
   };
 
@@ -131,8 +124,10 @@ const Game: React.FC = () => {
 
   return (
     <div
-      className="flex justify-center items-center h-screen bg-gray-100"
+      tabIndex={0}
+      onKeyDown={handleJump}
       style={{
+        outline: 'none',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -142,18 +137,14 @@ const Game: React.FC = () => {
       }}
     >
       <div
-        tabIndex={0}
-        onKeyDown={handleJump}
         style={{
-          outline: 'none',
+          position: 'relative',
           width: '1200px',
           height: '400px',
           border: '4px solid #333',
-          position: 'relative',
-          background: '#60a5fa', // real background - like sky
+          background: '#60a5fa',
         }}
       >
-        {/* Path/ground line */}
         <div
           style={{
             position: 'absolute',
@@ -161,11 +152,12 @@ const Game: React.FC = () => {
             left: 0,
             width: '100%',
             height: `${PATH_HEIGHT}px`,
-            backgroundColor: '#7dd3fc', // path color - lighter blue like snow
+            backgroundColor: '#7dd3fc',
           }}
         />
 
         <Cat x={cat.x} y={cat.y} />
+
         {obstacles.map((obstacle, index) => (
           <Obstacle
             key={index}
@@ -174,6 +166,7 @@ const Game: React.FC = () => {
             image={obstacle.image}
           />
         ))}
+
         <div
           style={{
             position: 'absolute',
