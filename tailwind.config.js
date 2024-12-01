@@ -8,6 +8,7 @@ export default {
         silver: '#C0C0C0',
         bronze: '#CD7F32',
         standard: '#D3D3D3',
+        'light-yellow': '#f5f5dc',
       },
     },
   },
