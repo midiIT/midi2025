@@ -16,6 +16,7 @@ import SponsorsPage from '@/components/SponsorsPage/SponsorsPage.tsx';
 import TeamPage from '@/components/TeamPage/TeamPage.tsx';
 import Tracking from '@/components/Tracking/Tracking.tsx';
 import TwitchPlayer from '@/components/TwitchPage/TwitchPlayer';
+import GameKatazauras from '@/components/Games/Katazauras/GameKatazauras.tsx';
 
 const routes = addTracking([
   {
@@ -49,6 +50,10 @@ const routes = addTracking([
   {
     path: 'twitch',
     element: <TwitchPlayer />,
+  },
+  {
+    path: 'game',
+    element: <GameKatazauras />,
   },
 ]);
 
