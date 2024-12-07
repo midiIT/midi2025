@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import CountdownComponent from '../CountdownComponent/CountdownComponent';
 import DatePicker from '../EventsPage/DatePicker';
 import EventDisplay from '../EventsPage/EventDisplay';
+import SwipeablePages from './SwipeablePages';
 
 interface PhoneDisplayProps {
   className?: string;
@@ -13,64 +14,24 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null); // For EventDisplay
   const [showEventInfo, setShowEventInfo] = useState(false); // Controls when EventDisplay is shown
 
-  const scrollRef = useRef<HTMLDivElement>(null); // Reference to the scrollable screen
-
   const togglePower = () => setPowerOn(!powerOn);
-
-  const handleScroll = (direction: 'up' | 'down') => {
-    if (scrollRef.current) {
-      const currentScrollTop = scrollRef.current.scrollTop;
-      const scrollAmount = 50; // Scroll distance
-      scrollRef.current.scrollTo({
-        top:
-          direction === 'up'
-            ? currentScrollTop - scrollAmount
-            : currentScrollTop + scrollAmount,
-        behavior: 'smooth',
-      });
-    }
-  };
 
   const pages = [
     <div className="text-center text-green-400 text-base">
       <p>Home Page</p>
     </div>,
-
-    <div className="w-full h-full flex flex-col items-center justify-center ">
+    <div className="w-full h-full flex">
       <CountdownComponent />
     </div>,
-
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="w-full h-full flex">
       <DatePicker
         onDatePicked={date => {
           setSelectedDate(date.toISOString().split('T')[0]);
-          setShowEventInfo(false);
+          setShowEventInfo(true);
         }}
       />
     </div>,
-
-    showEventInfo && selectedDate ? (
-      <div className="w-full h-full flex items-center justify-center">
-        <EventDisplay eventDate={selectedDate} />
-      </div>
-    ) : null,
   ];
-
-  const goToNextPage = () => {
-    if (currentPage === 2 && selectedDate) return;
-    if (currentPage < pages.length - 1) setCurrentPage(currentPage + 1);
-  };
-
-  const goToPreviousPage = () => {
-    if (currentPage > 0) setCurrentPage(currentPage - 1);
-  };
-
-  const handleOkPress = () => {
-    if (currentPage === 2 && selectedDate) {
-      setShowEventInfo(true);
-      setCurrentPage(3);
-    }
-  };
 
   return (
     <div
@@ -101,14 +62,36 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
 
         {/* Screen Area */}
         <div
-          ref={scrollRef}
-          className={`absolute h-[55%] w-[85%] left-[7%] top-[8%] bg-black rounded-[1rem] border-4 border-gray-600
-                     overflow-y-scroll transition-opacity duration-500 landscape:h-[85%] landscape:w-[55%] shadow-inner
-                     landscape:left-[8%] landscape:top-[7%] ${powerOn ? 'opacity-100' : 'opacity-50'}`}
+          className={`absolute inset-0 h-[55%] w-[85%] left-[7%] top-[8%] bg-black rounded-[1rem] border-4 border-gray-600
+                     overflow-hidden transition-opacity duration-500 landscape:h-[85%] landscape:w-[55%] shadow-inner
+                     landscape:left-[8%] landscape:top-[7%]  ${powerOn ? 'opacity-100' : 'opacity-50'}`}
         >
           {powerOn && (
-            <div className="h-full flex items-center justify-center">
-              {pages[currentPage]}
+            <div className="relative h-full w-full flex">
+              <SwipeablePages
+                pages={pages.map(page => (
+                  <div className="absolute inset-0 h-full w-full flex flex-col overflow-y-auto scrollbar-hide">
+                    {page}
+                  </div>
+                ))}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+
+              {/* Event Pop-Up */}
+              {showEventInfo && selectedDate && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-80 rounded-[1rem]">
+                  <div className="relative bg-gray-800 rounded-lg shadow-lg p-6 w-[90%] h-[80%] overflow-y-auto">
+                    <button
+                      onClick={() => setShowEventInfo(false)}
+                      className="absolute top-2 right-2 w-8 h-8 bg-red-600 text-white rounded-full font-bold flex items-center justify-center"
+                    >
+                      ✕
+                    </button>
+                    <EventDisplay eventDate={selectedDate} />
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -129,10 +112,10 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
                            ? 'ring-4 ring-green-500'
                            : 'ring-4 ring-red-500'
                        }`}
-            aria-label="Power"
           >
             ⚫
           </button>
+
           {/* Navigation Pad */}
           <div
             className="relative w-36 h-36 bg-gray-700 rounded-full flex items-center justify-center shadow-lg
@@ -142,8 +125,6 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
             <button
               className="absolute top-1 w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center
                          text-white font-bold hover:bg-gray-500 active:bg-gray-700 shadow-md"
-              aria-label="Up"
-              onClick={() => handleScroll('up')}
             >
               ▲
             </button>
@@ -152,8 +133,6 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
             <button
               className="absolute left-1 w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center
                          text-white font-bold hover:bg-gray-500 active:bg-gray-700 shadow-md"
-              aria-label="Previous Page"
-              onClick={goToPreviousPage}
             >
               ◀
             </button>
@@ -162,8 +141,6 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
             <button
               className="w-14 h-14 bg-gray-700 rounded-full flex items-center justify-center text-white
                          font-bold hover:bg-gray-600 active:bg-gray-800 shadow-lg border-2 border-gray-500"
-              aria-label="Center"
-              onClick={handleOkPress}
             >
               OK
             </button>
@@ -172,8 +149,6 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
             <button
               className="absolute right-1 w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center
                          text-white font-bold hover:bg-gray-500 active:bg-gray-700 shadow-md"
-              aria-label="Next Page"
-              onClick={goToNextPage}
             >
               ▶
             </button>
@@ -182,8 +157,6 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
             <button
               className="absolute bottom-1 w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center
                         text-white font-bold hover:bg-gray-500 active:bg-gray-700 shadow-md"
-              aria-label="Down"
-              onClick={() => handleScroll('down')}
             >
               ▼
             </button>

@@ -43,7 +43,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto bg-white shadow-lg rounded-md">
+    <div className="p-4 lg:max-w-md lg:mx-auto bg-white shadow-lg rounded-md sm:w-full sm:h-full sm:overflow-y-auto sm:mx-0">
       <h2 className="text-xl font-semibold text-center mb-4">
         {new Date(year, month - 1).toLocaleString('lt', { month: 'long' })}{' '}
         {year}
