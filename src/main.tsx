@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import GraphicalInterface from '@/components/GraphicalInterface/GraphicalInterface.tsx';
 import TerminalInterface from '@/components/TerminalInterface/TerminalInterface.tsx';
+import MobileInterface from './components/MobileInterface/MobileInterface';
 
 import CountdownComponent from '@/components/CountdownComponent/CountdownComponent.tsx';
 import EventsPage from '@/components/EventsPage/EventsPage.tsx';
@@ -25,6 +26,10 @@ const routes = addTracking([
   {
     path: 'gui',
     element: <GraphicalInterface />,
+  },
+  {
+    path: 'mobile',
+    element: <MobileInterface />,
   },
   {
     path: 'cli',
