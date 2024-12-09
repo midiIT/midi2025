@@ -52,7 +52,7 @@ const routes = addTracking([
   },
 ]);
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes, { basename: '/2025' });
 
 function addTracking(routes: RouteObject[]): RouteObject[] {
   return routes.map(route => ({
