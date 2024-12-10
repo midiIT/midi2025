@@ -53,6 +53,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
         }}
       />
     </div>,
+    <div className="text-center text-green-400 text-base"></div>,
   ];
 
   return (

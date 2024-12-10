@@ -15,16 +15,24 @@ const SwipeablePages: React.FC<SwipeablePagesProps> = ({
   const [swipeDirection, setSwipeDirection] = useState<string | null>(null);
 
   const goToNextPage = () => {
-    if (currentPage < pages.length - 1) {
+    if (currentPage < pages.length - 2) {
       setSwipeDirection('left');
-      setTimeout(() => setCurrentPage(currentPage + 1), 300);
+      setTimeout(() => {
+        setCurrentPage(pages.length - 1);
+        setSwipeDirection('right');
+      }, 200);
+      setTimeout(() => setCurrentPage(currentPage + 1), 400);
     }
   };
 
   const goToPreviousPage = () => {
     if (currentPage > 0) {
       setSwipeDirection('right');
-      setTimeout(() => setCurrentPage(currentPage - 1), 300);
+      setTimeout(() => {
+        setCurrentPage(pages.length - 1);
+        setSwipeDirection('left');
+      }, 200);
+      setTimeout(() => setCurrentPage(currentPage - 1), 400);
     }
   };
 
@@ -34,17 +42,19 @@ const SwipeablePages: React.FC<SwipeablePagesProps> = ({
     delta: 10,
     trackTouch: true,
     trackMouse: false,
+    preventScrollOnSwipe: true,
   });
 
   useEffect(() => {
-    const timeout = setTimeout(() => setSwipeDirection(null), 300);
+    const timeout = setTimeout(() => setSwipeDirection(null), 600);
     return () => clearTimeout(timeout);
   }, [swipeDirection]);
 
   return (
     <div {...handlers} className="relative w-full h-full overflow-hidden">
       <div
-        className={`absolute w-full h-full flex items-center justify-center transition-transform duration-300`}
+        id="transition-element"
+        className={`absolute w-full h-full flex items-center justify-center transition-transform duration-200`}
         style={{
           transform: `translateX(${
             swipeDirection === 'left'
