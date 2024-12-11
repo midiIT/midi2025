@@ -25,9 +25,6 @@ const TerminalInterface: React.FC = () => {
         if (currentLine.length > 0) {
           // Remove character from current line
           updatedLines[updatedLines.length - 1] = currentLine.slice(0, -1);
-        } else if (updatedLines.length > 1) {
-          // Remove the empty line if there are multiple lines
-          updatedLines.pop();
         }
         return updatedLines;
       });
@@ -57,11 +54,16 @@ const TerminalInterface: React.FC = () => {
             ===========================================================================================================================================================================
           </div>
         </div>
-        <div className="flex mt-4">
+        <div className="flex mt-4 overflow-scroll">
           <div className="text-green-500 font-mono">
-            &#62;&#62;&#62;
             {lines.map((line, index) => (
-              <div key={index}>{line}</div>
+              <div
+                className={index === lines.length - 1 ? 'inline-flex' : ''}
+                key={index}
+              >
+                &#62;&#62;&#62;&nbsp;
+                {line}
+              </div>
             ))}
             <span className="animate-pulse">█</span>
           </div>
