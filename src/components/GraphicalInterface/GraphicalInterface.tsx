@@ -5,9 +5,11 @@ import ApplicationWindow from '@/components/GraphicalInterface/ApplicationWindow
 import CountdownComponent from '../CountdownComponent/CountdownComponent';
 import DatePicker from '../EventsPage/DatePicker';
 import EventDisplay from '../EventsPage/EventDisplay';
+import TeamPage from '../TeamPage/TeamPage';
 
 import RandomTerminalPng from '@/images/random_terminal.png';
 import RandomSomethingElsePng from '@/images/random_cat.jpeg';
+import TeamPageIcon from '@/images/TeamPageIcon.jpg';
 
 const TempTerminal: React.FC = () => {
   return <p>Insert terminal as import later!!!</p>;
@@ -48,15 +50,17 @@ const GraphicalInterface: React.FC = () => {
             setWindowContent(<TempTerminal />);
           }}
         />
-        <Application
-          iconPath={RandomSomethingElsePng}
-          appText="Something Elseeeeeeeeeeeeeeeeeeeeeeeeeee"
-          windowContent={TempSomethingElse}
-          onClick={() => {
-            setShowWindow(true);
-            setWindowContent(<TempSomethingElse />);
-          }}
-        />
+        <div>
+          <Application
+            iconPath={TeamPageIcon}
+            appText="Team Page"
+            windowContent={TempSomethingElse}
+            onClick={() => {
+              setShowWindow(true);
+              setWindowContent(<TeamPage />);
+            }}
+          />
+        </div>
         <Application
           iconPath={RandomSomethingElsePng}
           appText="Something Elseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
