@@ -18,10 +18,30 @@ interface Sponsor {
 }
 
 const sponsors: Sponsor[] = [
-  { href: "https://lt.wikipedia.org/wiki/Auksas", src: goldImage, alt: "Gold Sponsor", tier: SponsorTier.gold },
-  { href: "https://lt.wikipedia.org/wiki/Sidabras", src: silverImage, alt: "Silver Sponsor", tier: SponsorTier.silver },
-  { href: "https://lt.wikipedia.org/wiki/Bronza", src: bronzeImage, alt: "Bronze Sponsor", tier: SponsorTier.bronze },
-  { href: "https://lt.wikipedia.org/wiki/Standartas", src: standardImage, alt: "Standard Sponsor", tier: SponsorTier.standard },
+  {
+    href: 'https://lt.wikipedia.org/wiki/Auksas',
+    src: goldImage,
+    alt: 'Gold Sponsor',
+    tier: SponsorTier.gold,
+  },
+  {
+    href: 'https://lt.wikipedia.org/wiki/Sidabras',
+    src: silverImage,
+    alt: 'Silver Sponsor',
+    tier: SponsorTier.silver,
+  },
+  {
+    href: 'https://lt.wikipedia.org/wiki/Bronza',
+    src: bronzeImage,
+    alt: 'Bronze Sponsor',
+    tier: SponsorTier.bronze,
+  },
+  {
+    href: 'https://lt.wikipedia.org/wiki/Standartas',
+    src: standardImage,
+    alt: 'Standard Sponsor',
+    tier: SponsorTier.standard,
+  },
 ];
 
 function renderSponsorSection(tier: SponsorTier, sponsors: Sponsor[]) {
@@ -66,8 +86,9 @@ function SponsorsPage() {
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold text-center mb-10">Sponsors Page</h1>
-      {Object.values(SponsorTier)
-        .map((tier) => renderSponsorSection(tier as SponsorTier, sponsors))}
+      {Object.values(SponsorTier).map(tier =>
+        renderSponsorSection(tier as SponsorTier, sponsors),
+      )}
     </div>
   );
 }

@@ -8,17 +8,17 @@ const TerminalInterface: React.FC = () => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       // Add a new line on Enter
-      setLines((prevLines) => [...prevLines, '']);
+      setLines(prevLines => [...prevLines, '']);
     } else if (e.key.length === 1) {
       // Add typed character to the current line
-      setLines((prevLines) => {
+      setLines(prevLines => {
         const updatedLines = [...prevLines];
         updatedLines[updatedLines.length - 1] += e.key;
         return updatedLines;
       });
     } else if (e.key === 'Backspace') {
       // Handle backspace
-      setLines((prevLines) => {
+      setLines(prevLines => {
         const updatedLines = [...prevLines];
         const currentLine = updatedLines[updatedLines.length - 1];
 
@@ -62,8 +62,8 @@ const TerminalInterface: React.FC = () => {
             &#62;&#62;&#62;
             {lines.map((line, index) => (
               <div key={index}>{line}</div>
-          ))}
-          <span className="animate-pulse">█</span>
+            ))}
+            <span className="animate-pulse">█</span>
           </div>
         </div>
 

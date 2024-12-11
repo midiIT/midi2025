@@ -1,15 +1,18 @@
-import Button from '@/components/MainPage/Button.tsx';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="h-screen flex flex-col items-center justify-center gap-4">
-      <h1 className="text-4xl font-bold">MIDI 2025</h1>
-      <div className="flex flex-row gap-4">
-        <Button buttonText="Terminal" to="cli" />
-        <Button buttonText="Graphical" to="gui" />
-      </div>
-    </div>
-  );
-}
+const App: React.FC = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isMobile =
+      /Android|iPhone|Windows Phone|BlackBerry/i.test(navigator.userAgent) ||
+      window.innerWidth < 640;
+
+    navigate(isMobile ? '/mobile' : '/gui', { replace: true });
+  }, [navigate]);
+
+  return null;
+};
 
 export default App;
