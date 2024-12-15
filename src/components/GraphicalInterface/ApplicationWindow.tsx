@@ -3,10 +3,12 @@ import React, { ReactNode, useEffect } from 'react';
 interface ApplicationWindowProps {
   content: ReactNode;
   onExit: () => void;
+  title: string;
 }
 const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   content,
   onExit,
+  title,
 }) => {
   function dragElement(el: HTMLElement | null) {
     if (!el) return;
@@ -16,7 +18,9 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
       pos3 = 0,
       pos4 = 0;
 
-    const topBar: HTMLElement | null = document.querySelector('#top-bar');
+    const topBar: HTMLElement | null = document.querySelector(
+      `#top-bar-${title}`,
+    );
     if (topBar) {
       topBar.onmousedown = dragMouseDown(el);
     }
@@ -56,16 +60,16 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   }
 
   useEffect(() => {
-    dragElement(document.querySelector('#application'));
-  }, []);
+    dragElement(document.querySelector(`#application-${title}`));
+  }, [title]);
 
   return (
     <div
-      id="application"
+      id={`application-${title}`}
       className="absolute bg-gray-600 rounded z-10 w-[500px] h-[400px]"
     >
       <div
-        id="top-bar"
+        id={`top-bar-${title}`}
         className="h-10 bg-gray-700 rounded-t flex justify-end items-center"
       >
         <button
