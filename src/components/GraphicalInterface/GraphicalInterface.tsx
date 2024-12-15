@@ -25,55 +25,61 @@ const GraphicalInterface: React.FC = () => {
       initialPowerState={true}
       onPowerChange={isOn => console.log('Power state:', isOn)}
     >
-      <div className="absolute w-1/2 left-1/4">
-        <CountdownComponent />
-      </div>
-      <div className="absolute w-1/2 left-1/2 top-1/2">
-        <DatePicker
-          onDatePicked={date => {
-            setShowWindow(true);
-            setWindowContent(
-              <EventDisplay eventDate={date.toISOString().split('T')[0]} />,
-            );
-          }}
-        />
-      </div>
-      <div className="inline-grid grid-cols-2 gap-4">
-        <Application
-          iconPath={RandomTerminalPng}
-          appText="Terminal"
-          windowContent={TempTerminal}
-          onClick={() => {
-            setShowWindow(true);
-            setWindowContent(<TempTerminal />);
-          }}
-        />
-        <Application
-          iconPath={RandomSomethingElsePng}
-          appText="Something Elseeeeeeeeeeeeeeeeeeeeeeeeeee"
-          windowContent={TempSomethingElse}
-          onClick={() => {
-            setShowWindow(true);
-            setWindowContent(<TempSomethingElse />);
-          }}
-        />
-        <Application
-          iconPath={RandomSomethingElsePng}
-          appText="Something Elseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-          windowContent={TempSomethingElse}
-          onClick={() => {
-            setShowWindow(true);
-            setWindowContent(<TempSomethingElse />);
-          }}
-        />
-        {showWindow ? (
-          <ApplicationWindow
-            content={windowContent}
-            onExit={() => {
-              setShowWindow(false);
+      <div className="flex justify-between">
+        {/* Applications */}
+        <div className="inline-grid grid-cols-2 gap-4">
+          <Application
+            iconPath={RandomTerminalPng}
+            appText="Terminal"
+            windowContent={TempTerminal}
+            onClick={() => {
+              setShowWindow(true);
+              setWindowContent(<TempTerminal />);
             }}
           />
-        ) : null}
+          <Application
+            iconPath={RandomSomethingElsePng}
+            appText="Something Elseeeeeeeeeeeeeeeeeeeeeeeeeee"
+            windowContent={TempSomethingElse}
+            onClick={() => {
+              setShowWindow(true);
+              setWindowContent(<TempSomethingElse />);
+            }}
+          />
+          <Application
+            iconPath={RandomSomethingElsePng}
+            appText="Something Elseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            windowContent={TempSomethingElse}
+            onClick={() => {
+              setShowWindow(true);
+              setWindowContent(<TempSomethingElse />);
+            }}
+          />
+          {showWindow ? (
+            <ApplicationWindow
+              content={windowContent}
+              onExit={() => {
+                setShowWindow(false);
+              }}
+            />
+          ) : null}
+        </div>
+        {/* Widgets */}
+        <div className="flex flex-col space-y-4 items-end">
+          <div>
+            <CountdownComponent />
+          </div>
+          <div>
+            <DatePicker
+              onDatePicked={date => {
+                setShowWindow(true);
+                setWindowContent(
+                  <EventDisplay eventDate={date.toISOString().split('T')[0]} />,
+                );
+              }}
+            />
+          </div>
+        </div>
       </div>
     </CRTDisplay>
   );

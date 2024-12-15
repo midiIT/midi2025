@@ -75,7 +75,7 @@ const CRTDisplay: React.FC<CRTDisplayProps> = ({
           />
 
           {/* Control Panel */}
-          <div className="absolute bottom-6 right-6 z-50">
+          <div className="absolute bottom-2 right-2 z-50">
             <div className="relative">
               <button
                 onClick={handlePowerToggle}
