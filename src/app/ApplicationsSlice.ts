@@ -4,12 +4,10 @@ import { RootState } from '@/app/Store.ts';
 
 interface ApplicationsState {
   openApplications: ApplicationData[];
-  focusedApplicationTitle: string;
 }
 
 const initialState: ApplicationsState = {
   openApplications: [],
-  focusedApplicationTitle: '',
 };
 
 export const applicationsSlice = createSlice({
@@ -24,10 +22,22 @@ export const applicationsSlice = createSlice({
         app => app.title !== action.payload,
       );
     },
+    setFocusedApplication: (state, action: PayloadAction<string>) => {
+      state.openApplications = state.openApplications.map(app => {
+        return { ...app, zIndex: app.zIndex - 1 };
+      });
+
+      const index = state.openApplications.findIndex(
+        app => app.title === action.payload,
+      );
+
+      state.openApplications[index].zIndex = 30;
+    },
   },
 });
 
-export const { openApplication, closeApplication } = applicationsSlice.actions;
+export const { openApplication, closeApplication, setFocusedApplication } =
+  applicationsSlice.actions;
 
 export const selectOpenApplications = (state: RootState) =>
   state.applications.openApplications;

@@ -1,6 +1,10 @@
 import React, { ReactNode, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { closeApplication } from '@/app/ApplicationsSlice.ts';
+import {
+  closeApplication,
+  selectOpenApplications,
+  setFocusedApplication,
+} from '@/app/ApplicationsSlice.ts';
+import { useAppDispatch, useAppSelector } from '@/app/hooks.ts';
 
 interface ApplicationWindowProps {
   content: ReactNode;
@@ -10,7 +14,10 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   content,
   title,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const zIndex = useAppSelector(selectOpenApplications).filter(
+    app => app.title === title,
+  )[0].zIndex;
 
   const noWhiteSpaceTitle = title.replace(' ', '_');
 
@@ -32,8 +39,6 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     function dragMouseDown(el: HTMLElement) {
       return (e: MouseEvent) => {
         e.preventDefault();
-
-        console.log('down');
 
         pos3 = e.clientX;
         pos4 = e.clientY;
@@ -70,7 +75,8 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   return (
     <div
       id={`application-${noWhiteSpaceTitle}`}
-      className="absolute bg-gray-600 rounded z-10 w-[500px] h-[400px]"
+      className={`absolute bg-gray-600 rounded w-[500px] h-[400px] z-${zIndex}`}
+      onMouseDown={() => dispatch(setFocusedApplication(title))}
     >
       <div
         id={`top-bar-${noWhiteSpaceTitle}`}
