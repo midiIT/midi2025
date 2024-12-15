@@ -19,6 +19,8 @@ import Tracking from '@/components/Tracking/Tracking.tsx';
 import TwitchPlayer from '@/components/TwitchPage/TwitchPlayer';
 import GameKatazauras from '@/components/Games/Katazauras/GameKatazauras.tsx';
 import GameKatris from '@/components/Games/Katris/GameKatris';
+import { Provider } from 'react-redux';
+import store from '@/app/Store.ts';
 
 const routes = addTracking([
   {
@@ -78,6 +80,8 @@ function addTracking(routes: RouteObject[]): RouteObject[] {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>,
 );

@@ -1,15 +1,19 @@
 import React, { ReactNode, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { closeApplication } from '@/app/ApplicationsSlice.ts';
 
 interface ApplicationWindowProps {
   content: ReactNode;
-  onExit: () => void;
   title: string;
 }
 const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   content,
-  onExit,
   title,
 }) => {
+  const dispatch = useDispatch();
+
+  const noWhiteSpaceTitle = title.replace(' ', '_');
+
   function dragElement(el: HTMLElement | null) {
     if (!el) return;
 
@@ -19,7 +23,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
       pos4 = 0;
 
     const topBar: HTMLElement | null = document.querySelector(
-      `#top-bar-${title}`,
+      `#top-bar-${noWhiteSpaceTitle}`,
     );
     if (topBar) {
       topBar.onmousedown = dragMouseDown(el);
@@ -60,21 +64,23 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   }
 
   useEffect(() => {
-    dragElement(document.querySelector(`#application-${title}`));
-  }, [title]);
+    dragElement(document.querySelector(`#application-${noWhiteSpaceTitle}`));
+  }, [noWhiteSpaceTitle]);
 
   return (
     <div
-      id={`application-${title}`}
+      id={`application-${noWhiteSpaceTitle}`}
       className="absolute bg-gray-600 rounded z-10 w-[500px] h-[400px]"
     >
       <div
-        id={`top-bar-${title}`}
-        className="h-10 bg-gray-700 rounded-t flex justify-end items-center"
+        id={`top-bar-${noWhiteSpaceTitle}`}
+        className="h-10 bg-gray-700 rounded-t flex justify-between items-center"
       >
+        <div className="w-8"></div>
+        <p>{title}</p>
         <button
           className="w-8 h-8 bg-red-500 text-white mr-1 rounded font-bold"
-          onClick={onExit}
+          onClick={() => dispatch(closeApplication(title))}
         >
           X
         </button>
