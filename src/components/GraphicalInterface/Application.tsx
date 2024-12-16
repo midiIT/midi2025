@@ -12,32 +12,19 @@ const Application: React.FC<ApplicationProps> = ({
   windowContent,
   onClick,
 }) => {
-  const isTouchDevice =
-    'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-  const handleTouch = () => {
-    if (isTouchDevice) {
-      onClick(windowContent);
-    }
-  };
-
-  const handleDoubleClick = () => {
-    if (!isTouchDevice) {
-      onClick(windowContent);
-    }
-  };
-
   return (
-    <div className="md:flex md:flex-col md:items-center lg:flex lg:flex-col lg:items-center es:flex">
-      <button onClick={handleTouch} onDoubleClick={handleDoubleClick}>
+    <div className="flex flex-col items-center">
+      <button
+        onDoubleClick={() => {
+          onClick(windowContent);
+        }}
+      >
         <img
-          className="relative lg:w-32 lg:h-32 lg:p-2 lg:object-contain max-w-full es:w-20 es:h-20 es:p-2 es:top-2 es:object-contain"
+          className="relative w-32 h-32 p-2 object-contain max-w-full"
           src={iconPath}
           alt="Application Icon"
         />
-        <p className="lg:max-w-32 text-center lg:mt-2 break-words es:max-w-18 es:mt-2">
-          {appText}
-        </p>
+        <p className="max-w-32 text-center mt-2 break-words">{appText}</p>
       </button>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const Clock: React.FC = () => {
   const [time, setTime] = useState(new Date());
@@ -12,21 +12,49 @@ const Clock: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Fetch weather data for Vilnius
-  useEffect(() => {
+  const loadWeather = useCallback(() => {
+    const cachedWeather = localStorage.getItem('weather');
+    const currentTime = new Date().getTime();
+
+    if (cachedWeather) {
+      const { weather, temperature, timestamp } = JSON.parse(cachedWeather);
+
+      // Use cached weather if 30 minutes have not passed
+      if (currentTime - timestamp < 30 * 60 * 1000) {
+        setWeather(weather);
+        setTemperature(temperature);
+        return;
+      }
+    }
+
+    // Fetch new weather data
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=Vilnius&units=metric&lang=lt&appid=81279801d34470e5dbb037fabe491c60`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=lt&appid=81279801d34470e5dbb037fabe491c60`,
     )
       .then(response => response.json())
       .then(data => {
-        setWeather(data.weather[0].description);
-        setTemperature(`${Math.round(data.main.temp)}°C`);
+        const weatherData = {
+          weather: data.weather[0]?.description ?? 'Nėra duomenų',
+          temperature:
+            data.main?.temp !== undefined
+              ? `${Math.round(data.main.temp)}°C`
+              : '--',
+          timestamp: new Date().getTime(),
+        };
+        localStorage.setItem('weather', JSON.stringify(weatherData));
+        setWeather(weatherData.weather);
+        setTemperature(weatherData.temperature);
       })
       .catch(() => {
         setWeather('Nepavyko gauti orų');
         setTemperature('--');
       });
-  }, []);
+  }, [city]);
+
+  // Fetch weather data on component mount
+  useEffect(() => {
+    loadWeather();
+  }, [loadWeather]);
 
   return (
     <div>

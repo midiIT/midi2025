@@ -3,7 +3,7 @@ import CountdownComponent from '../CountdownComponent/CountdownComponent';
 import DatePicker from '../EventsPage/DatePicker';
 import EventDisplay from '../EventsPage/EventDisplay';
 import SwipeablePages from './SwipeablePages';
-import PageWithApplications from './PageWithApplications';
+import PageWithApplications from './Application components/PageWithApplications';
 import Notification from './Notification';
 
 // Pages
@@ -131,10 +131,8 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
       showWindow={showWindow}
       setShowWindow={setShowWindow}
     />,
-    <div className="w-full h-full flex translate-y-[3vh] landscape:translate-y-[7vh]">
+    <div className="w-full h-full flex flex-col items-center justify-center space-y-0">
       <CountdownComponent />
-    </div>,
-    <div className="w-full h-full flex overflow-y-auto translate-y-[3vh] landscape:translate-y-[7vh]">
       <DatePicker
         onDatePicked={date => {
           setSelectedDate(date.toISOString().split('T')[0]);
@@ -142,7 +140,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
         }}
       />
     </div>,
-    <div className="text-center text-green-400 text-base"></div>,
+    <div className="text-center"></div>,
   ];
 
   return (

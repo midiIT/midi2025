@@ -1,6 +1,6 @@
 import React from 'react';
-import Application from '../GraphicalInterface/Application';
-import ApplicationWindow from '../GraphicalInterface/ApplicationWindow';
+import ApplicationWindowMobile from './ApplicationWindowMobile';
+import ApplicationMobile from './ApplicationMobile';
 
 interface ApplicationType {
   iconPath: string;
@@ -29,7 +29,7 @@ const PageWithApplications: React.FC<PageWithApplicationsProps> = ({
       <p>{title}</p>
       <div className="grid grid-cols-4 gap-4">
         {applications.map((app, index) => (
-          <Application
+          <ApplicationMobile
             key={index}
             iconPath={app.iconPath}
             appText={app.appText}
@@ -42,7 +42,7 @@ const PageWithApplications: React.FC<PageWithApplicationsProps> = ({
         ))}
       </div>
       {showWindow && (
-        <ApplicationWindow
+        <ApplicationWindowMobile
           content={windowContent}
           onExit={() => {
             setShowWindow(false);
