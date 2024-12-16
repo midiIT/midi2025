@@ -23,7 +23,7 @@ const GraphicalInterface: React.FC = () => {
         {/* Desktop*/}
         <div className="flex justify-between m-4">
           {/* Applications */}
-          <div className="inline-grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 h-64">
             {applications.map(app => (
               <ApplicationIcon
                 key={app.data.title}
@@ -38,9 +38,8 @@ const GraphicalInterface: React.FC = () => {
                 <ApplicationWindow
                   key={app.title}
                   content={
-                    applications.filter(
-                      curr => curr.data.title === app.title,
-                    )[0].windowContent
+                    applications.find(curr => curr.data.title === app.title)
+                      ?.windowContent
                   }
                   title={app.title}
                 />

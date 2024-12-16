@@ -1,4 +1,4 @@
-import './PixelImage.css';
+import './PixelImage.module.css';
 import teamMembers from '@/data/team.json';
 import { useState } from 'react';
 

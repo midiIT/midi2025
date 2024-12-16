@@ -11,7 +11,7 @@ const ApplicationIcon: React.FC<ApplicationProps> = ({ iconPath, title }) => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex items-start h-32">
       <button
         onDoubleClick={() => {
           dispatch(
@@ -25,11 +25,11 @@ const ApplicationIcon: React.FC<ApplicationProps> = ({ iconPath, title }) => {
         }}
       >
         <img
-          className="relative w-32 h-32 p-2 object-contain max-w-full"
+          className="relative w-24 h-24 p-2 object-contain max-w-full"
           src={iconPath}
           alt="Icon"
         />
-        <p className="max-w-32 text-center mt-2 break-words">{title}</p>
+        <p className="max-w-24 text-center break-words">{title}</p>
       </button>
     </div>
   );
