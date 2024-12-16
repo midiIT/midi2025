@@ -2,6 +2,7 @@ import { Application } from '@/components/GraphicalInterface/types.ts';
 import React from 'react';
 import randomTerminalPng from '@/images/random_terminal.png';
 import randomSomethingElsePng from '@/images/random_cat.jpeg';
+import TerminalInterface from '@/components/TerminalInterface/TerminalInterface.tsx';
 
 const TempTerminal: React.FC = () => {
   return <p>Insert terminal as import later!!!</p>;
@@ -13,26 +14,38 @@ const TempSomethingElse: React.FC = () => {
 const applications: Application[] = [
   {
     windowContent: <TempTerminal />,
-    iconPath: randomTerminalPng,
     data: {
       title: 'Terminal',
+      iconPath: randomTerminalPng,
       minimized: false,
+      zIndex: 30,
+    },
+  },
+  {
+    windowContent: <TerminalInterface />,
+    data: {
+      title: 'Real terminal',
+      iconPath: randomTerminalPng,
+      minimized: false,
+      zIndex: 30,
     },
   },
   {
     windowContent: <TempSomethingElse />,
-    iconPath: randomSomethingElsePng,
     data: {
       title: 'Something 1',
+      iconPath: randomSomethingElsePng,
       minimized: false,
+      zIndex: 30,
     },
   },
   {
     windowContent: <TempSomethingElse />,
-    iconPath: randomSomethingElsePng,
     data: {
       title: 'Something 2',
+      iconPath: randomSomethingElsePng,
       minimized: false,
+      zIndex: 30,
     },
   },
 ];

@@ -1,6 +1,7 @@
 import React, { ReactNode, useEffect } from 'react';
 import {
   closeApplication,
+  minimizeApplication,
   selectOpenApplications,
   setFocusedApplication,
 } from '@/app/ApplicationsSlice.ts';
@@ -15,9 +16,10 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   title,
 }) => {
   const dispatch = useAppDispatch();
-  const zIndex = useAppSelector(selectOpenApplications).filter(
+  const application = useAppSelector(selectOpenApplications).find(
     app => app.title === title,
-  )[0].zIndex;
+  );
+  const zIndex = application?.zIndex;
 
   const noWhiteSpaceTitle = title.replace(' ', '_');
 
@@ -75,7 +77,8 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   return (
     <div
       id={`application-${noWhiteSpaceTitle}`}
-      className={`absolute bg-gray-600 rounded w-[500px] h-[400px] z-${zIndex}`}
+      className={`absolute ${application?.minimized ? 'hidden' : 'block'} bg-gray-600 rounded w-[500px] h-[400px] max-w-[800px] max-h-[700px]`}
+      style={{ zIndex: zIndex }}
       onMouseDown={() => dispatch(setFocusedApplication(title))}
     >
       <div
@@ -84,14 +87,23 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
       >
         <div className="w-8"></div>
         <p>{title}</p>
-        <button
-          className="w-8 h-8 bg-red-500 text-white mr-1 rounded font-bold"
-          onClick={() => dispatch(closeApplication(title))}
-        >
-          X
-        </button>
+        {/* Buttons */}
+        <div>
+          <button
+            className="w-8 h-8 bg-blue-500 text-white mr-1 rounded font-bold"
+            onClick={() => dispatch(minimizeApplication(title))}
+          >
+            —
+          </button>
+          <button
+            className="w-8 h-8 bg-red-500 text-white mr-1 rounded font-bold"
+            onClick={() => dispatch(closeApplication(title))}
+          >
+            X
+          </button>
+        </div>
       </div>
-      {content}
+      <div>{content}</div>
     </div>
   );
 };
