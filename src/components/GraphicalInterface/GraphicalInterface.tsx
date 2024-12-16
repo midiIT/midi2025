@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CRTDisplay from '@/components/CTRDisplay/CTRDisplay';
 import ApplicationIcon from '@/components/GraphicalInterface/ApplicationIcon.tsx';
 import ApplicationWindow from '@/components/GraphicalInterface/ApplicationWindow';
 import CountdownComponent from '../CountdownComponent/CountdownComponent';
 import DatePicker from '../EventsPage/DatePicker';
-// import EventDisplay from '../EventsPage/EventDisplay';
+import EventDisplay from '../EventsPage/EventDisplay';
 
-import { useAppSelector } from '@/app/hooks.ts';
-import { selectOpenApplications } from '@/app/ApplicationsSlice.ts';
+import { useAppDispatch, useAppSelector } from '@/app/hooks.ts';
+import {
+  openApplication,
+  selectOpenApplications,
+} from '@/app/ApplicationsSlice.ts';
 import applications from '@/components/GraphicalInterface/ApplicationList.tsx';
 import TaskbarIcon from '@/components/GraphicalInterface/TaskbarIcon.tsx';
 
+import calendarIcon from '@/images/calendar.png';
+
 const GraphicalInterface: React.FC = () => {
+  const dispatch = useAppDispatch();
   const openApplications = useAppSelector(selectOpenApplications);
+
+  const [date, setDate] = useState('');
 
   return (
     <CRTDisplay
@@ -33,13 +41,19 @@ const GraphicalInterface: React.FC = () => {
               />
             ))}
 
+            {/* TODO: add ability to use right click on the desktop */}
+            {/* TODO: move currently shown event date into store, that way this isn't going to be needed */}
             {openApplications.map(app => {
               return (
                 <ApplicationWindow
                   key={app.title}
                   content={
-                    applications.find(curr => curr.data.title === app.title)
-                      ?.windowContent
+                    app.title === 'Calendar' ? (
+                      <EventDisplay eventDate={date} />
+                    ) : (
+                      applications.find(curr => curr.data.title === app.title)
+                        ?.windowContent
+                    )
                   }
                   title={app.title}
                 />
@@ -54,11 +68,16 @@ const GraphicalInterface: React.FC = () => {
             <div>
               <DatePicker
                 onDatePicked={date => {
-                  // setShowWindow(true);
-                  // setWindowContent(
-                  //   <EventDisplay eventDate={date.toISOString().split('T')[0]} />,
-                  // );
-                  console.log(date);
+                  setDate(date.toISOString().split('T')[0]);
+
+                  dispatch(
+                    openApplication({
+                      minimized: false,
+                      title: 'Calendar',
+                      iconPath: calendarIcon,
+                      zIndex: 300,
+                    }),
+                  );
                 }}
               />
             </div>

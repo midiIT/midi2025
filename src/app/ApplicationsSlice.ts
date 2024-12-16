@@ -47,7 +47,7 @@ export const applicationsSlice = createSlice({
         app => app.title === action.payload,
       );
 
-      state.openApplications[index].zIndex = 30;
+      state.openApplications[index].zIndex = 300;
     },
   },
 });

@@ -19,7 +19,7 @@ const ApplicationIcon: React.FC<ApplicationProps> = ({ iconPath, title }) => {
               minimized: false,
               title: title,
               iconPath: iconPath,
-              zIndex: 30,
+              zIndex: 300,
             }),
           );
         }}
