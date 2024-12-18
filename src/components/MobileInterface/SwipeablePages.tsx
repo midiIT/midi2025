@@ -5,12 +5,14 @@ interface SwipeablePagesProps {
   pages: JSX.Element[];
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  disableSwipe?: boolean;
 }
 
 const SwipeablePages: React.FC<SwipeablePagesProps> = ({
   pages,
   currentPage,
   setCurrentPage,
+  disableSwipe = false,
 }) => {
   const [swipeDirection, setSwipeDirection] = useState<string | null>(null);
 
@@ -21,7 +23,7 @@ const SwipeablePages: React.FC<SwipeablePagesProps> = ({
         setCurrentPage(pages.length - 1);
         setSwipeDirection('right');
       }, 200);
-      setTimeout(() => setCurrentPage(currentPage + 1), 400);
+      setTimeout(() => setCurrentPage(currentPage + 1), 360);
     }
   };
 
@@ -32,13 +34,13 @@ const SwipeablePages: React.FC<SwipeablePagesProps> = ({
         setCurrentPage(pages.length - 1);
         setSwipeDirection('left');
       }, 200);
-      setTimeout(() => setCurrentPage(currentPage - 1), 400);
+      setTimeout(() => setCurrentPage(currentPage - 1), 360);
     }
   };
 
   const handlers = useSwipeable({
-    onSwipedLeft: () => goToNextPage(),
-    onSwipedRight: () => goToPreviousPage(),
+    onSwipedLeft: () => !disableSwipe && goToNextPage(),
+    onSwipedRight: () => !disableSwipe && goToPreviousPage(),
     delta: 10,
     trackTouch: true,
     trackMouse: false,
@@ -46,7 +48,7 @@ const SwipeablePages: React.FC<SwipeablePagesProps> = ({
   });
 
   useEffect(() => {
-    const timeout = setTimeout(() => setSwipeDirection(null), 600);
+    const timeout = setTimeout(() => setSwipeDirection(null), 220);
     return () => clearTimeout(timeout);
   }, [swipeDirection]);
 
@@ -54,7 +56,7 @@ const SwipeablePages: React.FC<SwipeablePagesProps> = ({
     <div {...handlers} className="relative w-full h-full overflow-hidden">
       <div
         id="transition-element"
-        className={`absolute w-full h-full flex items-center justify-center transition-transform duration-200`}
+        className={`absolute w-full h-full flex items-center justify-center transition-transform duration-150`}
         style={{
           transform: `translateX(${
             swipeDirection === 'left'
