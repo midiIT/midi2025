@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import CountdownComponent from '../CountdownComponent/CountdownComponent';
-import DatePicker from '../EventsPage/DatePicker';
-import EventDisplay from '../EventsPage/EventDisplay';
 import SwipeablePages from './SwipeablePages';
-import PageWithApplications from './Application components/PageWithApplications';
-import Notification from './Notification';
+import PageWithApplications from './ApplicationComponents/PageWithApplications';
+import Notification from './OtherMobile/Notification';
 
 // Pages
 import TeamPage from '../TeamPage/TeamPage';
 import SponsorsPage from '../SponsorsPage/SponsorsPage';
-import SettingsApp from './SettingsApp';
-import Clock from './Clock';
+import SettingsApp from './OtherMobile/SettingsApp';
+import Clock from './OtherMobile/Clock';
+import DatePicker from '../EventsPage/DatePicker';
+import EventDisplay from '../EventsPage/EventDisplay';
+import CountdownComponent from '../CountdownComponent/CountdownComponent';
+import SecretCodeApp from '../SecretPage/SecretCodeApp';
 
 // Photos
 import RandomTerminalPng from '@/images/random_terminal.png';
-import MIDI from '@/images/MIDI.png';
-import LandscapeMIDI from '@/images/LandscapeMIDI.png';
-import Sponsors from '@/images/sponsors.png';
-import Settings from '@/images/settings.png';
+import MIDI from '@/images/MobileImages/MIDI.png';
+import LandscapeMIDI from '@/images/MobileImages/LandscapeMIDI.png';
+import Sponsors from '@/images/MobileImages/sponsors.png';
+import Settings from '@/images/MobileImages/settings.png';
+import Anonymous from '@/images/MobileImages/anonymous.png';
 
 interface PhoneDisplayProps {
   className?: string;
 }
 
 const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
-  const [powerOn, setPowerOn] = useState(true);
   const [currentPage, setCurrentPage] = useState(0); // Track the current page
   const [selectedDate, setSelectedDate] = useState<string | null>(null); // For EventDisplay
   const [showEventInfo, setShowEventInfo] = useState(false); // Controls when EventDisplay is shown
@@ -36,10 +37,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
   const [time, setTime] = useState(new Date()); // For status bar time
   const [brightness, setBrightness] = useState(80); // Brightness state
 
-  const togglePower = () => {
-    setPowerOn(!powerOn);
-  };
-
+  // Update time every second
   useEffect(() => {
     const timer = setInterval(() => {
       setTime(new Date());
@@ -48,21 +46,12 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    if (!powerOn) {
-      setShowWindow(false); // Close application window when phone is turned off
-      setShowEventInfo(false); // Close event pop-up if open
-    } else {
-      setCurrentPage(0); // Return to the first page (Clock) when phone is turned on
-    }
-  }, [powerOn]);
-
+  // Change document style
   useEffect(() => {
     document.documentElement.style.height = '100%';
     document.body.style.height = '100%';
     document.body.style.margin = '0';
     document.body.style.padding = '0';
-    document.body.style.overscrollBehavior = 'none';
     document.body.style.backgroundColor = '#111827';
     document.body.style.overflow = 'auto';
 
@@ -71,12 +60,12 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
       document.body.style.height = '';
       document.body.style.margin = '';
       document.body.style.padding = '';
-      document.body.style.overscrollBehavior = '';
       document.body.style.backgroundColor = '';
       document.body.style.overflow = '';
     };
   }, []);
 
+  // Handle landscape mode
   useEffect(() => {
     const handleResize = () => {
       setIsLandscape(window.innerWidth > window.innerHeight);
@@ -89,11 +78,14 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
     };
   }, []);
 
+  // Pages array
   const pages = [
+    // 1 Page
     <div className="absolute inset-0 w-full h-full overflow-hidden">
       <Clock />
     </div>,
 
+    // 2 Page
     <PageWithApplications
       title="Pagrindinis"
       applications={[
@@ -102,11 +94,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
           appText: 'Komanda',
           windowContent: TeamPage,
         },
-        {
-          iconPath: Sponsors,
-          appText: 'Rėmėjai',
-          windowContent: SponsorsPage,
-        },
+        { iconPath: Sponsors, appText: 'Rėmėjai', windowContent: SponsorsPage },
         {
           iconPath: Settings,
           appText: 'Nustatymai',
@@ -117,20 +105,19 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
             />
           ),
         },
+        { iconPath: Sponsors, appText: 'test', windowContent: SponsorsPage },
+        { iconPath: Sponsors, appText: 'test', windowContent: SponsorsPage },
         {
-          iconPath: Sponsors,
-          appText: 'test',
-          windowContent: SponsorsPage,
-        },
-        {
-          iconPath: Sponsors,
-          appText: 'test',
-          windowContent: SponsorsPage,
+          iconPath: Anonymous,
+          appText: 'Paslaptis',
+          windowContent: SecretCodeApp,
         },
       ]}
       showWindow={showWindow}
       setShowWindow={setShowWindow}
     />,
+
+    // 3 Page
     <div className="w-full h-full flex flex-col items-center justify-center space-y-0">
       <CountdownComponent />
       <DatePicker
@@ -174,14 +161,12 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
         <div
           className={`absolute h-[82vh] w-[90vw] left-[2.5vw] top-[7vh] bg-black rounded-[1rem] border-4 border-gray-600
                      overflow-hidden transition-opacity duration-500 landscape:h-[80vh] landscape:w-[80vw] shadow-inner
-                     landscape:left-[8vw] landscape:top-[2.5vh]  ${powerOn ? 'opacity-100' : 'opacity-50'}`}
+                     landscape:left-[8vw] landscape:top-[2.5vh]`}
           style={{
-            backgroundImage: powerOn
-              ? isLandscape
-                ? `url(${LandscapeMIDI})`
-                : `url(${MIDI})`
-              : 'none',
-            backgroundColor: powerOn ? 'black' : 'transparent',
+            backgroundImage: isLandscape
+              ? `url(${LandscapeMIDI})`
+              : `url(${MIDI})`,
+            backgroundColor: 'black',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -189,7 +174,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
           }}
         >
           {/* Notification */}
-          {powerOn && showNotification && (
+          {showNotification && (
             <Notification
               dismissNotification={() => setShowNotification(false)}
             />
@@ -197,19 +182,15 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
 
           {/* Status bar */}
           <div
-            className={`absolute top-0 left-0 w-full h-8 flex items-center justify-between px-4 bg-black${
-              powerOn ? ' bg-opacity-100' : 'bg-transparent'
-            } text-white text-xs transition-opacity duration-500 ${powerOn ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute top-0 left-0 w-full h-8 flex items-center justify-between px-4 bg-black${' bg-opacity-100'} text-white text-xs transition-opacity duration-500 `}
           >
             {/* Time on the Left */}
             <div className="flex items-center">
               <span>
-                {powerOn
-                  ? time.toLocaleTimeString('lt-LT', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })
-                  : ''}
+                {time.toLocaleTimeString('lt-LT', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
               </span>
             </div>
 
@@ -238,7 +219,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
             </div>
           </div>
 
-          {powerOn && (
+          {
             <div className="relative h-full w-full overflow-y-auto scrollbar-hide">
               <SwipeablePages
                 pages={pages.map(page => (
@@ -266,26 +247,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
                 </div>
               )}
             </div>
-          )}
-        </div>
-
-        {/* Controls */}
-        <div
-          className={`absolute portrait:bottom-[1vh] portrait:w-full flex flex-col items-center left-0 portrait:space-y-4 
-               landscape:absolute landscape:bottom-[35vh] landscape:-right-[88vw] 
-               landscape:transform landscape:translate-y-0 landscape:translate-x-0 
-               landscape:rotate-[270deg] landscape:space-y-6`}
-        >
-          {/* Power Button */}
-          <button
-            onClick={togglePower}
-            className={`w-14 h-14 rounded-full bg-gray-500 text-white font-bold hover:bg-gray-400
-                       active:bg-gray-600 shadow-xl ${
-                         powerOn
-                           ? 'ring-4 ring-green-500'
-                           : 'ring-4 ring-red-500'
-                       }`}
-          />
+          }
         </div>
       </div>
     </div>
