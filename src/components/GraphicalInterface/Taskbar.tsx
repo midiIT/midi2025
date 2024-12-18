@@ -24,7 +24,13 @@ const Taskbar = () => {
 
   return (
     <div>
-      <div className="flex h-14 bg-[#27364a] w-[95%%] m-8 rounded shadow-2xl">
+      <div
+        className="flex h-14 bg-[#27364a] w-[95%%] m-8 rounded shadow-2xl"
+        onContextMenu={e => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
         {openApplications.map(app => (
           <TaskbarIcon key={app.title} icon={app.iconPath} title={app.title} />
         ))}
@@ -33,6 +39,7 @@ const Taskbar = () => {
         <ContextMenu
           content={[
             <div
+              key="minimize"
               onClick={() =>
                 dispatch(minimizeApplication(contextMenuData.title))
               }
@@ -41,6 +48,7 @@ const Taskbar = () => {
               {contextMenuData.title}
             </div>,
             <div
+              key="close"
               onClick={() => dispatch(closeApplication(contextMenuData.title))}
             >
               Close {contextMenuData.title}

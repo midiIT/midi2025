@@ -44,7 +44,7 @@ const ContextMenu = ({ content }: Props) => {
   return (
     <div
       id="context-menu"
-      className="fixed bg-slate-700 rounded shadow-2xl divide-y divide-slate-600 overflow-hidden max-w-64"
+      className="fixed bg-slate-700 rounded shadow-2xl divide-y divide-slate-600 overflow-hidden max-w-80 z-[500]"
       style={{
         visibility: `${yPos ? 'visible' : 'hidden'}`,
         top: yPos ?? 0,
@@ -57,6 +57,7 @@ const ContextMenu = ({ content }: Props) => {
         return cloneElement(child as ReactElement, {
           className:
             'px-4 py-2 text-gray-300 hover:bg-slate-600 cursor-pointer text-sm',
+          key: child.key,
         });
       })}
     </div>

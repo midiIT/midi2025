@@ -80,6 +80,10 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
       className={`absolute ${application?.minimized ? 'hidden' : 'block'} bg-gray-600 rounded w-[500px] h-[400px] max-w-[800px] max-h-[700px]`}
       style={{ zIndex: zIndex }}
       onMouseDown={() => dispatch(setFocusedApplication(title))}
+      onContextMenu={e => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
     >
       <div
         id={`top-bar-${noWhiteSpaceTitle}`}

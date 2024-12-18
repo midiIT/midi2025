@@ -26,6 +26,7 @@ const ApplicationIcon: React.FC<ApplicationProps> = ({ iconPath, title }) => {
         }}
         onContextMenu={e => {
           e.preventDefault();
+          e.stopPropagation();
           dispatch(
             openContextMenu({
               x: e.pageX,

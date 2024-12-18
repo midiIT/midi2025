@@ -49,6 +49,7 @@ const ApplicationsGrid = () => {
         <ContextMenu
           content={[
             <div
+              key="open"
               onClick={() => {
                 const app = applications.find(
                   app => app.data.title === contextMenuData.title,

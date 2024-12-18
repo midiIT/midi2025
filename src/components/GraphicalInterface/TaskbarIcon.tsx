@@ -21,6 +21,7 @@ const TaskbarIcon: React.FC<TaskbarIconProps> = ({ icon, title }) => {
       onClick={() => dispatch(minimizeApplication(title))}
       onContextMenu={e => {
         e.preventDefault();
+        e.stopPropagation();
         dispatch(
           openContextMenu({
             x: e.pageX,

@@ -11,7 +11,14 @@ const Widgets = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="flex flex-col space-y-4 items-end">
+    <div
+      className="flex flex-col space-y-4 items-end"
+      onContextMenu={e => {
+        // edit this to add context menu to all widgets
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+    >
       <div>
         <CountdownComponent />
       </div>
