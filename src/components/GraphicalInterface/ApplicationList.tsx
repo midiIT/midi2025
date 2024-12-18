@@ -4,6 +4,7 @@ import randomTerminalPng from '@/images/random_terminal.png';
 import randomSomethingElsePng from '@/images/random_cat.jpeg';
 import calendarPng from '@/images/calendar.png';
 import EventDisplay from '@/components/EventsPage/EventDisplay.tsx';
+import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 
 const TempTerminal: React.FC = () => {
   return <p>Insert terminal as import later!!!</p>;
@@ -20,7 +21,7 @@ const applications: Application[] = [
       title: 'Terminal',
       iconPath: randomTerminalPng,
       minimized: false,
-      zIndex: 300,
+      zIndex: DEFAULT_Z_INDEX,
     },
   },
   {
@@ -30,7 +31,7 @@ const applications: Application[] = [
       title: 'Something 1',
       iconPath: randomSomethingElsePng,
       minimized: false,
-      zIndex: 300,
+      zIndex: DEFAULT_Z_INDEX,
     },
   },
   {
@@ -40,7 +41,7 @@ const applications: Application[] = [
       title: 'Something 2',
       iconPath: randomSomethingElsePng,
       minimized: false,
-      zIndex: 300,
+      zIndex: DEFAULT_Z_INDEX,
     },
   },
   {
@@ -50,7 +51,7 @@ const applications: Application[] = [
       title: 'Calendar',
       iconPath: calendarPng,
       minimized: false,
-      zIndex: 300,
+      zIndex: DEFAULT_Z_INDEX,
     },
   },
 ];

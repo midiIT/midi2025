@@ -15,6 +15,7 @@ import applications from '@/components/GraphicalInterface/ApplicationList.tsx';
 import TaskbarIcon from '@/components/GraphicalInterface/TaskbarIcon.tsx';
 
 import calendarIcon from '@/images/calendar.png';
+import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 
 const GraphicalInterface: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -70,7 +71,7 @@ const GraphicalInterface: React.FC = () => {
                       minimized: false,
                       title: 'Calendar',
                       iconPath: calendarIcon,
-                      zIndex: 300,
+                      zIndex: DEFAULT_Z_INDEX,
                     }),
                   );
                 }}

@@ -1,6 +1,7 @@
 import { ApplicationData } from '@/components/GraphicalInterface/types.ts';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/app/Store.ts';
+import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 
 interface ApplicationsState {
   openApplications: ApplicationData[];
@@ -39,6 +40,12 @@ export const applicationsSlice = createSlice({
       );
       state.openApplications[index].minimized =
         !state.openApplications[index].minimized;
+
+      state.openApplications = state.openApplications.map(app => {
+        return { ...app, zIndex: app.zIndex - 1 };
+      });
+
+      state.openApplications[index].zIndex = DEFAULT_Z_INDEX;
     },
     setFocusedApplication: (state, action: PayloadAction<string>) => {
       state.openApplications = state.openApplications.map(app => {
@@ -49,7 +56,7 @@ export const applicationsSlice = createSlice({
         app => app.title === action.payload,
       );
 
-      state.openApplications[index].zIndex = 300;
+      state.openApplications[index].zIndex = DEFAULT_Z_INDEX;
     },
     setEventDate: (state, action: PayloadAction<string>) => {
       state.eventDate = action.payload;
