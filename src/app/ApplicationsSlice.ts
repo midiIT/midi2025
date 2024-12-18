@@ -4,10 +4,12 @@ import { RootState } from '@/app/Store.ts';
 
 interface ApplicationsState {
   openApplications: ApplicationData[];
+  eventDate: string;
 }
 
 const initialState: ApplicationsState = {
   openApplications: [],
+  eventDate: '',
 };
 
 export const applicationsSlice = createSlice({
@@ -49,6 +51,9 @@ export const applicationsSlice = createSlice({
 
       state.openApplications[index].zIndex = 300;
     },
+    setEventDate: (state, action: PayloadAction<string>) => {
+      state.eventDate = action.payload;
+    },
   },
 });
 
@@ -57,11 +62,14 @@ export const {
   closeApplication,
   minimizeApplication,
   setFocusedApplication,
+  setEventDate,
 } = applicationsSlice.actions;
 
 export const selectOpenApplications = (state: RootState) =>
   state.applications.openApplications;
 export const selectApplication = (title: string) => (state: RootState) =>
   state.applications.openApplications.find(app => app.title === title);
+export const selectEventDate = (state: RootState) =>
+  state.applications.eventDate;
 
 export default applicationsSlice.reducer;

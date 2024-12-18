@@ -10,4 +10,5 @@ export interface ApplicationData {
 export interface Application {
   data: ApplicationData;
   windowContent: ReactNode;
+  hidden: boolean;
 }
