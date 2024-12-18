@@ -29,7 +29,7 @@ const Taskbar = () => {
           <TaskbarIcon key={app.title} icon={app.iconPath} title={app.title} />
         ))}
       </div>
-      {contextMenuOpen && (
+      {contextMenuOpen && contextMenuData.owner == 'taskbarIcon' && (
         <ContextMenu
           content={[
             <div

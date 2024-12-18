@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { openApplication } from '@/app/ApplicationsSlice.ts';
 import { useAppDispatch } from '@/app/hooks.ts';
+import { openContextMenu } from '@/app/ContextMenuSlice.ts';
 
 interface ApplicationProps {
   iconPath: string;
@@ -20,6 +21,17 @@ const ApplicationIcon: React.FC<ApplicationProps> = ({ iconPath, title }) => {
               title: title,
               iconPath: iconPath,
               zIndex: 300,
+            }),
+          );
+        }}
+        onContextMenu={e => {
+          e.preventDefault();
+          dispatch(
+            openContextMenu({
+              x: e.pageX,
+              y: e.pageY,
+              title,
+              owner: 'applicationIcon',
             }),
           );
         }}

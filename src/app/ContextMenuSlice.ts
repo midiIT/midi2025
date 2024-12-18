@@ -6,6 +6,7 @@ interface ContextMenuSlice {
   x: number;
   y: number;
   title: string;
+  owner: string;
 }
 
 const initialState: ContextMenuSlice = {
@@ -13,6 +14,7 @@ const initialState: ContextMenuSlice = {
   x: 0,
   y: 0,
   title: '',
+  owner: '',
 };
 
 export const contextMenuSlice = createSlice({
@@ -21,12 +23,18 @@ export const contextMenuSlice = createSlice({
   reducers: {
     openContextMenu: (
       state,
-      action: PayloadAction<{ x: number; y: number; title: string }>,
+      action: PayloadAction<{
+        x: number;
+        y: number;
+        title: string;
+        owner: string;
+      }>,
     ) => {
       state.open = true;
       state.x = action.payload.x;
       state.y = action.payload.y;
       state.title = action.payload.title;
+      state.owner = action.payload.owner;
     },
     closeContextMenu: state => {
       state.open = false;
@@ -43,6 +51,7 @@ export const selectContextMenuData = (state: RootState) => {
     x: state.contextMenu.x,
     y: state.contextMenu.y,
     title: state.contextMenu.title,
+    owner: state.contextMenu.owner,
   };
 };
 
