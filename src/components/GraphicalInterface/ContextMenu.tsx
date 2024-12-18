@@ -1,16 +1,20 @@
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { useAppSelector } from '@/app/hooks';
 import { selectContextMenuData } from '@/app/ContextMenuSlice';
 import {
-  closeApplication,
-  minimizeApplication,
-  selectApplication,
-} from '@/app/ApplicationsSlice';
-import { useEffect, useState } from 'react';
+  cloneElement,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 
-const ContextMenu = () => {
-  const dispatch = useAppDispatch();
+interface Props {
+  content: ReactNode[];
+}
+
+const ContextMenu = ({ content }: Props) => {
   const contextMenuData = useAppSelector(selectContextMenuData);
-  const application = useAppSelector(selectApplication(contextMenuData.title));
   const [yPos, setYPos] = useState<number | undefined>(undefined);
 
   useEffect(() => {
@@ -23,9 +27,7 @@ const ContextMenu = () => {
     )?.offsetHeight;
 
     const offset = (
-      document.querySelector('#taskbar-context-menu') as
-        | HTMLDivElement
-        | undefined
+      document.querySelector('#context-menu') as HTMLDivElement | undefined
     )?.offsetHeight;
 
     if (!displayHeight || !offset || !ctrDisplayHeight) return;
@@ -41,7 +43,7 @@ const ContextMenu = () => {
 
   return (
     <div
-      id="taskbar-context-menu"
+      id="context-menu"
       className="fixed bg-slate-700 rounded shadow-2xl divide-y divide-slate-600 overflow-hidden max-w-64"
       style={{
         visibility: `${yPos ? 'visible' : 'hidden'}`,
@@ -49,18 +51,14 @@ const ContextMenu = () => {
         left: contextMenuData.x,
       }}
     >
-      <div
-        className="px-4 py-2 text-gray-300 hover:bg-slate-600 cursor-pointer text-sm"
-        onClick={() => dispatch(minimizeApplication(contextMenuData.title))}
-      >
-        {application?.minimized ? 'Open' : 'Minimize'} {contextMenuData.title}
-      </div>
-      <div
-        className="px-4 py-2 text-gray-300 hover:bg-slate-600 cursor-pointer text-sm"
-        onClick={() => dispatch(closeApplication(contextMenuData.title))}
-      >
-        Close {contextMenuData.title}
-      </div>
+      {content.map(child => {
+        if (!isValidElement(child)) return child;
+
+        return cloneElement(child as ReactElement, {
+          className:
+            'px-4 py-2 text-gray-300 hover:bg-slate-600 cursor-pointer text-sm',
+        });
+      })}
     </div>
   );
 };

@@ -12,20 +12,15 @@ import {
   setEventDate,
 } from '@/app/ApplicationsSlice.ts';
 import applications from '@/components/GraphicalInterface/ApplicationList.tsx';
-import TaskbarIcon from '@/components/GraphicalInterface/TaskbarIcon.tsx';
 
 import calendarIcon from '@/images/calendar.png';
 import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
-import {
-  closeContextMenu,
-  selectContextMenuOpen,
-} from '@/app/ContextMenuSlice.ts';
-import ContextMenu from '@/components/GraphicalInterface/ContextMenu.tsx';
+import { closeContextMenu } from '@/app/ContextMenuSlice.ts';
+import Taskbar from '@/components/GraphicalInterface/Taskbar.tsx';
 
 const GraphicalInterface: React.FC = () => {
   const dispatch = useAppDispatch();
   const openApplications = useAppSelector(selectOpenApplications);
-  const contextMenuOpen = useAppSelector(selectContextMenuOpen);
 
   useEffect(() => {
     const handleClick = () => dispatch(closeContextMenu());
@@ -64,7 +59,6 @@ const GraphicalInterface: React.FC = () => {
                 />
               ))}
 
-            {/* TODO: add ability to use right click on the desktop */}
             {openApplications.map(app => {
               return (
                 <ApplicationWindow
@@ -102,16 +96,7 @@ const GraphicalInterface: React.FC = () => {
           </div>
         </div>
         {/* Bottom bar */}
-        <div className="flex h-14 bg-[#27364a] w-[95%%] m-8 rounded shadow-2xl">
-          {openApplications.map(app => (
-            <TaskbarIcon
-              key={app.title}
-              icon={app.iconPath}
-              title={app.title}
-            />
-          ))}
-        </div>
-        {contextMenuOpen && <ContextMenu />}
+        <Taskbar />
       </div>
     </CRTDisplay>
   );
