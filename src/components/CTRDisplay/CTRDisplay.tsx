@@ -28,7 +28,7 @@ const CRTDisplay: React.FC<CRTDisplayProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black p-8">
+    <div id="ctr-display" className="fixed inset-0 bg-black p-8">
       {/* Outer casing with very rounded edges */}
       <div className="relative w-full h-full bg-gray-800 rounded-3xl shadow-2xl">
         {/* Inner bezels and borders */}
