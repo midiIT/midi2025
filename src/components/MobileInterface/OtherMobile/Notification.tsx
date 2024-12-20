@@ -23,7 +23,7 @@ const Notification: React.FC<NotificationProps> = ({ dismissNotification }) => {
       {/* Dismiss Button */}
       <button
         onClick={dismissNotification}
-        className="bg-blue-800 hover:bg-blue-900 rounded-full w-6 h-6 flex items-center justify-center text-xs"
+        className="bg-red-600 rounded-full w-8 h-8 flex items-center justify-center text-xs"
       >
         ✕
       </button>

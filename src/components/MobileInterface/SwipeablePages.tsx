@@ -14,27 +14,19 @@ const SwipeablePages: React.FC<SwipeablePagesProps> = ({
   setCurrentPage,
   disableSwipe = false,
 }) => {
-  const [swipeDirection, setSwipeDirection] = useState<string | null>(null);
+  const [transitioning, setTransitioning] = useState(false);
 
   const goToNextPage = () => {
-    if (currentPage < pages.length - 2) {
-      setSwipeDirection('left');
-      setTimeout(() => {
-        setCurrentPage(pages.length - 1);
-        setSwipeDirection('right');
-      }, 200);
-      setTimeout(() => setCurrentPage(currentPage + 1), 360);
+    if (currentPage < pages.length - 1 && !transitioning) {
+      setTransitioning(true);
+      setCurrentPage(prev => prev + 1);
     }
   };
 
   const goToPreviousPage = () => {
-    if (currentPage > 0) {
-      setSwipeDirection('right');
-      setTimeout(() => {
-        setCurrentPage(pages.length - 1);
-        setSwipeDirection('left');
-      }, 200);
-      setTimeout(() => setCurrentPage(currentPage - 1), 360);
+    if (currentPage > 0 && !transitioning) {
+      setTransitioning(true);
+      setCurrentPage(prev => prev - 1);
     }
   };
 
@@ -48,26 +40,23 @@ const SwipeablePages: React.FC<SwipeablePagesProps> = ({
   });
 
   useEffect(() => {
-    const timeout = setTimeout(() => setSwipeDirection(null), 220);
+    const timeout = setTimeout(() => setTransitioning(false), 300);
     return () => clearTimeout(timeout);
-  }, [swipeDirection]);
+  }, [currentPage]);
 
   return (
     <div {...handlers} className="relative w-full h-full overflow-hidden">
       <div
-        id="transition-element"
-        className={`absolute w-full h-full flex items-center justify-center transition-transform duration-150`}
+        className="absolute flex w-full h-full transition-transform duration-300"
         style={{
-          transform: `translateX(${
-            swipeDirection === 'left'
-              ? '-100%'
-              : swipeDirection === 'right'
-                ? '100%'
-                : '0'
-          })`,
+          transform: `translateX(-${currentPage * 100}%)`,
         }}
       >
-        {pages[currentPage]}
+        {pages.map((page, index) => (
+          <div key={index} className="w-full h-full flex-shrink-0">
+            {page}
+          </div>
+        ))}
       </div>
     </div>
   );

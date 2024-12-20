@@ -1,25 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import SwipeablePages from './SwipeablePages';
-import PageWithApplications from './ApplicationComponents/PageWithApplications';
 import Notification from './OtherMobile/Notification';
-
-// Pages
-import TeamPage from '../TeamPage/TeamPage';
-import SponsorsPage from '../SponsorsPage/SponsorsPage';
-import SettingsApp from './OtherMobile/SettingsApp';
-import Clock from './OtherMobile/Clock';
-import DatePicker from '../EventsPage/DatePicker';
 import EventDisplay from '../EventsPage/EventDisplay';
-import CountdownComponent from '../CountdownComponent/CountdownComponent';
-import SecretCodeApp from '../SecretPage/SecretCodeApp';
+import { PagesList } from './PagesList';
+import './MobileStyles.css';
 
 // Photos
-import RandomTerminalPng from '@/images/random_terminal.png';
 import MIDI from '@/images/MobileImages/MIDI.png';
 import LandscapeMIDI from '@/images/MobileImages/LandscapeMIDI.png';
-import Sponsors from '@/images/MobileImages/sponsors.png';
-import Settings from '@/images/MobileImages/settings.png';
-import Anonymous from '@/images/MobileImages/anonymous.png';
 
 interface PhoneDisplayProps {
   className?: string;
@@ -46,22 +34,12 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
     return () => clearInterval(timer);
   }, []);
 
-  // Change document style
+  // Apply styles to body
   useEffect(() => {
-    document.documentElement.style.height = '100%';
-    document.body.style.height = '100%';
-    document.body.style.margin = '0';
-    document.body.style.padding = '0';
-    document.body.style.backgroundColor = '#111827';
-    document.body.style.overflow = 'auto';
+    document.body.classList.add('mobile-interface-body');
 
     return () => {
-      document.documentElement.style.height = '';
-      document.body.style.height = '';
-      document.body.style.margin = '';
-      document.body.style.padding = '';
-      document.body.style.backgroundColor = '';
-      document.body.style.overflow = '';
+      document.body.classList.remove('mobile-interface-body');
     };
   }, []);
 
@@ -78,61 +56,9 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
     };
   }, []);
 
-  // Pages array
-  const pages = [
-    // 1 Page
-    <div className="absolute inset-0 w-full h-full overflow-hidden">
-      <Clock />
-    </div>,
-
-    // 2 Page
-    <PageWithApplications
-      title="Pagrindinis"
-      applications={[
-        {
-          iconPath: RandomTerminalPng,
-          appText: 'Komanda',
-          windowContent: TeamPage,
-        },
-        { iconPath: Sponsors, appText: 'Rėmėjai', windowContent: SponsorsPage },
-        {
-          iconPath: Settings,
-          appText: 'Nustatymai',
-          windowContent: () => (
-            <SettingsApp
-              brightness={brightness}
-              setBrightness={setBrightness}
-            />
-          ),
-        },
-        { iconPath: Sponsors, appText: 'test', windowContent: SponsorsPage },
-        { iconPath: Sponsors, appText: 'test', windowContent: SponsorsPage },
-        {
-          iconPath: Anonymous,
-          appText: 'Paslaptis',
-          windowContent: SecretCodeApp,
-        },
-      ]}
-      showWindow={showWindow}
-      setShowWindow={setShowWindow}
-    />,
-
-    // 3 Page
-    <div className="w-full h-full flex flex-col items-center justify-center space-y-0">
-      <CountdownComponent />
-      <DatePicker
-        onDatePicked={date => {
-          setSelectedDate(date.toISOString().split('T')[0]);
-          setShowEventInfo(true);
-        }}
-      />
-    </div>,
-    <div className="text-center"></div>,
-  ];
-
   return (
     <div
-      className={`flex items-center justify-center h-screen w-screen bg-gray-900 overflow-hidden ${className}`}
+      className={`flex items-center justify-center h-screen w-screen bg-gray-900 overflow-hidden mobile-interface ${className}`}
     >
       {/* Phone box */}
       <div
@@ -221,33 +147,37 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
 
           {
             <div className="relative h-full w-full overflow-y-auto scrollbar-hide">
+              {/* Pages */}
               <SwipeablePages
-                pages={pages.map(page => (
-                  <div className="absolute inset-0 h-full w-full flex flex-col overflow-hidden scrollbar-hide">
-                    {page}
-                  </div>
-                ))}
+                pages={PagesList({
+                  brightness,
+                  setBrightness,
+                  selectedDate,
+                  setSelectedDate,
+                  setShowEventInfo,
+                  showWindow,
+                  setShowWindow,
+                })}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 disableSwipe={showWindow || showEventInfo}
               />
-
-              {/* Event Pop-Up */}
-              {showEventInfo && selectedDate && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-80 rounded-[1rem]">
-                  <div className="relative bg-gray-800 rounded-lg shadow-lg p-6 w-[90%] h-[80%] overflow-y-auto">
-                    <button
-                      onClick={() => setShowEventInfo(false)}
-                      className="absolute top-2 right-2 w-8 h-8 bg-red-600 text-white rounded-full font-bold flex items-center justify-center"
-                    >
-                      ✕
-                    </button>
-                    <EventDisplay eventDate={selectedDate} />
-                  </div>
-                </div>
-              )}
             </div>
           }
+          {/* Event Pop-Up */}
+          {showEventInfo && selectedDate && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-80 rounded-[1rem]">
+              <div className="relative bg-gray-800 rounded-lg shadow-lg p-6 w-[90%] h-[80%] overflow-y-auto">
+                <button
+                  onClick={() => setShowEventInfo(false)}
+                  className="absolute top-2 right-2 w-8 h-8 bg-red-600 text-white rounded-full font-bold flex items-center justify-center"
+                >
+                  ✕
+                </button>
+                <EventDisplay eventDate={selectedDate} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
