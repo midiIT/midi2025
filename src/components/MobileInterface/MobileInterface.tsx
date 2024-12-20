@@ -58,7 +58,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
 
   return (
     <div
-      className={`flex items-center justify-center h-screen w-screen bg-gray-900 overflow-hidden mobile-interface ${className}`}
+      className={`flex items-center justify-center h-screen w-screen bg-gray-900 overflow-hidden ${className}`}
     >
       {/* Phone box */}
       <div
@@ -96,7 +96,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            filter: `brightness(${brightness / 100})`, // Apply brightness
+            filter: `brightness(${brightness / 100})`,
           }}
         >
           {/* Notification */}
@@ -122,9 +122,9 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
 
             <div className="flex items-center space-x-4">
               <div className="flex space-x-1 items-end">
-                <div className="w-1 h-2 bg-white rounded-sm"></div>{' '}
-                <div className="w-1 h-3 bg-white rounded-sm"></div>{' '}
-                <div className="w-1 h-4 bg-white rounded-sm"></div>{' '}
+                <div className="w-1 h-2 bg-white rounded-sm"></div>
+                <div className="w-1 h-3 bg-white rounded-sm"></div>
+                <div className="w-1 h-4 bg-white rounded-sm"></div>
               </div>
 
               {/* Battery Icon */}
