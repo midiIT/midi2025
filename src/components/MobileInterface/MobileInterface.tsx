@@ -108,11 +108,12 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
 
           {/* Status bar */}
           <div
-            className={`absolute top-0 left-0 w-full h-8 flex items-center justify-between px-4 bg-black${' bg-opacity-100'} text-white text-xs transition-opacity duration-500 `}
+            className="absolute top-0 left-0 w-full h-7 flex items-center justify-between px-6
+                     bg-black bg-opacity-90 text-white text-sm font-medium backdrop-blur-sm rounded-t-2xl"
           >
             {/* Time on the Left */}
             <div className="flex items-center">
-              <span>
+              <span className="font-semibold tracking-wide">
                 {time.toLocaleTimeString('lt-LT', {
                   hour: '2-digit',
                   minute: '2-digit',
@@ -120,27 +121,24 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
               </span>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="flex space-x-1 items-end">
-                <div className="w-1 h-2 bg-white rounded-sm"></div>
-                <div className="w-1 h-3 bg-white rounded-sm"></div>
-                <div className="w-1 h-4 bg-white rounded-sm"></div>
+            <div className="flex items-center space-x-3">
+              {/* Signal Strength */}
+              <div className="flex flex-row-reverse space-x-0.5 space-x-reverse items-end h-3">
+                <div className="w-0.5 h-3 bg-white rounded-sm opacity-90"></div>
+                <div className="w-0.5 h-2.5 bg-white rounded-sm opacity-90"></div>
+                <div className="w-0.5 h-2 bg-white rounded-sm opacity-90"></div>
+                <div className="w-0.5 h-1.5 bg-white rounded-sm opacity-90"></div>
               </div>
 
               {/* Battery Icon */}
-              <div className="relative flex items-center">
-                <div className="relative w-8 h-4 border-2 border-white rounded-sm flex items-center justify-start">
+              <div className="relative flex items-center h-3">
+                <div className="relative w-6 h-3 border border-white rounded-sm flex items-center">
                   <div
-                    className={`h-full bg-green-600`}
+                    className="h-full bg-white transition-all duration-300"
                     style={{ width: '69%' }}
                   ></div>
-
-                  <span className="absolute left-1 text-xs text-gray-300 font-bold">
-                    69
-                  </span>
                 </div>
-
-                <div className="w-1 h-2 bg-white ml-1"></div>
+                <div className="w-0.5 h-2 bg-white ml-0.5 rounded-r-sm"></div>
               </div>
             </div>
           </div>

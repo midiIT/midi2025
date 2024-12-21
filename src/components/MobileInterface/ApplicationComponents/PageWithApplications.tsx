@@ -25,7 +25,7 @@ const PageWithApplications: React.FC<PageWithApplicationsProps> = ({
     React.useState<React.ReactNode>(null);
 
   return (
-    <div className="text-center text-blue-300 text-base w-full h-full overflow-hidden translate-y-[3vh] landscape:translate-y-[3vw]">
+    <div className="text-center text-blue-300 text-base w-full h-full overflow-hidden translate-y-[3vh] landscape:translate-y-[6vh]">
       <p>{title}</p>
       <div className="grid grid-cols-4 gap-4">
         {applications.map((app, index) => (

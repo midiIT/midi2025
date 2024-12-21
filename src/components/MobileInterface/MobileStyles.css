@@ -5,3 +5,6 @@
   background-color: #111827;
   overflow: auto;
 }
+.notification {
+  overflow: hidden;
+}

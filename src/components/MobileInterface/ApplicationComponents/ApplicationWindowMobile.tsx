@@ -17,7 +17,7 @@ const ApplicationWindowMobile: React.FC<ApplicationWindowProps> = ({
       >
         <button
           onClick={onExit}
-          className="absolute right-4 top-4 z-50 w-9 h-8 flex items-center justify-center bg-red-600 rounded-full text-lg font-bold"
+          className="absolute right-4 top-4 z-50 w-8 h-8 flex items-center justify-center bg-red-600 rounded-full text-lg font-bold"
         >
           &times;
         </button>
