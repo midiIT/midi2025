@@ -7,15 +7,14 @@ const TerminalInterface: React.FC = () => {
   const lastLineRef = useRef<HTMLDivElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-
     const handleCommand = () => {
-      switch(lines[lines.length - 1]) {
+      switch (lines[lines.length - 1]) {
         case 'sponsors':
           return <SponsorsPage />;
         case 'time':
           setLines(prevLines => [...prevLines, `Time till MIDI: nezinau`]);
       }
-    }
+    };
 
     if (e.key === 'Enter') {
       setLines(prevLines => [...prevLines, '']);
@@ -55,8 +54,8 @@ const TerminalInterface: React.FC = () => {
           <pre className="text-center whitespace-pre leading-none mr-10">
             {`
             ____    ____ _____ ______   _____ 
-            |_   \\  /   _|_   _|_   _ \.|_   _|
-              |   \\/   |   | |   | | \. \\ | |  
+            |_   \\  /   _|_   _|_   _ \`.|_   _|
+              |   \\/   |   | |   | | \`. \\ | |  
               | |\\  /| |   | |   | |  | | | |  
             _| |_\\/_| |_ _| |_ _| |_.' /_| |_ 
             |_____||_____|_____|______.'|_____|`}
