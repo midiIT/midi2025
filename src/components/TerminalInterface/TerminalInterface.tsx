@@ -1,13 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CRTDisplay from '@/components/CTRDisplay/CTRDisplay';
+import SponsorsPage from '../SponsorsPage/SponsorsPage';
 
 const TerminalInterface: React.FC = () => {
   const [lines, setLines] = useState<string[]>(['']);
   const lastLineRef = useRef<HTMLDivElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+
+    const handleCommand = () => {
+      switch(lines[lines.length - 1]) {
+        case 'sponsors':
+          return <SponsorsPage />;
+        case 'time':
+          setLines(prevLines => [...prevLines, `Time till MIDI: nezinau`]);
+      }
+    }
+
     if (e.key === 'Enter') {
       setLines(prevLines => [...prevLines, '']);
+      handleCommand();
     } else if (e.key.length === 1 && lines[lines.length - 1].length < 100) {
       setLines(prevLines => {
         const updatedLines = [...prevLines];
@@ -43,8 +55,8 @@ const TerminalInterface: React.FC = () => {
           <pre className="text-center whitespace-pre leading-none mr-10">
             {`
             ____    ____ _____ ______   _____ 
-            |_   \\  /   _|_   _|_   _ \`.|_   _|
-              |   \\/   |   | |   | | \`. \\ | |  
+            |_   \\  /   _|_   _|_   _ \.|_   _|
+              |   \\/   |   | |   | | \. \\ | |  
               | |\\  /| |   | |   | |  | | | |  
             _| |_\\/_| |_ _| |_ _| |_.' /_| |_ 
             |_____||_____|_____|______.'|_____|`}
