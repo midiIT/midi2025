@@ -3,9 +3,13 @@ import Cat from './Cat';
 import Obstacle from './Obstacle';
 import obstacle1 from '@/images/katazaugasImages/obWall.png';
 import obstacle2 from '@/images/katazaugasImages/obPoop.png';
-import obstacle3 from '@/images/katazaugasImages/obVape.png';
+import obstacle3 from '@/images/katazaugasImages/obCone.png';
 import decoration1 from '@/images/katazaugasImages/cloud.png';
 import decoration2 from '@/images/katazaugasImages/star.png';
+import decoration3 from '@/images/katazaugasImages/wind.png';
+import decoration4 from '@/images/katazaugasImages/wind3.png';
+import decoration5 from '@/images/katazaugasImages/diamond.png';
+import decoration6 from '@/images/katazaugasImages/diamond2.png';
 
 interface CatType {
   x: number;
@@ -32,7 +36,14 @@ interface DecorationType {
 }
 
 const obstacleImages = [obstacle1, obstacle2, obstacle3];
-const decorationImages = [decoration1, decoration2];
+const decorationImages = [
+  decoration1,
+  decoration2,
+  decoration3,
+  decoration4,
+  decoration5,
+  decoration6,
+];
 const GROUND_LEVEL = 320;
 const PATH_HEIGHT = 40;
 const CAT_SIZE = 40;
@@ -79,7 +90,7 @@ const Game: React.FC = () => {
       updatedObstacles.forEach(obstacle => {
         if (detectCollision(cat, obstacle)) {
           setIsGameRunning(false);
-          setGameOverMessage(`Game Over! Final Score: ${score}`);
+          setGameOverMessage(`Taškai: ${score}`);
         }
       });
 
@@ -190,6 +201,19 @@ const Game: React.FC = () => {
         backgroundColor: '#27272a',
       }}
     >
+      {/* Info Message */}
+      <div
+        style={{
+          marginTop: '10px',
+          marginBottom: '10px',
+          fontSize: '16px',
+          color: 'white',
+          fontWeight: 'bold',
+        }}
+      >
+        Katinukas gali pašokti du kartus!
+      </div>
+
       {/* Game Window */}
       <div
         style={{
@@ -270,7 +294,7 @@ const Game: React.FC = () => {
             fontWeight: 'bold',
           }}
         >
-          Start Game
+          Pradėti žaidimą
         </button>
         <button
           onClick={resetGame}
@@ -284,7 +308,7 @@ const Game: React.FC = () => {
             fontWeight: 'bold',
           }}
         >
-          Restart Game
+          Pradėti iš naujo
         </button>
       </div>
 
