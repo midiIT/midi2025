@@ -107,7 +107,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
           </button>
         </div>
       </div>
-      <div>{content}</div>
+      <div className="w-full h-full overflow-scroll">{content}</div>
     </div>
   );
 };

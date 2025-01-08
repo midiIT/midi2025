@@ -34,10 +34,7 @@ const GraphicalInterface: React.FC = () => {
   });
 
   return (
-    <CRTDisplay
-      initialPowerState={true}
-      onPowerChange={isOn => console.log('Power state:', isOn)}
-    >
+    <CRTDisplay initialPowerState={true}>
       <div
         id="graphical-interface"
         className="flex flex-col justify-between content-center h-full"

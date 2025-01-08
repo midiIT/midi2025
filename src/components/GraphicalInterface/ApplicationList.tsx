@@ -5,6 +5,8 @@ import randomSomethingElsePng from '@/images/random_cat.jpeg';
 import calendarPng from '@/images/calendar.png';
 import EventDisplay from '@/components/EventsPage/EventDisplay.tsx';
 import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
+import TeamPage from '@/components/TeamPage/TeamPage.tsx';
+import teamAppIcon from '@/images/TeamAppIcon.jpg';
 
 const TempTerminal: React.FC = () => {
   return <p>Insert terminal as import later!!!</p>;
@@ -50,6 +52,16 @@ const applications: Application[] = [
     data: {
       title: 'Calendar',
       iconPath: calendarPng,
+      minimized: false,
+      zIndex: DEFAULT_Z_INDEX,
+    },
+  },
+  {
+    windowContent: <TeamPage />,
+    hidden: false,
+    data: {
+      title: 'Team',
+      iconPath: teamAppIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
     },
