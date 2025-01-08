@@ -77,7 +77,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   return (
     <div
       id={`application-${noWhiteSpaceTitle}`}
-      className={`absolute ${application?.minimized ? 'hidden' : 'block'} bg-gray-600 rounded w-[500px] h-[400px] max-w-[800px] max-h-[700px]`}
+      className={`absolute ${application?.minimized ? 'hidden' : 'block'} bg-gray-600 rounded w-[80%] h-[80%] max-w-[800px] max-h-[700px]`}
       style={{ zIndex: zIndex }}
       onMouseDown={() => dispatch(setFocusedApplication(title))}
       onContextMenu={e => {
