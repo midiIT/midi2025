@@ -43,7 +43,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto bg-white shadow-lg rounded-md">
+    <div className="p-4 lg:max-w-md lg:mx-auto bg-white shadow-lg rounded-md es:w-full es:h-full sm:overflow-y-auto">
       <h2 className="text-xl font-semibold text-center mb-4">
         {new Date(year, month - 1).toLocaleString('lt', { month: 'long' })}{' '}
         {year}
@@ -66,7 +66,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
               )
                 handleClick(date);
             }}
-            className={`cursor-pointer rounded-full w-10 h-10 flex flex-col items-center justify-center
+            className={`cursor-pointer rounded-full w-10 h-10 flex flex-col items-center justify-center sm:w-12 sm:h-12
                             ${date ? (selectedDate?.getDate() === date?.getDate() ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800') : 'bg-gray-300'}
                             ${date ? 'hover:bg-blue-300 hover:text-white' : ''}
                             ${date && events.find(event => event.date == date.toISOString().split('T')[0]) ? 'border-2 border-blue-500 hover:border-none' : ''}`}
