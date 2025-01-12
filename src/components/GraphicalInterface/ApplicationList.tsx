@@ -10,7 +10,7 @@ const applications: Application[] = [
     windowContent: <EventDisplay />,
     hidden: true,
     data: {
-      title: 'Calendar',
+      title: 'Kalendorius',
       iconPath: calendarPng,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
@@ -20,7 +20,7 @@ const applications: Application[] = [
     windowContent: <TeamPage />,
     hidden: false,
     data: {
-      title: 'Team',
+      title: 'Komanda',
       iconPath: teamAppIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
