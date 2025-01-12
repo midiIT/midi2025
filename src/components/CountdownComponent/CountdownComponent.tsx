@@ -17,16 +17,27 @@ const CountdownComponent: React.FC = () => {
     return () => clearInterval(timer);
   }, [targetDate]);
 
-  // with little tailwind css
   return (
-    <div className=" bg-blue-500 text-white p-6 rounded-lg flex flex-col items-center sm:w-full sm:h-full">
-      <h1 className="text-2xl font-bold mb-4">Time Left</h1>
-      <p className="text-lg font-mono bg-blue-800 p-4 rounded-md">
-        {timeLeft.days} <span className="font-semibold">Days</span>,{' '}
-        {timeLeft.hours} <span className="font-semibold">Hours</span>,{' '}
-        {timeLeft.minutes} <span className="font-semibold">Minutes</span>,{' '}
-        {timeLeft.seconds} <span className="font-semibold">Seconds</span>
-      </p>
+    <div className="bg-green-900 text-white p-6 border-2 border-white rounded-lg flex flex-col items-center sm:w-full sm:h-full">
+      <h1 className="text-2xl font-bold mb-4 tracking-wide uppercase border-b-2 border-white pb-2">
+        Time Left
+      </h1>
+      <div className="bg-green-700 p-4 rounded-sm border-2 border-white w-full">
+        <p className="text-lg font-mono flex justify-center space-x-6">
+          <span>
+            <span className="text-white">{timeLeft.days}</span> Days
+          </span>
+          <span>
+            <span className="text-white">{timeLeft.hours}</span> Hours
+          </span>
+          <span>
+            <span className="text-white">{timeLeft.minutes}</span> Minutes
+          </span>
+          <span>
+            <span className="text-white">{timeLeft.seconds}</span> Seconds
+          </span>
+        </p>
+      </div>
     </div>
   );
 };
