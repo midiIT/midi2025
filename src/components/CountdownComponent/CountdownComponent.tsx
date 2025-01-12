@@ -1,45 +1,21 @@
 import React, { useState, useEffect } from 'react';
-
-// type of calculateTimeLeft
-type TimeLeft = {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-};
+import { calculateTimeLeft, TimeLeft } from '@/utils/timeUtils';
 
 // a functional component
 const CountdownComponent: React.FC = () => {
   const targetDate = import.meta.env.VITE_MIDI_DATE;
 
-  // helper function
-  const calculateTimeLeft = (): TimeLeft => {
-    const now = new Date();
-    const difference = new Date(targetDate).getTime() - now.getTime(); // in milliseconds
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(
+    calculateTimeLeft(targetDate),
+  );
 
-    if (difference <= 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    }
-
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((difference / (1000 * 60)) % 60);
-    const seconds = Math.floor((difference / 1000) % 60);
-
-    return { days, hours, minutes, seconds };
-  };
-
-  // state to hold the calculated time left
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-  // a hook to set up a timer
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft()); // update the time left every 1s
+      setTimeLeft(calculateTimeLeft(targetDate));
     }, 1000);
 
-    return () => clearInterval(timer); // cleanup func
-  });
+    return () => clearInterval(timer);
+  }, [targetDate]);
 
   // with little tailwind css
   return (
