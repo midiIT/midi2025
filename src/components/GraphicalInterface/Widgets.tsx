@@ -30,7 +30,7 @@ const Widgets = () => {
             dispatch(
               openApplication({
                 minimized: false,
-                title: 'Calendar',
+                title: 'Kalendorius',
                 iconPath: calendarIcon,
                 zIndex: DEFAULT_Z_INDEX,
               }),
