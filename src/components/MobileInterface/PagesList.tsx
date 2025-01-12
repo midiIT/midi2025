@@ -1,5 +1,7 @@
 import React from 'react';
 import PageWithApplications from './ApplicationComponents/PageWithApplications';
+import { setEventDate } from '@/app/ApplicationsSlice.ts';
+import { useAppDispatch } from '@/app/hooks.ts';
 
 // Photos
 import RandomTerminalPng from '@/images/random_terminal.png';
@@ -19,8 +21,6 @@ import DatePicker from '../EventsPage/DatePicker';
 interface PagesProps {
   brightness: number;
   setBrightness: React.Dispatch<React.SetStateAction<number>>;
-  selectedDate: string | null;
-  setSelectedDate: React.Dispatch<React.SetStateAction<string | null>>;
   setShowEventInfo: React.Dispatch<React.SetStateAction<boolean>>;
   showWindow: boolean;
   setShowWindow: React.Dispatch<React.SetStateAction<boolean>>;
@@ -29,11 +29,12 @@ interface PagesProps {
 export const PagesList = ({
   brightness,
   setBrightness,
-  setSelectedDate,
   setShowEventInfo,
   showWindow,
   setShowWindow,
 }: PagesProps): React.ReactElement[] => {
+  const dispatch = useAppDispatch();
+
   return [
     // 1 Page: Clock
     <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -75,7 +76,7 @@ export const PagesList = ({
       <CountdownComponent />
       <DatePicker
         onDatePicked={date => {
-          setSelectedDate(date.toISOString().split('T')[0]);
+          dispatch(setEventDate(date.toISOString().split('T')[0]));
           setShowEventInfo(true);
         }}
       />

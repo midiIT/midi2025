@@ -1,79 +1,84 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useEffect } from 'react';
 import CRTDisplay from '@/components/CTRDisplay/CTRDisplay';
-import Application from '@/components/GraphicalInterface/Application';
-import ApplicationWindow from '@/components/GraphicalInterface/ApplicationWindow';
-import CountdownComponent from '../CountdownComponent/CountdownComponent';
-import DatePicker from '../EventsPage/DatePicker';
-import EventDisplay from '../EventsPage/EventDisplay';
+import Taskbar from '@/components/GraphicalInterface/Taskbar.tsx';
+import ApplicationsGrid from '@/components/GraphicalInterface/ApplicationsGrid.tsx';
+import Widgets from '@/components/GraphicalInterface/Widgets.tsx';
 
-import RandomTerminalPng from '@/images/random_terminal.png';
-import RandomSomethingElsePng from '@/images/random_cat.jpeg';
-
-const TempTerminal: React.FC = () => {
-  return <p>Insert terminal as import later!!!</p>;
-};
-const TempSomethingElse: React.FC = () => {
-  return <p>Insert something else here!</p>;
-};
+import { useAppDispatch, useAppSelector } from '@/app/hooks.ts';
+import {
+  closeContextMenu,
+  openContextMenu,
+  selectContextMenuData,
+  selectContextMenuOpen,
+} from '@/app/ContextMenuSlice.ts';
+import ContextMenu from '@/components/GraphicalInterface/ContextMenu.tsx';
 
 const GraphicalInterface: React.FC = () => {
-  const [showWindow, setShowWindow] = useState<boolean>(false);
-  const [windowContent, setWindowContent] = useState<ReactNode>(null);
+  const dispatch = useAppDispatch();
+  const contextMenuOpen = useAppSelector(selectContextMenuOpen);
+  const contextMenuData = useAppSelector(selectContextMenuData);
+
+  // Disables right click everywhere except where it's setup
+  // Disables context menu when clicking anywhere
+  useEffect(() => {
+    const handleClick = () => dispatch(closeContextMenu());
+    const handleContextMenu = (e: MouseEvent) => e.preventDefault();
+
+    document.addEventListener('click', handleClick);
+    document.addEventListener('contextmenu', handleContextMenu);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+      document.removeEventListener('contextmenu', handleContextMenu);
+    };
+  });
 
   return (
-    <CRTDisplay
-      initialPowerState={true}
-      onPowerChange={isOn => console.log('Power state:', isOn)}
-    >
-      <div className="absolute w-1/2 left-1/4">
-        <CountdownComponent />
-      </div>
-      <div className="absolute w-1/2 left-1/2 top-1/2">
-        <DatePicker
-          onDatePicked={date => {
-            setShowWindow(true);
-            setWindowContent(
-              <EventDisplay eventDate={date.toISOString().split('T')[0]} />,
-            );
-          }}
-        />
-      </div>
-      <div className="inline-grid grid-cols-2 gap-4">
-        <Application
-          iconPath={RandomTerminalPng}
-          appText="Terminal"
-          windowContent={TempTerminal}
-          onClick={() => {
-            setShowWindow(true);
-            setWindowContent(<TempTerminal />);
-          }}
-        />
-        <Application
-          iconPath={RandomSomethingElsePng}
-          appText="Something Elseeeeeeeeeeeeeeeeeeeeeeeeeee"
-          windowContent={TempSomethingElse}
-          onClick={() => {
-            setShowWindow(true);
-            setWindowContent(<TempSomethingElse />);
-          }}
-        />
-        <Application
-          iconPath={RandomSomethingElsePng}
-          appText="Something Elseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-          windowContent={TempSomethingElse}
-          onClick={() => {
-            setShowWindow(true);
-            setWindowContent(<TempSomethingElse />);
-          }}
-        />
-        {showWindow ? (
-          <ApplicationWindow
-            content={windowContent}
-            onExit={() => {
-              setShowWindow(false);
-            }}
+    <CRTDisplay initialPowerState={true}>
+      <div
+        id="graphical-interface"
+        className="flex flex-col justify-between content-center h-full"
+        onContextMenu={e => {
+          e.preventDefault();
+          dispatch(
+            openContextMenu({
+              x: e.pageX,
+              y: e.pageY,
+              title: '',
+              owner: 'desktop',
+            }),
+          );
+        }}
+      >
+        <div className="flex justify-between m-4">
+          <ApplicationsGrid />
+          <Widgets />
+        </div>
+        <Taskbar />
+        {contextMenuOpen && contextMenuData.owner === 'desktop' && (
+          <ContextMenu
+            content={[
+              <div key="fb">
+                <a
+                  href="https://www.facebook.com/midi.lt/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Check out MIDI on Facebook!
+                </a>
+              </div>,
+              <div key="ig">
+                <a
+                  href="https://www.instagram.com/midi.lt/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Check out MIDI on Instagram!
+                </a>
+              </div>,
+            ]}
           />
-        ) : null}
+        )}
       </div>
     </CRTDisplay>
   );
