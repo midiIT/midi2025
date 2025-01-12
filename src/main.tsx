@@ -18,6 +18,9 @@ import TeamPage from '@/components/TeamPage/TeamPage.tsx';
 import Tracking from '@/components/Tracking/Tracking.tsx';
 import TwitchPlayer from '@/components/TwitchPage/TwitchPlayer';
 import GameKatazauras from '@/components/Games/Katazauras/GameKatazauras.tsx';
+import GameKatris from '@/components/Games/Katris/GameKatris';
+import { Provider } from 'react-redux';
+import store from '@/app/Store.ts';
 
 const routes = addTracking([
   {
@@ -60,6 +63,10 @@ const routes = addTracking([
     path: 'game',
     element: <GameKatazauras />,
   },
+  {
+    path: 'katris',
+    element: <GameKatris />,
+  },
 ]);
 
 const router = createBrowserRouter(routes);
@@ -73,6 +80,8 @@ function addTracking(routes: RouteObject[]): RouteObject[] {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>,
 );

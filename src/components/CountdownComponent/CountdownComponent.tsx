@@ -10,7 +10,10 @@ const CountdownComponent: React.FC = () => {
   );
 
   useEffect(() => {
+    setTimeLeft(calculateTimeLeft(targetDate)); // Initialize the state immediately
+
     const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft(targetDate));
       setTimeLeft(calculateTimeLeft(targetDate));
     }, 1000);
 
