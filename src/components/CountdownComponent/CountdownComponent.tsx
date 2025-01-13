@@ -25,7 +25,7 @@ const CountdownComponent: React.FC = () => {
   return (
     <div className="p-6 border-4 border-gray-700 rounded-lg flex flex-col items-center sm:w-full sm:h-full bg-black">
       <h1 className="whitespace-pre text-4xl mb-4 tracking-wide border-b-4 border-blue-500 pb-2 text-blue-500 animate-pulse">
-        I K I M I D I L I K O
+        IKI MIDI LIKO
       </h1>
       <div className="relative w-full">
         <div className="bg-black p-4 rounded border-4 border-blue-500 w-full">
