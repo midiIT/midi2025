@@ -3,7 +3,13 @@ import Cat from './Cat';
 import Obstacle from './Obstacle';
 import obstacle1 from '@/images/katazaugasImages/obWall.png';
 import obstacle2 from '@/images/katazaugasImages/obPoop.png';
-import obstacle3 from '@/images/katazaugasImages/obVape.png';
+import obstacle3 from '@/images/katazaugasImages/obCone.png';
+import decoration1 from '@/images/katazaugasImages/cloud.png';
+import decoration2 from '@/images/katazaugasImages/star.png';
+import decoration3 from '@/images/katazaugasImages/wind.png';
+import decoration4 from '@/images/katazaugasImages/wind3.png';
+import decoration5 from '@/images/katazaugasImages/diamond.png';
+import decoration6 from '@/images/katazaugasImages/diamond2.png';
 
 interface CatType {
   x: number;
@@ -21,7 +27,23 @@ interface ObstacleType {
   image: string;
 }
 
+interface DecorationType {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  image: string;
+}
+
 const obstacleImages = [obstacle1, obstacle2, obstacle3];
+const decorationImages = [
+  decoration1,
+  decoration2,
+  decoration3,
+  decoration4,
+  decoration5,
+  decoration6,
+];
 const GROUND_LEVEL = 320;
 const PATH_HEIGHT = 40;
 const CAT_SIZE = 40;
@@ -36,11 +58,17 @@ const Game: React.FC = () => {
     jumpsLeft: 2,
   });
 
-  const [obstacles, setObstacles] = useState<ObstacleType[]>([]);
   const [score, setScore] = useState<number>(0);
   const gameInterval = useRef<number | null>(null);
+  const gameContainerRef = useRef<HTMLDivElement>(null); // after Start immediately focusses on game window
+  const [obstacles, setObstacles] = useState<ObstacleType[]>([]);
+  const [decorations, setDecorations] = useState<DecorationType[]>([]);
+  const [gameOverMessage, setGameOverMessage] = useState<string | null>(null);
+  const [isGameRunning, setIsGameRunning] = useState<boolean>(false);
 
   const updateGame = useCallback(() => {
+    if (!isGameRunning) return;
+
     setCat(prevCat => {
       let newY = prevCat.y + prevCat.dy;
       let newDy = prevCat.dy + (prevCat.jumping ? 0.6 : 0);
@@ -56,13 +84,13 @@ const Game: React.FC = () => {
 
     setObstacles(prevObstacles => {
       const updatedObstacles = prevObstacles
-        .map(obstacle => ({ ...obstacle, x: obstacle.x - 5 })) // Move obstacles left
-        .filter(obstacle => obstacle.x + OBSTACLE_SIZE > 0); // Remove off-screen obstacles
+        .map(obstacle => ({ ...obstacle, x: obstacle.x - 5 }))
+        .filter(obstacle => obstacle.x + OBSTACLE_SIZE > 0);
 
       updatedObstacles.forEach(obstacle => {
         if (detectCollision(cat, obstacle)) {
-          alert('Womp womp. Skill issue. Final Score: ' + score);
-          resetGame();
+          setIsGameRunning(false);
+          setGameOverMessage(`Taškai: ${score}`);
         }
       });
 
@@ -81,16 +109,40 @@ const Game: React.FC = () => {
       setScore(prevScore => prevScore + 1);
       return updatedObstacles;
     });
-  }, [cat, score]);
+
+    setDecorations(prevDecorations => {
+      const updatedDecorations = prevDecorations
+        .map(decoration => ({ ...decoration, x: decoration.x - 2 }))
+        .filter(decoration => decoration.x + decoration.width > 0);
+
+      if (Math.random() < 0.01) {
+        const randomImage =
+          decorationImages[Math.floor(Math.random() * decorationImages.length)];
+        updatedDecorations.push({
+          x: 1200,
+          y: Math.random() * 150,
+          width: 50,
+          height: 30,
+          image: randomImage,
+        });
+      }
+
+      return updatedDecorations;
+    });
+  }, [cat, score, isGameRunning]);
 
   useEffect(() => {
-    gameInterval.current = window.setInterval(updateGame, 20);
+    if (isGameRunning) {
+      gameInterval.current = window.setInterval(updateGame, 20);
+    } else if (gameInterval.current) {
+      clearInterval(gameInterval.current);
+    }
     return () => {
       if (gameInterval.current !== null) {
         clearInterval(gameInterval.current);
       }
     };
-  }, [updateGame]);
+  }, [updateGame, isGameRunning]);
 
   const detectCollision = (cat: CatType, obstacle: ObstacleType): boolean => {
     const safeMargin = 10;
@@ -116,35 +168,80 @@ const Game: React.FC = () => {
     });
   };
 
+  const startGame = () => {
+    setGameOverMessage(null);
+    setIsGameRunning(true);
+    resetGame();
+
+    if (gameContainerRef.current) {
+      gameContainerRef.current.focus();
+    }
+  };
+
   const resetGame = () => {
     setCat({ x: 50, y: GROUND_LEVEL, dy: 0, jumping: false, jumpsLeft: 2 });
     setObstacles([]);
+    setDecorations([]);
     setScore(0);
+    setGameOverMessage(null);
   };
 
   return (
     <div
+      ref={gameContainerRef}
       tabIndex={0}
       onKeyDown={handleJump}
       style={{
         outline: 'none',
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
         backgroundColor: '#27272a',
-        overflow: 'hidden',
       }}
     >
+      {/* Info Message */}
+      <div
+        style={{
+          marginTop: '10px',
+          marginBottom: '10px',
+          fontSize: '16px',
+          color: 'white',
+          fontWeight: 'bold',
+        }}
+      >
+        Katinukas gali pašokti du kartus!
+      </div>
+
+      {/* Game Window */}
       <div
         style={{
           position: 'relative',
           width: '1200px',
           height: '400px',
           border: '4px solid #333',
-          background: '#60a5fa',
+          background: '#172554',
+          overflow: 'hidden',
         }}
       >
+        {/* Decorations */}
+        {decorations.map((decoration, index) => (
+          <img
+            key={index}
+            src={decoration.image}
+            alt="Decoration"
+            style={{
+              position: 'absolute',
+              top: decoration.y,
+              left: decoration.x,
+              width: `${decoration.width}px`,
+              height: `${decoration.height}px`,
+            }}
+          />
+        ))}
+
+        {/* Path */}
         <div
           style={{
             position: 'absolute',
@@ -152,12 +249,10 @@ const Game: React.FC = () => {
             left: 0,
             width: '100%',
             height: `${PATH_HEIGHT}px`,
-            backgroundColor: '#7dd3fc',
+            backgroundColor: '#60a5fa',
           }}
         />
-
         <Cat x={cat.x} y={cat.y} />
-
         {obstacles.map((obstacle, index) => (
           <Obstacle
             key={index}
@@ -166,7 +261,6 @@ const Game: React.FC = () => {
             image={obstacle.image}
           />
         ))}
-
         <div
           style={{
             position: 'absolute',
@@ -178,6 +272,69 @@ const Game: React.FC = () => {
         >
           Score: {score}
         </div>
+      </div>
+
+      {/* Buttons */}
+      <div
+        style={{
+          marginTop: '20px',
+          display: 'flex',
+          gap: '10px',
+        }}
+      >
+        <button
+          onClick={startGame}
+          style={{
+            padding: '10px 20px',
+            background: '#34d399',
+            color: 'white',
+            border: 'none',
+            cursor: 'pointer',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+          }}
+        >
+          Pradėti žaidimą
+        </button>
+        <button
+          onClick={resetGame}
+          style={{
+            padding: '10px 20px',
+            background: '#f472b6',
+            color: 'white',
+            border: 'none',
+            cursor: 'pointer',
+            borderRadius: '5px',
+            fontWeight: 'bold',
+          }}
+        >
+          Pradėti iš naujo
+        </button>
+      </div>
+
+      {/* Game Over Message */}
+      <div
+        style={{
+          marginTop: '20px',
+          height: '30px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {gameOverMessage && (
+          <div
+            style={{
+              padding: '10px 20px',
+              background: '#93c5fd',
+              color: 'white',
+              borderRadius: '5px',
+              fontWeight: 'bold',
+            }}
+          >
+            {gameOverMessage}
+          </div>
+        )}
       </div>
     </div>
   );

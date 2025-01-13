@@ -1,11 +1,9 @@
-import React from 'react';
 import events from '@/events.json';
+import { useAppSelector } from '@/app/hooks.ts';
+import { selectEventDate } from '@/app/ApplicationsSlice.ts';
 
-interface EventDisplayProps {
-  eventDate: string;
-}
-
-const EventDisplay: React.FC<EventDisplayProps> = ({ eventDate }) => {
+const EventDisplay = () => {
+  const eventDate = useAppSelector(selectEventDate);
   const eventInfo = events.find(event => event.date === eventDate);
 
   return (
