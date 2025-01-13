@@ -1,61 +1,62 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
+import { calculateTimeLeft, TimeLeft } from '@/utils/timeUtils';
 
-type TimeLeft = {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-};
-
-// Helper function to calculate the time left
-const calculateTimeLeft = (targetDate: Date): TimeLeft => {
-  const now = new Date();
-  const difference = targetDate.getTime() - now.getTime();
-
-  if (difference <= 0) {
-    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-  }
-
-  return {
-    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((difference / (1000 * 60)) % 60),
-    seconds: Math.floor((difference / 1000) % 60),
-  };
-};
-
+// a functional component
 const CountdownComponent: React.FC = () => {
-  const targetDate = useMemo(
-    () => new Date(import.meta.env.VITE_MIDI_DATE || '2025-01-01T00:00:00'),
-    [],
-  );
+  const targetDate = import.meta.env.VITE_MIDI_DATE;
 
-  // State for the countdown timer
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(
     calculateTimeLeft(targetDate),
   );
 
-  // Effect to start the timer
   useEffect(() => {
     setTimeLeft(calculateTimeLeft(targetDate)); // Initialize the state immediately
 
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft(targetDate));
+      setTimeLeft(calculateTimeLeft(targetDate));
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [targetDate]); // Only re-run if targetDate changes
+  }, [targetDate]);
 
-  // with little tailwind css
+  const padNumber = (num: number) => String(num).padStart(2, '0');
+
   return (
-    <div className=" bg-blue-500 text-white p-6 rounded-lg flex flex-col items-center sm:w-full sm:h-full">
-      <h1 className="text-2xl font-bold mb-4">Time Left</h1>
-      <p className="text-lg font-mono bg-blue-800 p-4 rounded-md">
-        {timeLeft.days} <span className="font-semibold">Days</span>,{' '}
-        {timeLeft.hours} <span className="font-semibold">Hours</span>,{' '}
-        {timeLeft.minutes} <span className="font-semibold">Minutes</span>,{' '}
-        {timeLeft.seconds} <span className="font-semibold">Seconds</span>
-      </p>
+    <div className="p-6 border-4 border-gray-700 rounded-lg flex flex-col items-center sm:w-full sm:h-full bg-black">
+      <h1 className="whitespace-pre text-4xl mb-4 tracking-wide border-b-4 border-midi-blue pb-2 text-midi-blue animate-pulse">
+        IKI MIDI LIKO
+      </h1>
+      <div className="relative w-full">
+        <div className="bg-black p-4 rounded border-4 border-midi-blue w-full">
+          <div className="grid grid-cols-4 gap-2 text-center font-mono">
+            <div className="flex flex-col">
+              <span className="text-midi-blue text-5xl font-bold pr-10 pl-10">
+                {padNumber(timeLeft.days)}
+              </span>
+              <span className="text-midi-blue text-xl pr-10 pl-10">DIEN</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-midi-blue text-5xl font-bold pr-10 pl-10">
+                {padNumber(timeLeft.hours)}
+              </span>
+              <span className="text-midi-blue text-xl pr-10 pl-10">VAL</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-midi-blue text-5xl font-bold pr-10 pl-10">
+                {padNumber(timeLeft.minutes)}
+              </span>
+              <span className="text-midi-blue text-xl pr-10 pl-10">MIN</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-midi-blue text-5xl font-bold pr-10 pl-10">
+                {padNumber(timeLeft.seconds)}
+              </span>
+              <span className="text-midi-blue text-xl pr-10 pl-10">SEK</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

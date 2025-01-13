@@ -1,29 +1,40 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { calculateTimeLeft } from '@/utils/timeUtils';
 import CRTDisplay from '@/components/CTRDisplay/CTRDisplay';
 
 const TerminalInterface: React.FC = () => {
-  const [lines, setLines] = useState<string[]>(['']);
+  const [lines, setLines] = useState<string[]>([]);
+  const [currentInput, setCurrentInput] = useState<string>('');
   const lastLineRef = useRef<HTMLDivElement>(null);
+  const targetDate = import.meta.env.VITE_MIDI_DATE;
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      setLines(prevLines => [...prevLines, '']);
-    } else if (e.key.length === 1 && lines[lines.length - 1].length < 100) {
-      setLines(prevLines => {
-        const updatedLines = [...prevLines];
-        updatedLines[updatedLines.length - 1] += e.key;
-        return updatedLines;
-      });
-    } else if (e.key === 'Backspace') {
-      setLines(prevLines => {
-        const updatedLines = [...prevLines];
-        const currentLine = updatedLines[updatedLines.length - 1];
-
-        if (currentLine.length > 0) {
-          updatedLines[updatedLines.length - 1] = currentLine.slice(0, -1);
+      const handleCommand = (): string[] => {
+        switch (currentInput.trim()) {
+          case 'sponsors':
+            return ['Displaying Sponsors Page...'];
+          case 'time': {
+            const timeLeft = calculateTimeLeft(targetDate);
+            return [
+              `Time till MIDI: ${timeLeft.days} Days, ${timeLeft.hours} Hours, ${timeLeft.minutes} Minutes, ${timeLeft.seconds} Seconds`,
+            ];
+          }
+          default:
+            return ['Command not found'];
         }
-        return updatedLines;
-      });
+      };
+
+      setLines(prevLines => [
+        ...prevLines,
+        `>>> ${currentInput}`,
+        ...handleCommand(),
+      ]);
+      setCurrentInput('');
+    } else if (e.key.length === 1 && currentInput.length < 100) {
+      setCurrentInput(prevInput => prevInput + e.key);
+    } else if (e.key === 'Backspace') {
+      setCurrentInput(prevInput => prevInput.slice(0, -1));
     }
   };
 
@@ -31,7 +42,7 @@ const TerminalInterface: React.FC = () => {
     if (lastLineRef.current) {
       lastLineRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [lines]);
+  }, [lines, currentInput]);
 
   return (
     <CRTDisplay
@@ -43,11 +54,11 @@ const TerminalInterface: React.FC = () => {
           <pre className="text-center whitespace-pre leading-none mr-10">
             {`
             ____    ____ _____ ______   _____ 
-            |_   \\  /   _|_   _|_   _ \`.|_   _|
-              |   \\/   |   | |   | | \`. \\ | |  
+            |_   \\  /   _|_   _|_   _ \\ |_   _|
+              |   \\/   |   | |   | | \\ \\ | |  
               | |\\  /| |   | |   | |  | | | |  
             _| |_\\/_| |_ _| |_ _| |_.' /_| |_ 
-            |_____||_____|_____|______.'|_____|`}
+           |_____||_____|_____|______.'|_____|`}
           </pre>
         </div>
         <br />
@@ -60,15 +71,16 @@ const TerminalInterface: React.FC = () => {
           <div className="text-green-500 font-mono">
             {lines.map((line, index) => (
               <div
-                className={index === lines.length - 1 ? 'inline-flex' : ''}
                 key={index}
                 ref={index === lines.length - 1 ? lastLineRef : null}
               >
-                &#62;&#62;&#62;&nbsp;
                 {line}
               </div>
             ))}
-            <span className="animate-pulse">█</span>
+            <div>
+              {'>>>'} {currentInput}
+              <span className="animate-pulse">█</span>
+            </div>
           </div>
         </div>
 

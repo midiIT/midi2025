@@ -10,6 +10,7 @@ export default {
         standard: '#D3D3D3',
         'light-yellow': '#f5f5dc',
         purple: '#c39bd3',
+        'midi-blue': '#0175B4',
       },
       screens: {
         es: '360px', // Extra Small (custom)
