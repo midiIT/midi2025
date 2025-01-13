@@ -24,35 +24,35 @@ const CountdownComponent: React.FC = () => {
 
   return (
     <div className="p-6 border-4 border-gray-700 rounded-lg flex flex-col items-center sm:w-full sm:h-full bg-black">
-      <h1 className="whitespace-pre text-4xl mb-4 tracking-wide border-b-4 border-blue-500 pb-2 text-blue-500 animate-pulse">
+      <h1 className="whitespace-pre text-4xl mb-4 tracking-wide border-b-4 border-midi-blue pb-2 text-midi-blue animate-pulse">
         IKI MIDI LIKO
       </h1>
       <div className="relative w-full">
-        <div className="bg-black p-4 rounded border-4 border-blue-500 w-full">
+        <div className="bg-black p-4 rounded border-4 border-midi-blue w-full">
           <div className="grid grid-cols-4 gap-2 text-center font-mono">
             <div className="flex flex-col">
-              <span className="text-blue-500 text-4xl font-bold pr-10 pl-10">
+              <span className="text-midi-blue text-4xl font-bold pr-10 pl-10">
                 {padNumber(timeLeft.days)}
               </span>
-              <span className="text-blue-400 text-sm pr-10 pl-10">DIEN</span>
+              <span className="text-midi-blue text-sm pr-10 pl-10">DIEN</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-blue-500 text-4xl font-bold pr-10 pl-10">
+              <span className="text-midi-blue text-4xl font-bold pr-10 pl-10">
                 {padNumber(timeLeft.hours)}
               </span>
-              <span className="text-blue-400 text-sm pr-10 pl-10">VAL</span>
+              <span className="text-midi-blue text-sm pr-10 pl-10">VAL</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-blue-500 text-4xl font-bold pr-10 pl-10">
+              <span className="text-midi-blue text-4xl font-bold pr-10 pl-10">
                 {padNumber(timeLeft.minutes)}
               </span>
-              <span className="text-blue-400 text-sm pr-10 pl-10">MIN</span>
+              <span className="text-midi-blue text-sm pr-10 pl-10">MIN</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-blue-500 text-4xl font-bold pr-10 pl-10">
+              <span className="text-midi-blue text-4xl font-bold pr-10 pl-10">
                 {padNumber(timeLeft.seconds)}
               </span>
-              <span className="text-blue-400 text-sm pr-10 pl-10">SEK</span>
+              <span className="text-midi-blue text-sm pr-10 pl-10">SEK</span>
             </div>
           </div>
         </div>
