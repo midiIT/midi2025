@@ -31,28 +31,28 @@ const CountdownComponent: React.FC = () => {
         <div className="bg-black p-4 rounded border-4 border-midi-blue w-full">
           <div className="grid grid-cols-4 gap-2 text-center font-mono">
             <div className="flex flex-col">
-              <span className="text-midi-blue text-4xl font-bold pr-10 pl-10">
+              <span className="text-midi-blue text-5xl font-bold pr-10 pl-10">
                 {padNumber(timeLeft.days)}
               </span>
-              <span className="text-midi-blue text-sm pr-10 pl-10">DIEN</span>
+              <span className="text-midi-blue text-xl pr-10 pl-10">DIEN</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-midi-blue text-4xl font-bold pr-10 pl-10">
+              <span className="text-midi-blue text-5xl font-bold pr-10 pl-10">
                 {padNumber(timeLeft.hours)}
               </span>
-              <span className="text-midi-blue text-sm pr-10 pl-10">VAL</span>
+              <span className="text-midi-blue text-xl pr-10 pl-10">VAL</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-midi-blue text-4xl font-bold pr-10 pl-10">
+              <span className="text-midi-blue text-5xl font-bold pr-10 pl-10">
                 {padNumber(timeLeft.minutes)}
               </span>
-              <span className="text-midi-blue text-sm pr-10 pl-10">MIN</span>
+              <span className="text-midi-blue text-xl pr-10 pl-10">MIN</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-midi-blue text-4xl font-bold pr-10 pl-10">
+              <span className="text-midi-blue text-5xl font-bold pr-10 pl-10">
                 {padNumber(timeLeft.seconds)}
               </span>
-              <span className="text-midi-blue text-sm pr-10 pl-10">SEK</span>
+              <span className="text-midi-blue text-xl pr-10 pl-10">SEK</span>
             </div>
           </div>
         </div>
