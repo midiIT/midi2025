@@ -5,6 +5,8 @@ import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 import TeamPage from '@/components/TeamPage/TeamPage.tsx';
 import teamAppIcon from '@/images/TeamAppIcon.jpg';
 
+import VolunteerForm from '../RegistrationForms/VolunteerForm';
+
 const applications: Application[] = [
   {
     windowContent: <EventDisplay />,
@@ -21,6 +23,16 @@ const applications: Application[] = [
     hidden: false,
     data: {
       title: 'Komanda',
+      iconPath: teamAppIcon,
+      minimized: false,
+      zIndex: DEFAULT_Z_INDEX,
+    },
+  },
+  {
+    windowContent: <VolunteerForm />,
+    hidden: false,
+    data: {
+      title: 'Registracija',
       iconPath: teamAppIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,

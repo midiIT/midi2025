@@ -18,6 +18,8 @@ import SecretCodeApp from '../SecretPage/SecretCodeApp';
 import CountdownComponent from '../CountdownComponent/CountdownComponent';
 import DatePicker from '../EventsPage/DatePicker';
 
+import VolunteerForm from '../RegistrationForms/VolunteerForm';
+
 interface PagesProps {
   brightness: number;
   setBrightness: React.Dispatch<React.SetStateAction<number>>;
@@ -65,6 +67,11 @@ export const PagesList = ({
           iconPath: Anonymous,
           appText: 'Paslaptis',
           windowContent: SecretCodeApp,
+        },
+        {
+          iconPath: RandomTerminalPng,
+          appText: 'Registracija',
+          windowContent: VolunteerForm,
         },
       ]}
       showWindow={showWindow}
