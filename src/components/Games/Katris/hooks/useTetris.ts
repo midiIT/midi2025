@@ -33,6 +33,15 @@ export function useTetris() {
     dispatchBoardState,
   ] = useTetrisBoard();
 
+  const resetGame = useCallback(() => {
+    setScore(0);
+    setUpcomingBlocks([]);
+    setIsCommitting(false);
+    setIsPlaying(false);
+    setTickSpeed(null);
+    dispatchBoardState({ type: 'start' });
+  }, [dispatchBoardState]);
+
   const startGame = useCallback(() => {
     const startingBlocks = [
       getRandomBlock(),
@@ -222,6 +231,7 @@ export function useTetris() {
     isPlaying,
     score,
     upcomingBlocks,
+    resetGame,
   };
 }
 
