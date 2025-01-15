@@ -1,17 +1,57 @@
 [
   {
-    "title": "aukosim Doma",
-    "description": "neaisku kam, bet aukosim tiesiog",
-    "date": "2024-11-03"
+    "title": "Sportinis pokeris",
+    "description": "Tai intelektualus žaidimas, kuriame strategija, psichologija ir matematiniai skaičiavimai lemia sėkmę, o ne atsitiktinumas.",
+    "date": "2025-04-10"
   },
   {
-    "title": "sprogdinsim Domo chata",
-    "description": "\"Gunpowder is comprised of 75% potassium nitrate, 15% charcoal and 10% sulfur.\"\npasigaminam ir varom",
-    "date": "2024-11-15"
+    "title": "Secret event",
+    "description": "???",
+    "date": "2025-04-11"
   },
   {
-    "title": "Paleisim 3 žąsis po kambarius",
-    "description": "Nesakykit nieko, tiesiog žąsys turės pasirinkimą ir mes stebėsime, kur jos nueis. Gali būti, kad užtruksim valandą, kol uždarysime langus. (chatgpt kazka vartoja wtf)",
-    "date": "2024-11-23"
+    "title": "LAN Party",
+    "description": "Visus komandinę dvasią jaučiančius žaidėjus kviečiame burti komandas ir išbandyti savo jėgas pagrindiniuose LAN turnyruose!",
+    "date": "2025-04-12"
+  },
+  {
+    "title": "Šachmatai",
+    "description": "MIDI Šachmatų turnyras - tai seniausia MIDI tradicija. Tavęs laukia ne tik geri prisiminimai, bet ir galimybė laimėti įvairius prizus! Nesvarbu, ar esi profesionalas, ar tik moki žaidimo taisykles, tu ir tavo draugai esate laukiami šių metų MIDI Šachmatų turnyre!",
+    "date": "2025-04-12"
+  },
+  {
+    "title": "LAN Party",
+    "description": "LAN turnyrai tęsiasi!",
+    "date": "2025-04-13"
+  },
+  {
+    "title": "Sporto dienos",
+    "description": "Įdomus ir įkvepiantis renginys, skirtas bendram sportiniam susivienijimui bei aktyviam gyvenimo būdui. Dalyviai galės rinktis iš bėgimo bei tinklinio rungčių!",
+    "date": "2025-04-13"
+  },
+  {
+    "title": "Įmonių mugė",
+    "description": "Kasmetinė įmonių mugė, kur viename koridoriuje tavęs ir tavo draugų lauks įmonių atstovai, o galbūt tavo būsimi kolegos?",
+    "date": "2025-04-14"
+  },
+  {
+    "title": "Sporto dienos",
+    "description": "Sportinės veiklos tęsiasi...",
+    "date": "2025-04-15"
+  },
+  {
+    "title": "Roko opera",
+    "description": "Tai pasakiškas ir ypatingas renginys, nukeliantis į nuostabų muzikos pasaulį.",
+    "date": "2025-04-16"
+  },
+  {
+    "title": "Protmūšis",
+    "description": "Nori išbandyti savo ir draugų protą bei mesti iššūkį kitiems? Jeigu taip, nieko nelaukęs čiupk draugus už parankių, suformuok šauniausią komandą!",
+    "date": "2025-04-17"
+  },
+  {
+    "title": "Uždarymo vakaras",
+    "description": "Tai paskutinis MIDI renginys, kviečiantis visus kartu užbaigti daugybę įspūdžių studentams bei jų draugams palikusią savaitę!",
+    "date": "2025-04-18"
   }
 ]

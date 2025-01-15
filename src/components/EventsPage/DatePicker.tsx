@@ -6,8 +6,11 @@ interface DatePickerProps {
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
-  const [currentYear, setCurrentYear] = useState<number>(2024);
-  const [currentMonth, setCurrentMonth] = useState<number>(11); // 1-based (Jan = 1)
+  const today = new Date();
+  const [currentYear, setCurrentYear] = useState<number>(today.getFullYear());
+  const [currentMonth, setCurrentMonth] = useState<number>(
+    today.getMonth() + 1,
+  );
 
   const weekdayHeaders = ['Pr', 'An', 'Tr', 'Kt', 'Pn', 'Š', 'Sk'];
 
@@ -63,7 +66,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
           onClick={() => handleMonthChange('prev')}
           className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
-          &lt; Prev
+          &lt; Atgal
         </button>
         <h2 className="text-xl font-semibold text-center">
           {new Date(currentYear, currentMonth - 1).toLocaleString('lt', {
@@ -75,7 +78,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
           onClick={() => handleMonthChange('next')}
           className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
-          Next &gt;
+          Pirmyn &gt;
         </button>
       </div>
       <div className="grid grid-cols-7 gap-2 text-center font-semibold text-gray-500 mb-2">
