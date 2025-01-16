@@ -73,28 +73,30 @@ const VolunteerForm: React.FC = () => {
             <div>
               <label className="block text-gray-700 mb-2">
                 Vardas, Pavardė *
+                <input
+                  type="text"
+                  name="fullName"
+                  id="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base md:text-lg"
+                />
               </label>
-              <input
-                type="text"
-                name="fullName"
-                id="fullName"
-                value={formData.fullName}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base md:text-lg"
-              />
             </div>
             <div>
-              <label className="block text-gray-700 mb-2">El. paštas *</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base md:text-lg"
-              />
+              <label className="block text-gray-700 mb-2">
+                El. paštas *
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base md:text-lg"
+                />
+              </label>
             </div>
             <fieldset className="space-y-4">
               <legend className="text-gray-700 mb-2 font-semibold text-lg">
@@ -130,15 +132,15 @@ const VolunteerForm: React.FC = () => {
             <div>
               <label className="block text-gray-700 mb-2">
                 Papildomi komentarai
+                <textarea
+                  name="comments"
+                  id="comments"
+                  rows={4}
+                  value={formData.comments}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base md:text-lg"
+                />
               </label>
-              <textarea
-                name="comments"
-                id="comments"
-                rows={4}
-                value={formData.comments}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base md:text-lg"
-              />
             </div>
             <button
               type="submit"
