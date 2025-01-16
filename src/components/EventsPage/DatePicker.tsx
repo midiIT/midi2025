@@ -41,8 +41,8 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
     onDatePicked(date);
   };
 
-  const handleMonthChange = (direction: 'prev' | 'next') => {
-    if (direction === 'prev') {
+  const handleMonthChange = (direction: 'Atgal' | 'Kitas') => {
+    if (direction === 'Atgal') {
       if (currentMonth === 1) {
         setCurrentMonth(12);
         setCurrentYear(currentYear - 1);
@@ -60,11 +60,11 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
   };
 
   return (
-    <div className="p-4 lg:max-w-md lg:mx-auto bg-white shadow-lg rounded-md w-full h-full overflow-y-auto">
+    <div className="p-4 lg:max-w-md lg:mx-auto bg-black shadow-lg rounded-md w-full h-full overflow-y-auto">
       <div className="flex justify-between items-center mb-4">
         <button
-          onClick={() => handleMonthChange('prev')}
-          className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          onClick={() => handleMonthChange('Atgal')}
+          className="px-2 py-1 bg-black-500 text-white rounded-md"
         >
           &lt; Atgal
         </button>
@@ -75,8 +75,8 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
           {currentYear}
         </h2>
         <button
-          onClick={() => handleMonthChange('next')}
-          className="px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          onClick={() => handleMonthChange('Kitas')}
+          className="px-2 py-1 bg-black text-white rounded-md hover:bg-blue-600"
         >
           Pirmyn &gt;
         </button>
@@ -100,7 +100,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
                 handleClick(date);
             }}
             className={`cursor-pointer rounded-full w-10 h-10 flex flex-col items-center justify-center sm:w-12 sm:h-12
-                            ${date ? 'bg-gray-200 text-gray-800' : 'bg-gray-300'}
+                            ${date ? 'border-2 border-gray-900 bg-black text-midi-blue' : 'bg-black-300'}
                             ${
                               date &&
                               events.find(
@@ -108,7 +108,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
                                   event.date ===
                                   date.toISOString().split('T')[0],
                               )
-                                ? 'border-2 border-blue-500 hover:bg-blue-300 hover:text-white'
+                                ? 'border-4 border-gray-700 hover:bg-gray-900'
                                 : ''
                             }`}
           >
