@@ -6,20 +6,23 @@ interface EventDisplayProps {
 }
 
 const EventDisplay: React.FC<EventDisplayProps> = ({ eventDate }) => {
-  const eventInfo = events.find(event => event.date === eventDate);
+  const eventsForDate = events.filter(event => event.date === eventDate);
 
   return (
     <div className="max-w-sm w-full bg-gray-100 p-6 rounded-lg">
-      {eventInfo ? (
-        <div>
-          <h2 className="text-xl font-semibold text-gray-800">
-            {eventInfo.title}
-          </h2>
-          <p className="mt-2 text-gray-600">{eventInfo.description}</p>
-          <p className="mt-4 text-sm text-gray-500">{eventInfo.date}</p>
-        </div>
+      {eventsForDate.length > 0 ? (
+        eventsForDate.map((event, index) => (
+          <div key={index} className="mb-4">
+            <h2 className="text-xl font-semibold text-gray-800">
+              {event.title}
+            </h2>
+            <p className="mt-2 text-gray-600">{event.description}</p>
+            <p className="mt-4 text-sm text-gray-500">{event.date}</p>
+            {index < eventsForDate.length - 1 && <hr className="my-2" />}
+          </div>
+        ))
       ) : (
-        <div className="text-red-500">Error getting event.</div>
+        <div className="text-red-500">No events found for this date.</div>
       )}
     </div>
   );
