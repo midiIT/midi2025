@@ -76,7 +76,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
         </h2>
         <button
           onClick={() => handleMonthChange('Kitas')}
-          className="px-2 py-1 bg-black text-white rounded-md hover:bg-blue-600"
+          className="px-2 py-1 bg-black text-white rounded-md"
         >
           Pirmyn &gt;
         </button>
