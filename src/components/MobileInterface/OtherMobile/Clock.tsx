@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { BACKEND_URL } from '@/consts';
 
 const Clock: React.FC = () => {
   const [time, setTime] = useState(new Date());
-  const [weather, setWeather] = useState<string>('');
+  const [weather, setWeather] = useState<string>('Kraunama...');
   const [temperature, setTemperature] = useState<string>('Kraunama...');
-  const city = 'Vilnius';
+  const hasFetchedWeather = useRef(false);
 
   // Update time every second
   useEffect(() => {
@@ -12,49 +13,29 @@ const Clock: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const loadWeather = useCallback(() => {
-    const cachedWeather = localStorage.getItem('weather');
-    const currentTime = new Date().getTime();
+  // Fetch weather data only once
+  useEffect(() => {
+    if (hasFetchedWeather.current) return;
+    hasFetchedWeather.current = true;
 
-    if (cachedWeather) {
-      const { weather, temperature, timestamp } = JSON.parse(cachedWeather);
-
-      // Use cached weather if 30 minutes have not passed
-      if (currentTime - timestamp < 30 * 60 * 1000) {
-        setWeather(weather);
-        setTemperature(temperature);
-        return;
-      }
-    }
-
-    // Fetch new weather data
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=lt&appid=81279801d34470e5dbb037fabe491c60`,
-    )
-      .then(response => response.json())
-      .then(data => {
-        const weatherData = {
-          weather: data.weather[0]?.description ?? 'Nėra duomenų',
-          temperature:
-            data.main?.temp !== undefined
-              ? `${Math.round(data.main.temp)}°C`
-              : '--',
-          timestamp: new Date().getTime(),
-        };
-        localStorage.setItem('weather', JSON.stringify(weatherData));
-        setWeather(weatherData.weather);
-        setTemperature(weatherData.temperature);
+    fetch(`${BACKEND_URL}/weather`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch weather data');
+        }
+        return response.json();
       })
-      .catch(() => {
+      .then(data => {
+        console.log('Weather Data from API:', data);
+        setWeather(data.weather || 'Nėra duomenų');
+        setTemperature(data.temperature || '--');
+      })
+      .catch(error => {
+        console.error('Error fetching weather:', error.message);
         setWeather('Nepavyko gauti orų');
         setTemperature('--');
       });
-  }, [city]);
-
-  // Fetch weather data on component mount
-  useEffect(() => {
-    loadWeather();
-  }, [loadWeather]);
+  }, []);
 
   return (
     <div>
@@ -78,9 +59,9 @@ const Clock: React.FC = () => {
       {/* Weather Information */}
       <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-center landscape:rotate-[270deg] landscape:-translate-[20vh] landscape:bottom-[23vh] landscape:left-[145vh]">
         <p className="text-gray-300 text-xl md:text-3xl font-medium drop-shadow-md">
-          {city}
+          Vilnius
         </p>
-        <p className="text-gray-400 text-3xl  font-medium drop-shadow-md landscape">
+        <p className="text-gray-400 text-3xl font-medium drop-shadow-md landscape">
           {weather}
         </p>
         <p className="text-blue-400 text-2xl mt-2 font-medium drop-shadow-md">

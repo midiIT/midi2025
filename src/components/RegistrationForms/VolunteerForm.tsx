@@ -16,6 +16,10 @@ const VolunteerForm: React.FC = () => {
     comments: '',
   });
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
@@ -32,26 +36,44 @@ const VolunteerForm: React.FC = () => {
   ) => {
     const { name, value } = event.target;
     setFormData(prevData => ({ ...prevData, [name]: value }));
+
+    if (name === 'email') {
+      if (!emailRegex.test(value)) {
+        setEmailError('El. pašto adresas netinkamas.');
+      } else {
+        setEmailError(null);
+      }
+    }
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Submitted Form Data:', formData);
+    setErrorMessage(null);
 
-    const response = await fetch(`${BACKEND_URL}/volunteer`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
+    if (!emailRegex.test(formData.email)) {
+      setEmailError('El. pašto adresas netinkamas.');
+      return;
+    }
 
-    if (response.ok) {
-      const result = await response.json();
-      console.log('Server response:', result);
-      setSubmitted(true);
-    } else {
-      alert('Klaida siunčiant duomenis. Bandykite vėl.');
+    try {
+      const response = await fetch(`${BACKEND_URL}/volunteer`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Server response:', result);
+        setSubmitted(true);
+      } else {
+        setErrorMessage('Klaida siunčiant duomenis. Pabandykite vėliau.');
+      }
+    } catch (error) {
+      console.error('Network or server error:', error);
+      setErrorMessage('Klaida siunčiant duomenis. Pabandykite vėliau.');
     }
   };
 
@@ -69,6 +91,14 @@ const VolunteerForm: React.FC = () => {
           <h2 className="text-xl font-semibold text-center mb-6 es:text-lg md:text-2xl lg:text-3xl text-black">
             Savanorių registracija
           </h2>
+          {errorMessage && (
+            <div
+              className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+              role="alert"
+            >
+              <span className="block sm:inline">{errorMessage}</span>
+            </div>
+          )}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-gray-700 mb-2">
@@ -93,10 +123,22 @@ const VolunteerForm: React.FC = () => {
                   id="email"
                   value={formData.email}
                   onChange={handleChange}
+                  onBlur={() => {
+                    if (!emailRegex.test(formData.email)) {
+                      setEmailError('El. pašto adresas netinkamas.');
+                    }
+                  }}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base md:text-lg"
+                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base md:text-lg ${
+                    emailError
+                      ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+                      : 'border-gray-300'
+                  }`}
                 />
               </label>
+              {emailError && (
+                <p className="text-red-500 text-sm mt-1">{emailError}</p>
+              )}
             </div>
             <fieldset className="space-y-4">
               <legend className="text-gray-700 mb-2 font-semibold text-lg">
