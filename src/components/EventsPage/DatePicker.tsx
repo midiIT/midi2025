@@ -64,19 +64,26 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
       <div className="flex justify-between items-center mb-4">
         <button
           onClick={() => handleMonthChange('Atgal')}
-          className="px-2 py-1 bg-black-500 text-white rounded-md"
+          className="px-2 py-1 bg-black-500 rounded-md"
+          style={{ color: '#466b7f' }}
         >
           &lt; Atgal
         </button>
-        <h2 className="text-xl font-semibold text-center">
-          {new Date(currentYear, currentMonth - 1).toLocaleString('lt', {
-            month: 'long',
-          })}{' '}
+        <h2
+          className="text-xl font-semibold text-center"
+          style={{ color: '#0175B4' }}
+        >
+          {new Date(currentYear, currentMonth - 1)
+            .toLocaleString('lt', {
+              month: 'long',
+            })
+            .replace(/^\w/, c => c.toUpperCase())}{' '}
           {currentYear}
         </h2>
         <button
           onClick={() => handleMonthChange('Kitas')}
-          className="px-2 py-1 bg-black text-white rounded-md"
+          className="px-2 py-1 bg-black rounded-md"
+          style={{ color: '#466b7f' }}
         >
           Pirmyn &gt;
         </button>
@@ -99,18 +106,18 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
               )
                 handleClick(date);
             }}
-            className={`cursor-pointer rounded-full w-10 h-10 flex flex-col items-center justify-center sm:w-12 sm:h-12
-                            ${date ? 'border-2 border-gray-900 bg-black text-midi-blue' : 'bg-black-300'}
-                            ${
-                              date &&
-                              events.find(
-                                event =>
-                                  event.date ===
-                                  date.toISOString().split('T')[0],
-                              )
-                                ? 'border-4 border-gray-700 hover:bg-gray-900'
-                                : ''
-                            }`}
+            style={{ color: '#0175B4' }}
+            className={`rounded-full w-10 h-10 flex flex-col items-center justify-center sm:w-12 sm:h-12
+                        ${date ? 'border-2 bg-black' : 'bg-black-300'}
+                        ${
+                          date &&
+                          events.find(
+                            event =>
+                              event.date === date.toISOString().split('T')[0],
+                          )
+                            ? 'cursor-pointer border-4 border-[#0175B4] hover:bg-gray-900'
+                            : 'cursor-default border-[#466b7f]'
+                        }`}
           >
             <span>{date ? date.getDate() : ''}</span>
           </div>

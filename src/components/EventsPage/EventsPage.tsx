@@ -9,7 +9,7 @@ function EventsPage() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="min-h-screen min-w-screen flex flex-col items-center justify-center">
       <DatePicker onDatePicked={date => setSelectedDate(date)} />
       <EventDisplay eventDate={selectedDate.toISOString().split('T')[0]} />
     </div>
