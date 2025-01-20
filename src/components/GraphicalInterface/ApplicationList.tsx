@@ -5,7 +5,7 @@ import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 import TeamPage from '@/components/TeamPage/TeamPage.tsx';
 import teamAppIcon from '@/images/TeamAppIcon.jpg';
 import randomTerminal from '@/images/random_terminal.png';
-import TerminalInterfaceContent from '../TerminalInterface/TerminalInterfaceContext';
+import TerminalInterfaceContent from '../TerminalInterface/TerminalInterfaceContent';
 
 const applications: Application[] = [
   {

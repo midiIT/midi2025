@@ -1,7 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { calculateTimeLeft } from '@/utils/timeUtils';
 
-const TerminalInterfaceContent: React.FC = () => {
+interface TerminalInterfaceContentProps {
+  windowTitle?: string;
+  isFocused?: boolean;
+}
+
+const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
+  windowTitle = '',
+  isFocused = false,
+}) => {
   const [lines, setLines] = useState<string[]>([]);
   const [currentInput, setCurrentInput] = useState<string>('');
   const lastLineRef = useRef<HTMLDivElement>(null);
@@ -76,6 +84,12 @@ const TerminalInterfaceContent: React.FC = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (isFocused && terminalRef.current) {
+      terminalRef.current.focus();
+    }
+  }, [isFocused]);
+
   return (
     <div className="space-y-2 flex flex-col overflow-hidden">
       <div className="flex items-center justify-center flex-shrink-0 h-[25%] overflow-hidden">
@@ -97,6 +111,7 @@ const TerminalInterfaceContent: React.FC = () => {
       </div>
       <div
         ref={terminalRef}
+        id={`terminal-input-${windowTitle}`}
         className="flex-1 overflow-y-auto focus:outline-none px-4"
         tabIndex={0}
         onKeyDown={handleKeyDown}

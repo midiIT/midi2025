@@ -1,5 +1,5 @@
 import CRTDisplay from '@/components/CTRDisplay/CTRDisplay';
-import TerminalInterfaceContent from './TerminalInterfaceContext';
+import TerminalInterfaceContent from './TerminalInterfaceContent';
 
 const TerminalInterface: React.FC = () => {
   return (

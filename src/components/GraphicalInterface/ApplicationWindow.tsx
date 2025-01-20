@@ -20,6 +20,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     app => app.title === title,
   );
   const zIndex = application?.zIndex;
+  const isFocused = application?.focused;
 
   const noWhiteSpaceTitle = title.replace(' ', '_');
 
@@ -74,6 +75,17 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     dragElement(document.querySelector(`#application-${noWhiteSpaceTitle}`));
   }, [noWhiteSpaceTitle]);
 
+  useEffect(() => {
+    if (isFocused) {
+      const terminalElement = document.querySelector(
+        `#terminal-input-${noWhiteSpaceTitle}`,
+      );
+      if (terminalElement instanceof HTMLElement) {
+        terminalElement.focus();
+      }
+    }
+  }, [isFocused, noWhiteSpaceTitle]);
+
   return (
     <div
       id={`application-${noWhiteSpaceTitle}`}
@@ -108,7 +120,12 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
           </button>
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto overflow-x-hidden">{content}</div>
+      <div className="flex-1 overflow-y-auto overflow-x-hidden">
+        {React.cloneElement(content as React.ReactElement, {
+          windowTitle: noWhiteSpaceTitle,
+          isFocused: isFocused,
+        })}
+      </div>
     </div>
   );
 };

@@ -1,14 +1,14 @@
 import CountdownComponent from '@/components/CountdownComponent/CountdownComponent.tsx';
-import DatePicker from '@/components/EventsPage/DatePicker.tsx';
+//import DatePicker from '@/components/EventsPage/DatePicker.tsx';
 
-import { useAppDispatch } from '@/app/hooks.ts';
-import { openApplication, setEventDate } from '@/app/ApplicationsSlice.ts';
+//import { useAppDispatch } from '@/app/hooks.ts';
+//import { openApplication, setEventDate } from '@/app/ApplicationsSlice.ts';
 
-import calendarIcon from '@/images/calendar.png';
-import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
+//import calendarIcon from '@/images/calendar.png';
+//import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 
 const Widgets = () => {
-  const dispatch = useAppDispatch();
+  //const dispatch = useAppDispatch();
 
   return (
     <div
@@ -22,8 +22,8 @@ const Widgets = () => {
       <div>
         <CountdownComponent />
       </div>
-      <div>
-        <DatePicker
+      {/* <div>
+         <DatePicker
           onDatePicked={date => {
             dispatch(setEventDate(date.toISOString().split('T')[0]));
 
@@ -37,7 +37,7 @@ const Widgets = () => {
             );
           }}
         />
-      </div>
+      </div> */}
     </div>
   );
 };
