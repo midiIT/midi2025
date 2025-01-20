@@ -5,7 +5,7 @@ import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 import TeamPage from '@/components/TeamPage/TeamPage.tsx';
 import teamAppIcon from '@/images/TeamAppIcon.jpg';
 
-import VolunteerForm from '../RegistrationForms/VolunteerForm';
+import AllForms from '../RegistrationForms/AllForms';
 
 const applications: Application[] = [
   {
@@ -29,7 +29,7 @@ const applications: Application[] = [
     },
   },
   {
-    windowContent: <VolunteerForm />,
+    windowContent: <AllForms />,
     hidden: false,
     data: {
       title: 'Registracija',

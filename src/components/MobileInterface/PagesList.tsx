@@ -18,7 +18,7 @@ import SecretCodeApp from '../SecretPage/SecretCodeApp';
 import CountdownComponent from '../CountdownComponent/CountdownComponent';
 import DatePicker from '../EventsPage/DatePicker';
 
-import VolunteerForm from '../RegistrationForms/VolunteerForm';
+import AllForms from '../RegistrationForms/AllForms';
 
 interface PagesProps {
   brightness: number;
@@ -71,7 +71,7 @@ export const PagesList = ({
         {
           iconPath: RandomTerminalPng,
           appText: 'Registracija',
-          windowContent: VolunteerForm,
+          windowContent: AllForms,
         },
       ]}
       showWindow={showWindow}

@@ -55,6 +55,11 @@ const VolunteerForm: React.FC = () => {
       return;
     }
 
+    if (formData.events.length === 0) {
+      setErrorMessage('Privaloma pasirinkti bent vieną renginį.');
+      return;
+    }
+
     try {
       const response = await fetch(`${BACKEND_URL}/volunteer`, {
         method: 'POST',
