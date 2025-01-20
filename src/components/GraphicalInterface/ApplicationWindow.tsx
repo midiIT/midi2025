@@ -90,7 +90,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     <div
       id={`application-${noWhiteSpaceTitle}`}
       className={`absolute ${application?.minimized ? 'hidden' : 'flex flex-col'}
-        bg-gray-600 rounded w-[80%] h-[80%] max-w-full max-h-full overflow-hidden`}
+        bg-gray-700 rounded w-[80%] h-[80%] max-w-full max-h-full overflow-hidden`}
       style={{ zIndex: zIndex }}
       onMouseDown={() => dispatch(setFocusedApplication(title))}
       onContextMenu={e => {
@@ -100,7 +100,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     >
       <div
         id={`top-bar-${noWhiteSpaceTitle}`}
-        className="h-10 bg-gray-700 rounded-t flex justify-between items-center flex-shrink-0"
+        className="h-10 bg-gray-800 rounded-t flex justify-between items-center flex-shrink-0"
       >
         <div className="w-8"></div>
         <p>{title}</p>

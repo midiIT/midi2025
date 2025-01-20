@@ -12,6 +12,8 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
 }) => {
   const [lines, setLines] = useState<string[]>([]);
   const [currentInput, setCurrentInput] = useState<string>('');
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [, setHistoryIndex] = useState<number | null>(null);
   const lastLineRef = useRef<HTMLDivElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const targetDate = import.meta.env.VITE_MIDI_DATE;
@@ -64,7 +66,53 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
         `>>> ${currentInput}`,
         ...handleCommand(),
       ]);
+      setCommandHistory(prevHistory => [...prevHistory, currentInput]);
       setCurrentInput('');
+      setHistoryIndex(null);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length > 0) {
+        setHistoryIndex(prevIndex => {
+          const newIndex =
+            prevIndex === null
+              ? commandHistory.length - 1
+              : Math.max(prevIndex - 1, 0);
+          setCurrentInput(commandHistory[newIndex] || '');
+          return newIndex;
+        });
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (commandHistory.length > 0) {
+        setHistoryIndex(prevIndex => {
+          const newIndex =
+            prevIndex === null
+              ? null
+              : Math.min(prevIndex + 1, commandHistory.length);
+          setCurrentInput(
+            newIndex === null || newIndex === commandHistory.length
+              ? ''
+              : commandHistory[newIndex],
+          );
+          return newIndex;
+        });
+      }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      switch (currentInput[0]?.toLowerCase()) {
+        case 'r':
+          setCurrentInput('rėmėjai');
+          break;
+        case 'k':
+          setCurrentInput('komanda');
+          break;
+        case 'v':
+          setCurrentInput('veiklos');
+          break;
+        case 'l':
+          setCurrentInput('laikas');
+          break;
+      }
     } else if (e.key.length === 1 && currentInput.length < 100) {
       setCurrentInput(prevInput => prevInput + e.key);
     } else if (e.key === 'Backspace') {
@@ -93,7 +141,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
   return (
     <div className="space-y-2 flex flex-col overflow-hidden">
       <div className="flex items-center justify-center flex-shrink-0 h-[25%] overflow-hidden">
-        <pre className="text-center pr-20 whitespace-pre leading-none">
+        <pre className="text-center text-midi-blue pr-20 whitespace-pre leading-none">
           {`
                   ____    ____ _____ ______   _____ 
                   |_   \\  /   _|_   _|_   _ \`.|_   _|
@@ -116,7 +164,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
         tabIndex={0}
         onKeyDown={handleKeyDown}
       >
-        <div className="whitespace-pre text-lg text-green-500 break-words">
+        <div className="whitespace-pre text-lg text-midi-blue break-words">
           {
             '>>> Sveiki prisijungę! Šiame terminale galite sužinoti apie MIDI 2025 rėmėjus, komandą, veiklas ir kt.\n'
           }
