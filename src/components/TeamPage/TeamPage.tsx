@@ -13,7 +13,9 @@ interface TeamMember {
 
 function TeamPage() {
   return (
-    <div className="min-h-screen w-full bg-[#4E4A59]"> {/* Changed to min-h-screen and added background */}
+    <div className="min-h-screen w-full bg-[#4E4A59]">
+      {' '}
+      {/* Changed to min-h-screen and added background */}
       <div className="container mx-auto px-16 py-16">
         <h1 className="text-9xl sm:text-4xl md:text-5xl font-extrabold text-center text-purple mb-8 md:mb-16">
           MIDI 2025 komanda
@@ -29,11 +31,19 @@ const TeamGrid = () => {
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
   // Divide team members into three equal sections of 4 elements each
-  const section1 = teamMembers.slice(0, 7);
-  const section2 = teamMembers.slice(7, 8);
-  const section3 = teamMembers.slice(8, 21);
+  const section1 = teamMembers.slice(0, 11);
+  const section2 = teamMembers.slice(11, 20);
+  const section3 = teamMembers.slice(20, 23);
+  const section4 = teamMembers.slice(23, 26);
+  const section5 = teamMembers.slice(26, 32);
 
-  const TeamMemberCard = ({ member, index }: { member: TeamMember; index: number }) => (
+  const TeamMemberCard = ({
+    member,
+    index,
+  }: {
+    member: TeamMember;
+    index: number;
+  }) => (
     <div
       className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl w-full"
       onMouseEnter={() => setHoveredMember(index)}
@@ -75,40 +85,74 @@ const TeamGrid = () => {
   );
 
   return (
-    <div className="flex flex-col gap-16"> {/* Increased gap between sections */}
+    <div className="flex flex-col gap-16">
+      {' '}
+      {/* Increased gap between sections */}
       {/* Management Section */}
       <section>
-        <h2 className="text-4xl font-bold text-center mb-8 text-[#839073]">Management Team</h2>
+        <h2 className="text-4xl font-bold text-center mb-8 text-[#839073]">
+          MIDI Vadovai
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
           {section1.map((member, index) => (
             <TeamMemberCard key={index} member={member} index={index} />
           ))}
         </div>
       </section>
-
       {/* Development Section */}
       <section>
-        <h2 className="text-4xl font-bold text-center mb-8 text-[#839073]">Development Team</h2>
+        <h2 className="text-4xl font-bold text-center mb-8 text-[#839073]">
+          MIDI Renginių vadovai
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
           {section2.map((member, index) => (
-            <TeamMemberCard 
-              key={index + section1.length} 
-              member={member} 
-              index={index + section1.length} 
+            <TeamMemberCard
+              key={index + section1.length}
+              member={member}
+              index={index + section1.length}
             />
           ))}
         </div>
       </section>
-
       {/* Support Section */}
       <section>
-        <h2 className="text-4xl font-bold text-center mb-8 text-[#839073]">Support Team</h2>
+        <h2 className="text-4xl font-bold text-center mb-8 text-[#839073]">
+          MIDI LAN Party vadovai
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
           {section3.map((member, index) => (
-            <TeamMemberCard 
-              key={index + section1.length + section2.length} 
-              member={member} 
-              index={index + section1.length + section2.length} 
+            <TeamMemberCard
+              key={index + section1.length + section2.length}
+              member={member}
+              index={index + section1.length + section2.length}
+            />
+          ))}
+        </div>
+      </section>
+      <section>
+        <h2 className="text-4xl font-bold text-center mb-8 text-[#839073]">
+          MIDI Komunikacija
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+          {section4.map((member, index) => (
+            <TeamMemberCard
+              key={index + section1.length + section2.length}
+              member={member}
+              index={index + section1.length + section2.length}
+            />
+          ))}
+        </div>
+      </section>
+      <section>
+        <h2 className="text-4xl font-bold text-center mb-8 text-[#839073]">
+          MIDI Mentoriai
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+          {section5.map((member, index) => (
+            <TeamMemberCard
+              key={index + section1.length + section2.length}
+              member={member}
+              index={index + section1.length + section2.length}
             />
           ))}
         </div>
