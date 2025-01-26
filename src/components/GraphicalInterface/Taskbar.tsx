@@ -25,7 +25,7 @@ const Taskbar = () => {
   return (
     <div>
       <div
-        className="flex h-14 bg-[#27364a] w-[95%%] m-8 rounded shadow-2xl"
+        className="flex h-14 bg-[#27364a] w-[95%] mb-4 mx-auto rounded shadow-2xl"
         onContextMenu={e => {
           e.preventDefault();
           e.stopPropagation();
