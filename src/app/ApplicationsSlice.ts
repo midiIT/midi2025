@@ -6,13 +6,11 @@ import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 interface ApplicationsState {
   openApplications: ApplicationData[];
   eventDate: string;
-  focused: boolean;
 }
 
 const initialState: ApplicationsState = {
   openApplications: [],
   eventDate: '',
-  focused: false,
 };
 
 export const applicationsSlice = createSlice({
