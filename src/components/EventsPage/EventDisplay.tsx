@@ -1,16 +1,14 @@
-import React from 'react';
 import events from '@/events.json';
+import { useAppSelector } from '@/app/hooks.ts';
+import { selectEventDate } from '@/app/ApplicationsSlice.ts';
 
-interface EventDisplayProps {
-  eventDate: string;
-}
-
-const EventDisplay: React.FC<EventDisplayProps> = ({ eventDate }) => {
+const EventDisplay = () => {
+  const eventDate = useAppSelector(selectEventDate);
   const eventsForDate = events.filter(event => event.date === eventDate);
 
   return (
     <div
-      className="w-full bg-black p-6 rounded-lg mt-4 flex flex-col overflow-y-auto"
+      className="w-full h-full bg-black p-6 flex flex-col overflow-y-auto"
       style={{ maxHeight: '80vh' }}
     >
       {eventsForDate.length > 0 ? (

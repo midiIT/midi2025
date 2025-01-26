@@ -15,7 +15,6 @@ interface PhoneDisplayProps {
 
 const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
   const [currentPage, setCurrentPage] = useState(0); // Track the current page
-  const [selectedDate, setSelectedDate] = useState<string | null>(null); // For EventDisplay
   const [showEventInfo, setShowEventInfo] = useState(false); // Controls when EventDisplay is shown
   const [showWindow, setShowWindow] = useState(false);
   const [showNotification, setShowNotification] = useState(true); // State for the message notification
@@ -150,8 +149,6 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
                 pages={PagesList({
                   brightness,
                   setBrightness,
-                  selectedDate,
-                  setSelectedDate,
                   setShowEventInfo,
                   showWindow,
                   setShowWindow,
@@ -163,7 +160,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
             </div>
           }
           {/* Event Pop-Up */}
-          {showEventInfo && selectedDate && (
+          {showEventInfo && (
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-80 rounded-[1rem]">
               <div className="relative bg-gray-800 rounded-lg shadow-lg p-6 w-[90%] h-[80%] overflow-y-auto">
                 <button
@@ -172,7 +169,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
                 >
                   ✕
                 </button>
-                <EventDisplay eventDate={selectedDate} />
+                <EventDisplay />
               </div>
             </div>
           )}
