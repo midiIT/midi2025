@@ -119,6 +119,17 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
                             : 'cursor-default border-[#466b7f]'
                         }`}
           >
+            <span
+              className={`
+                        ${
+                          date &&
+                          date.getDate() === new Date().getDate() &&
+                          currentMonth === new Date().getMonth() + 1
+                            ? 'relative top-0.5 border-[#0175B4] border-[3px] rounded-full'
+                            : ''
+                        }
+            `}
+            ></span>
             <span>{date ? date.getDate() : ''}</span>
           </div>
         ))}
