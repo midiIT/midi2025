@@ -60,7 +60,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
   };
 
   return (
-    <div className="p-4 lg:max-w-md lg:mx-auto bg-black shadow-lg rounded-md w-full h-full overflow-y-auto">
+    <div className="p-4 lg:max-w-md lg:mx-auto bg-black shadow-lg rounded-md w-full h-[440px] overflow-y-auto">
       <div className="flex justify-between items-center mb-4">
         <button
           onClick={() => handleMonthChange('Atgal')}
