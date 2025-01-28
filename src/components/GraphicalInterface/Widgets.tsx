@@ -33,6 +33,7 @@ const Widgets = () => {
                 title: 'Kalendorius',
                 iconPath: calendarIcon,
                 zIndex: DEFAULT_Z_INDEX,
+                focused: false,
               }),
             );
           }}

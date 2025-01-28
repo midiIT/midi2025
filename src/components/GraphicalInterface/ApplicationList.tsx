@@ -16,6 +16,7 @@ const applications: Application[] = [
       iconPath: calendarPng,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
+      focused: false,
     },
   },
   {
@@ -26,6 +27,18 @@ const applications: Application[] = [
       iconPath: teamAppIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
+      focused: false,
+    },
+  },
+  {
+    windowContent: <TerminalInterfaceContent />,
+    hidden: false,
+    data: {
+      title: 'Terminalas',
+      iconPath: randomTerminal,
+      minimized: false,
+      zIndex: DEFAULT_Z_INDEX,
+      focused: true,
     },
   },
   {

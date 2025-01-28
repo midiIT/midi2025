@@ -203,6 +203,20 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
       }
     } else if (e.key === 'Tab') {
       e.preventDefault();
+      switch (currentInput[0]?.toLowerCase()) {
+        case 'r':
+          setCurrentInput('rėmėjai');
+          break;
+        case 'k':
+          setCurrentInput('komanda');
+          break;
+        case 'v':
+          setCurrentInput('veiklos');
+          break;
+        case 'l':
+          setCurrentInput('laikas');
+          break;
+      }
     } else if (e.key.length === 1 && currentInput.length < 100) {
       setCurrentInput(prevInput => prevInput + e.key);
     } else if (e.key === 'Backspace') {
@@ -273,7 +287,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
           ))}
           <div>
             {`>>>`} {currentInput}
-            <span className="animate-pulse">█</span>
+            <span className="animate-pulse">|</span>
           </div>
         </div>
       </div>
