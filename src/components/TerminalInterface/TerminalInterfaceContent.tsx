@@ -183,7 +183,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
           ))}
           <div>
             {`>>>`} {currentInput}
-            <span className="animate-pulse">█</span>
+            <span className="animate-pulse">|</span>
           </div>
         </div>
       </div>
