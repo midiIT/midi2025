@@ -10,7 +10,7 @@ import TerminalInterfaceContent from '../TerminalInterface/TerminalInterfaceCont
 const applications: Application[] = [
   {
     windowContent: <EventDisplay />,
-    hidden: false,
+    hidden: true,
     data: {
       title: 'Kalendorius',
       iconPath: calendarPng,
