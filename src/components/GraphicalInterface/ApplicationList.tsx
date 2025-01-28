@@ -16,6 +16,7 @@ const applications: Application[] = [
       iconPath: calendarPng,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
+      focused: false,
     },
   },
   {
@@ -26,6 +27,7 @@ const applications: Application[] = [
       iconPath: teamAppIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
+      focused: false,
     },
   },
   {
@@ -36,6 +38,7 @@ const applications: Application[] = [
       iconPath: randomTerminal,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
+      focused: true,
     },
   },
 ];
