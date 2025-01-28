@@ -30,17 +30,11 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
           case '?': {
             return printingCommands([
               'Galimos komandos:',
-              "1. 'rėmėjai'",
-              "2. 'komanda'",
-              "3. 'veiklos'",
+              "1. 'komanda'",
+              "2. 'veiklos'",
+              '3. <veiklos pavadinimas>',
               "4. 'laikas'",
             ]);
-          }
-          case 'remejai':
-          case 'remėjai':
-          case 'rėmejai':
-          case 'rėmėjai': {
-            return printingCommands(['Rėmėjų sąrašas:', 'Kolkas nėra']);
           }
           case 'komanda': {
             return printingCommands([
@@ -82,35 +76,74 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
           case 'veiklos': {
             return printingCommands([
               'MIDI veiklos:',
-              '- Sportinis pokeris',
+              '- Sportinis pokeris:       2025-04-10',
+              '- LAN Party:               2025-04-12 ir 2025-04-13',
+              '- Šachmatai:               2025-04-12',
+              '- Sporto dienos:           2025-04-13 ir 2025-04-15',
+              '- Įmonių mugė:             2025-04-14',
+              '- Roko opera:              2025-04-16',
+              '- Protmūšis:               2025-04-17',
+              '- Uždarymo vakaras:        2025-04-18',
+            ]);
+          }
+          case 'sportinis pokeris':
+          case 'pokeris':
+          case 'sportinis': {
+            return printingCommands([
+              '   2025-04-10',
               '   Ar tiki, kad sėkmė nėra vienintelis pokerio elementas? MIDI 2025 Sportinio pokerio turnyras laukia būtent tavęs!',
               '   Šiame turnyre svarbiausia ne tik kortų kombinacijos, bet ir strateginis mąstymas, žaidėjo psichologija bei gebėjimas skaityti oponentus.',
               '   Nesvarbu, ar esi patyręs žaidėjas, ar tiesiog nori išbandyti savo jėgas – šiame turnyre laukia įdomūs iššūkiai ir puikios emocijos!',
               '   Daugiau informacijos apie registraciją ir prizus – netrukus.',
-              '- LAN Party',
+            ]);
+          }
+          case 'lan party':
+          case 'lan': {
+            return printingCommands([
+              '   2025-04-12 ir 2025-04-13',
               '   Esi tikras žaidimų entuziastas ir nori pasinerti į virtualių pasaulių kovas? MIDI LAN Party – tai renginys, kuriame laukia daugybė emocijų ir konkurencingos dvasios!',
               '   Čia galėsi išbandyti savo jėgas populiariausiuose komandiniuose ir individualiuose žaidimuose bei susirungti su kitais žaidėjais, kurie taip pat trokšta pergalių.',
               '   Nesvarbu, ar esi FPS fanas, strategijų genijus ar MOBA entuziastas – šiame renginyje rasi savo vietą!',
               '   Atsinešk savo įrangą, pasiruošk draugiškai konkurencijai ir nepamiršk pasimėgauti vakaro atmosfera – MIDI LAN Party laukia tavęs!',
               '   Daugiau informacijos jau netrukus.',
-              '- Šachmatai',
+            ]);
+          }
+          case 'šachmatai':
+          case 'sachmatai': {
+            return [
+              '   2025-04-12',
               '   Ar esi iš tų, kurie mano, kad 64 langelių ribos, užtenka įrodyti savo meistriškumą? Ar tau pažįstami žirgo posūkiai ir protingi karalienės manevrai?',
               '   Tuomet šis MIDI renginys kaip tik tau! MIDI Šachmatų turnyras – tai tradicija, sujungianti šachmatų mėgėjus ir profesionalus jau daugelį metų.',
               '   Tavęs laukia ne tik įtemptos partijos, bet ir šiltos emocijos, nauji pažįstami bei šaunūs prizai! Laukiami ir grandmeistrai, ir pradedantieji.',
               '   Daugiau informacijos jau netrukus.',
-              '- LAN Party',
-              '   Esi tikras žaidimų entuziastas ir nori pasinerti į virtualių pasaulių kovas? MIDI LAN Party – tai renginys, kuriame laukia daugybė emocijų ir konkurencingos dvasios!',
-              '   Čia galėsi išbandyti savo jėgas populiariausiuose komandiniuose ir individualiuose žaidimuose bei susirungti su kitais žaidėjais, kurie taip pat trokšta pergalių.',
-              '   Nesvarbu, ar esi FPS fanas, strategijų genijus ar MOBA entuziastas – šiame renginyje rasi savo vietą!',
-              '   Atsinešk savo įrangą, pasiruošk draugiškai konkurencijai ir nepamiršk pasimėgauti vakaro atmosfera – MIDI LAN Party laukia tavęs!',
-              '   Daugiau informacijos jau netrukus.',
-              '- Sporto dienos',
+            ];
+          }
+          case 'sporto dienos':
+          case 'sporto':
+          case 'sportas': {
+            return [
+              '   2025-04-13 ir 2025-04-15',
               '   Ar pasiruošęs pasinerti į sportišką nuotykį ir pajusti komandinės dvasios jėgą?',
               '   MIDI Sporto dienos – tai metas, kai visi pamiršta savo užrašus bei kompiuterius, ir susitinka aikštelėje dėl smagaus laiko ir sveikos konkurencijos!',
               '   Šio renginio metu tavęs laukia įvairių sporto šakų turnyrai. Nesvarbu, ar esi atletiškas profesionalas, ar tiesiog mėgėjas, šios dienos skirtos visiems!',
               '   Pradėk rinkti komandą ir kartu įrodykite, kad sportas – tai ne tik varžybos, bet ir puiki proga užmegzti naujus ryšius bei tiesiog gerai praleisti laiką!',
               '   Daugiau informacijos jau netrukus.',
-              '- Įmonių mugė',
+            ];
+          }
+          case 'imones':
+          case 'įmonės':
+          case 'įmones':
+          case 'imonės':
+          case 'įmonių mugė':
+          case 'įmonių muge':
+          case 'įmoniu mugė':
+          case 'įmoniu muge':
+          case 'imonių mugė':
+          case 'imonių muge':
+          case 'imoniu mugė':
+          case 'imoniu muge': {
+            return [
+              '   2025-04-14',
               '   Atraskite savo karjeros galimybes MIDI 2025 Įmonių mugėje!',
               '   Ieškote praktikos, pirmojo darbo ar tiesiog smalsaujate apie galimas karjeros kryptis?',
               '   Kasmetinė MIDI Įmonių mugė – tai puiki proga susipažinti su inovatyviomis įmonėmis, atrasti galimybes ir užmegzti ryšius su savo sričių profesionalais.',
@@ -120,13 +153,14 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
               '    • Dalyvauti greituosiuose darbo pokalbiuose, įgyti realios interviu patirties ir galbūt iš karto užsitikrinti sau darbo poziciją.',
               '   Nepraleiskite progos pradėti savo karjeros ar atrasti sau tobulą praktiką! Pasiruoškite klausimus, savo CV ir gerą nuotaiką – pasimatysime ten!',
               '   Daugiau informacijos jau netrukus.',
-              '- Sporto dienos',
-              '   Ar pasiruošęs pasinerti į sportišką nuotykį ir pajusti komandinės dvasios jėgą?',
-              '   MIDI Sporto dienos – tai metas, kai visi pamiršta savo užrašus bei kompiuterius, ir susitinka aikštelėje dėl smagaus laiko ir sveikos konkurencijos!',
-              '   Šio renginio metu tavęs laukia įvairių sporto šakų turnyrai. Nesvarbu, ar esi atletiškas profesionalas, ar tiesiog mėgėjas, šios dienos skirtos visiems!',
-              '   Pradėk rinkti komandą ir kartu įrodykite, kad sportas – tai ne tik varžybos, bet ir puiki proga užmegzti naujus ryšius bei tiesiog gerai praleisti laiką!',
-              '   Daugiau informacijos jau netrukus.',
-              '- Roko opera',
+            ];
+          }
+          case 'roko opera':
+          case 'rokopera':
+          case 'rokas':
+          case 'opera': {
+            return [
+              '   2025-04-16',
               '   Ar kada nors pagalvojai, kas nutinka, kai jaudinantis teatras susitinka su audringa muzika?',
               '   MIDI 2025 Roko opera – tai unikalus renginys, kuriame pasakojama istorija per užburiančią muziką ir įspūdingus pasirodymus!',
               '   Ši roko opera sukurta specialiai MIDI savaitei, įtraukiant geriausius talentus – nuo muzikantų ir dainininkų iki režisierių ir scenografų.',
@@ -134,23 +168,39 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
               '   Nepraleisk progos pamatyti šį ypatingą pasirodymą, kuris sujungs muziką, teatrą ir technologijas į vieną įsimintiną vakarą!',
               '   MIDI Roko opera taps tikra MIDI savaitės pažiba ir parodys, kad matematika ir informatika gali būti tokia pat įkvepianti kaip ir menas.',
               '   Daugiau informacijos apie bilietus ir pasirodymo laiką – netrukus!',
-              '- Protmūšis',
+            ];
+          }
+          case 'protmūšis':
+          case 'protmušis':
+          case 'protmusis':
+          case 'protmūsis': {
+            return [
+              '   2025-04-17',
               '   Ar tavo galvoje daugiau atsakymų nei klausimų? Ar mėgsti išnarplioti painiausias mįsles ir būti tuo, kuris suranda raktą į teisingą atsakymą?',
               '   Protmūšis – renginys tiems, kurie mėgsta iššūkius ir tiki savo komandos jėga!',
               '   MIDI Protmūšis – tai ne tik galimybė pademonstruoti savo žinias, bet ir įdomiai praleisti laiką, pasisemti gerų emocijų bei laimėti šaunius prizus!',
               '   Nesvarbu, ar esi faktų enciklopedija, ar mėgsti loginius galvosūkius, kartu su savo draugais galite tapti šio renginio žvaigždėmis.',
               '   Surink savo draugus (komanda turi būti iki 6 žmonių) intelektinei kovai 2025 MIDI protmūšyje! Svarbu pabrėžti, kad renginys vyks TIK lietuvių kalba!',
               '   Daugiau informacijos jau netrukus.',
-              '- Uždarymo vakaras',
-              '   Ar girdi tu, ar matai? Švenčia MIF’o katinai!',
-              '   MIDI 2025 Uždarymo vakaras – tai ne tik ikoniško renginių ciklo pabaiga, bet ir šventė, kuri primena visiems,',
-              '   kad Matematikai ir Informatikai moka linksmintis, kaip niekas kitas!',
-              '   Šiame vakarėlyje laukia ne tik muzika ir šokiai, bet ir puiki proga atsipalaiduoti po intensyvios savaitės,',
-              '   pabendrauti su draugais bei kolegomis ir pasidžiaugti kartu.',
-              '   Renginys toli gražu nėra uždaras, tad čiupk už parankės ir atsivesk draugus (taip, net jei tai fizikai…)',
-              '   Ateik švęsti, dalintis geromis emocijomis ir užbaigti MIDI 2025 su trenksmu!',
-              '   Daugiau informacijos jau netrukus.',
-            ]);
+            ];
+          }
+          case 'uždarymo vakaras':
+          case 'uzdarymo vakaras':
+          case 'uzdarymas':
+          case 'vakaras':
+          case 'party':
+          case 'tūsas':
+          case 'tusas': {
+            return [
+              '   2025-04-18',
+              '   Ar kada nors pagalvojai, kas nutinka, kai jaudinantis teatras susitinka su audringa muzika?',
+              '   MIDI 2025 Roko opera – tai unikalus renginys, kuriame pasakojama istorija per užburiančią muziką ir įspūdingus pasirodymus!',
+              '   Ši roko opera sukurta specialiai MIDI savaitei, įtraukiant geriausius talentus – nuo muzikantų ir dainininkų iki režisierių ir scenografų.',
+              '   Spektaklio siužetas – kupinas emocijų, netikėtų posūkių ir gilios simbolikos, kurią papildys energingos gitaros ir aistringi vokalai.',
+              '   Nepraleisk progos pamatyti šį ypatingą pasirodymą, kuris sujungs muziką, teatrą ir technologijas į vieną įsimintiną vakarą!',
+              '   MIDI Roko opera taps tikra MIDI savaitės pažiba ir parodys, kad matematika ir informatika gali būti tokia pat įkvepianti kaip ir menas.',
+              '   Daugiau informacijos apie bilietus ir pasirodymo laiką – netrukus!',
+            ];
           }
           case 'laikas': {
             const timeLeft = calculateTimeLeft(targetDate);
@@ -262,6 +312,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
           {"  'rėmėjai'\n"}
           {"  'komanda'\n"}
           {"  'veiklos'\n"}
+          {'  <veiklos pavadinimas>\n'}
           {"  'laikas'\n"}
           {lines.map((line, index) => (
             <div
