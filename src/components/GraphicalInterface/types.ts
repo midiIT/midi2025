@@ -5,12 +5,14 @@ import { ReactNode } from 'react';
  * @title application title
  * @zIndex application zIndex, used for correct stacking of applications
  * @iconPath application icon path
+ * @focused whether cursor should be focused on the application or no
  */
 export interface ApplicationData {
   minimized: boolean;
   title: string;
   zIndex: number;
   iconPath: string;
+  focused: boolean;
 }
 
 /**

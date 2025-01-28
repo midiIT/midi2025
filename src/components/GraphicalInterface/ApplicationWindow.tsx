@@ -20,6 +20,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     app => app.title === title,
   );
   const zIndex = application?.zIndex;
+  const isFocused = application?.focused;
 
   const noWhiteSpaceTitle = title.replace(' ', '_');
 
@@ -74,10 +75,22 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     dragElement(document.querySelector(`#application-${noWhiteSpaceTitle}`));
   }, [noWhiteSpaceTitle]);
 
+  useEffect(() => {
+    if (isFocused) {
+      const terminalElement = document.querySelector(
+        `#terminal-input-${noWhiteSpaceTitle}`,
+      );
+      if (terminalElement instanceof HTMLElement) {
+        terminalElement.focus();
+      }
+    }
+  }, [isFocused, noWhiteSpaceTitle]);
+
   return (
     <div
       id={`application-${noWhiteSpaceTitle}`}
-      className={`absolute ${application?.minimized ? 'hidden' : 'block'} bg-gray-600 rounded w-[80%] h-[80%]`}
+      className={`absolute ${application?.minimized ? 'hidden' : 'flex flex-col'}
+        bg-gray-700 rounded w-[80%] h-[80%] max-w-full max-h-full overflow-hidden`}
       style={{ zIndex: zIndex }}
       onMouseDown={() => dispatch(setFocusedApplication(title))}
       onContextMenu={e => {
@@ -87,7 +100,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     >
       <div
         id={`top-bar-${noWhiteSpaceTitle}`}
-        className="h-10 bg-gray-700 rounded-t flex justify-between items-center"
+        className="h-10 bg-gray-800 rounded-t flex justify-between items-center flex-shrink-0"
       >
         <div className="w-8"></div>
         <p>{title}</p>
@@ -107,7 +120,12 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
           </button>
         </div>
       </div>
-      <div className="w-full h-full overflow-scroll">{content}</div>
+      <div className="flex-1 overflow-y-auto overflow-x-hidden">
+        {React.cloneElement(content as React.ReactElement, {
+          windowTitle: noWhiteSpaceTitle,
+          isFocused: isFocused,
+        })}
+      </div>
     </div>
   );
 };
