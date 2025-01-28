@@ -41,16 +41,6 @@ const applications: Application[] = [
       focused: true,
     },
   },
-  {
-    windowContent: <TerminalInterfaceContent />,
-    hidden: false,
-    data: {
-      title: 'Terminalas',
-      iconPath: randomTerminal,
-      minimized: false,
-      zIndex: DEFAULT_Z_INDEX,
-    },
-  },
 ];
 
 export default applications;
