@@ -21,6 +21,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     app => app.title === title,
   );
   const zIndex = application?.zIndex;
+  const isFocused = application?.focused;
 
   const noWhiteSpaceTitle = title.replace(/\s+/g, '_');
   const windowRef = useRef<HTMLDivElement>(null);
@@ -211,13 +212,24 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     };
   }, [noWhiteSpaceTitle]);
 
+  useEffect(() => {
+    if (isFocused) {
+      const terminalElement = document.querySelector(
+        `#terminal-input-${noWhiteSpaceTitle}`,
+      );
+      if (terminalElement instanceof HTMLElement) {
+        terminalElement.focus();
+      }
+    }
+  }, [isFocused, noWhiteSpaceTitle]);
+
   return (
     <div
       id={`application-${noWhiteSpaceTitle}`}
       ref={windowRef}
       className={`absolute ${
-        application?.minimized ? 'hidden' : 'block'
-      } bg-gray-600 rounded border border-gray-400 pointer-events-auto`}
+        application?.minimized ? 'hidden' : 'flex flex-col'
+      } bg-gray-700 rounded border border-gray-400 pointer-events-auto max-w-full max-h-full overflow-hidden`}
       style={{
         zIndex: zIndex,
         width: '80%',
@@ -229,10 +241,14 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
         e.stopPropagation();
         dispatch(setFocusedApplication(title));
       }}
+      onContextMenu={e => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
     >
       <div
         id={`top-bar-${noWhiteSpaceTitle}`}
-        className="h-10 bg-gray-700 rounded-t flex justify-between items-center cursor-move select-none"
+        className="h-10 bg-gray-800 rounded-t flex justify-between items-center cursor-move select-none flex-shrink-0"
       >
         <p className="flex-grow text-center">{title}</p>
         <div className="flex">
@@ -250,8 +266,11 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
           </button>
         </div>
       </div>
-      <div className="w-full h-[calc(100%-2.5rem)] overflow-auto">
-        {content}
+      <div className="flex-1 overflow-y-auto overflow-x-hidden">
+        {React.cloneElement(content as React.ReactElement, {
+          windowTitle: noWhiteSpaceTitle,
+          isFocused: isFocused,
+        })}
       </div>
       <div className="absolute top-0 left-0 w-4 h-4 cursor-nw-resize resizer resizer-nw z-50"></div>
       <div className="absolute top-0 right-0 w-4 h-4 cursor-ne-resize resizer resizer-ne z-50"></div>

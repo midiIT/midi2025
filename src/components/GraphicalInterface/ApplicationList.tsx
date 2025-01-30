@@ -4,6 +4,8 @@ import EventDisplay from '@/components/EventsPage/EventDisplay.tsx';
 import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 import TeamPage from '@/components/TeamPage/TeamPage.tsx';
 import teamAppIcon from '@/images/TeamAppIcon.jpg';
+import randomTerminal from '@/images/random_terminal.png';
+import TerminalInterfaceContent from '../TerminalInterface/TerminalInterfaceContent';
 
 const applications: Application[] = [
   {
@@ -14,6 +16,7 @@ const applications: Application[] = [
       iconPath: calendarPng,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
+      focused: false,
     },
   },
   {
@@ -24,6 +27,18 @@ const applications: Application[] = [
       iconPath: teamAppIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
+      focused: false,
+    },
+  },
+  {
+    windowContent: <TerminalInterfaceContent />,
+    hidden: false,
+    data: {
+      title: 'Terminalas',
+      iconPath: randomTerminal,
+      minimized: false,
+      zIndex: DEFAULT_Z_INDEX,
+      focused: true,
     },
   },
 ];
