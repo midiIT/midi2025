@@ -2,17 +2,18 @@ import React from 'react';
 import PageWithApplications from './ApplicationComponents/PageWithApplications';
 
 // Photos
-import terminalIcon from '@/images/terminalas.png';
-import Sponsors from '@/images/MobileImages/sponsors.png';
-import Settings from '@/images/MobileImages/settings.png';
-import Anonymous from '@/images/MobileImages/anonymous.png';
+// import terminalIcon from '@/images/terminalas.png';
+import teamIcon from '@/images/komanda.png';
+// import Sponsors from '@/images/MobileImages/sponsors.png';
+// import Settings from '@/images/MobileImages/settings.png';
+// import Anonymous from '@/images/MobileImages/anonymous.png';
 
 // Pages
 import TeamPage from '../TeamPage/TeamPage';
-import SponsorsPage from '../SponsorsPage/SponsorsPage';
-import SettingsApp from './OtherMobile/SettingsApp';
+// import SponsorsPage from '../SponsorsPage/SponsorsPage';
+// import SettingsApp from './OtherMobile/SettingsApp';
 import Clock from './OtherMobile/Clock';
-import SecretCodeApp from '../SecretPage/SecretCodeApp';
+// import SecretCodeApp from '../SecretPage/SecretCodeApp';
 import CountdownComponent from '../CountdownComponent/CountdownComponent';
 import DatePicker from '../EventsPage/DatePicker';
 
@@ -25,8 +26,8 @@ interface PagesProps {
 }
 
 export const PagesList = ({
-  brightness,
-  setBrightness,
+  // brightness,
+  // setBrightness,
   setShowEventInfo,
   showWindow,
   setShowWindow,
@@ -39,29 +40,28 @@ export const PagesList = ({
 
     // 2 Page: Applications
     <PageWithApplications
-      title="Pagrindinis"
       applications={[
         {
-          iconPath: terminalIcon,
+          iconPath: teamIcon,
           appText: 'Komanda',
           windowContent: TeamPage,
         },
-        { iconPath: Sponsors, appText: 'Rėmėjai', windowContent: SponsorsPage },
-        {
-          iconPath: Settings,
-          appText: 'Nustatymai',
-          windowContent: () => (
-            <SettingsApp
-              brightness={brightness}
-              setBrightness={setBrightness}
-            />
-          ),
-        },
-        {
-          iconPath: Anonymous,
-          appText: 'Paslaptis',
-          windowContent: SecretCodeApp,
-        },
+        // { iconPath: Sponsors, appText: 'Rėmėjai', windowContent: SponsorsPage },
+        // {
+        //   iconPath: Settings,
+        //   appText: 'Nustatymai',
+        //   windowContent: () => (
+        //     <SettingsApp
+        //       brightness={brightness}
+        //       setBrightness={setBrightness}
+        //     />
+        //   ),
+        // },
+        // {
+        //   iconPath: Anonymous,
+        //   appText: 'Paslaptis',
+        //   windowContent: SecretCodeApp,
+        // },
       ]}
       showWindow={showWindow}
       setShowWindow={setShowWindow}

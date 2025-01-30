@@ -9,14 +9,12 @@ interface ApplicationType {
 }
 
 interface PageWithApplicationsProps {
-  title: string;
   applications: ApplicationType[];
   showWindow: boolean;
   setShowWindow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const PageWithApplications: React.FC<PageWithApplicationsProps> = ({
-  title,
   applications,
   showWindow,
   setShowWindow,
@@ -25,8 +23,7 @@ const PageWithApplications: React.FC<PageWithApplicationsProps> = ({
     React.useState<React.ReactNode>(null);
 
   return (
-    <div className="text-center text-blue-300 text-base w-full h-full overflow-hidden translate-y-[3vh] landscape:translate-y-[6vh]">
-      <p>{title}</p>
+    <div className="text-center text-black text-base w-full h-full overflow-hidden translate-y-[3vh] landscape:translate-y-[6vh]">
       <div className="grid grid-cols-4 gap-4">
         {applications.map((app, index) => (
           <ApplicationMobile
