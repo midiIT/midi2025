@@ -24,6 +24,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
 
   const noWhiteSpaceTitle = title.replace(/\s+/g, '_');
   const windowRef = useRef<HTMLDivElement>(null);
+  const applicationWindow = document.querySelector('#graphical-interface');
 
   useEffect(() => {
     const windowElement = windowRef.current;
@@ -53,6 +54,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
 
         const handleDragMove = (e: MouseEvent) => {
           if (!isDragging) return;
+          if (!applicationWindow) return;
 
           const deltaX = e.clientX - startX;
           const deltaY = e.clientY - startY;
@@ -60,7 +62,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
           const newLeft = Math.max(
             0,
             Math.min(
-              window.innerWidth - windowElement.offsetWidth,
+              applicationWindow.clientWidth - windowElement.offsetWidth,
               startLeft + deltaX,
             ),
           );
@@ -68,7 +70,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
           const newTop = Math.max(
             0,
             Math.min(
-              window.innerHeight - windowElement.offsetHeight,
+              applicationWindow.clientHeight - windowElement.offsetHeight,
               startTop + deltaY,
             ),
           );
@@ -90,40 +92,71 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
 
     const resizeHandlers: { [key: string]: (e: MouseEvent) => void } = {
       se: (e: MouseEvent) => {
+        if (!applicationWindow) return;
         if (!isResizing) return;
         const deltaX = e.clientX - startX;
         const deltaY = e.clientY - startY;
-        windowElement.style.width = `${Math.max(200, startWidth + deltaX)}px`;
-        windowElement.style.height = `${Math.max(200, startHeight + deltaY)}px`;
+
+        if (
+          windowElement.offsetLeft + startWidth + deltaX <=
+          applicationWindow.clientWidth
+        )
+          windowElement.style.width = `${Math.max(200, startWidth + deltaX)}px`;
+        if (
+          windowElement.offsetTop + startHeight + deltaY <=
+          applicationWindow.clientHeight
+        )
+          windowElement.style.height = `${Math.max(200, startHeight + deltaY)}px`;
       },
       sw: (e: MouseEvent) => {
+        if (!applicationWindow) return;
         if (!isResizing) return;
         const deltaX = e.clientX - startX;
         const deltaY = e.clientY - startY;
+
         const newWidth = Math.max(200, startWidth - deltaX);
-        windowElement.style.width = `${newWidth}px`;
-        windowElement.style.left = `${startLeft + startWidth - newWidth}px`;
-        windowElement.style.height = `${Math.max(200, startHeight + deltaY)}px`;
+        if (startLeft + startWidth - newWidth >= 0) {
+          windowElement.style.width = `${newWidth}px`;
+          windowElement.style.left = `${startLeft + startWidth - newWidth}px`;
+        }
+        if (
+          windowElement.offsetTop + startHeight + deltaY <=
+          applicationWindow.clientHeight
+        )
+          windowElement.style.height = `${Math.max(200, startHeight + deltaY)}px`;
       },
       ne: (e: MouseEvent) => {
+        if (!applicationWindow) return;
         if (!isResizing) return;
         const deltaX = e.clientX - startX;
         const deltaY = e.clientY - startY;
         const newHeight = Math.max(200, startHeight - deltaY);
-        windowElement.style.width = `${Math.max(200, startWidth + deltaX)}px`;
-        windowElement.style.height = `${newHeight}px`;
-        windowElement.style.top = `${startTop + startHeight - newHeight}px`;
+
+        if (
+          windowElement.offsetLeft + startWidth + deltaX <=
+          applicationWindow.clientWidth
+        )
+          windowElement.style.width = `${Math.max(200, startWidth + deltaX)}px`;
+        if (startTop + startHeight - newHeight >= 0) {
+          windowElement.style.height = `${newHeight}px`;
+          windowElement.style.top = `${startTop + startHeight - newHeight}px`;
+        }
       },
       nw: (e: MouseEvent) => {
+        if (!applicationWindow) return;
         if (!isResizing) return;
         const deltaX = e.clientX - startX;
         const deltaY = e.clientY - startY;
         const newWidth = Math.max(200, startWidth - deltaX);
         const newHeight = Math.max(200, startHeight - deltaY);
-        windowElement.style.width = `${newWidth}px`;
-        windowElement.style.height = `${newHeight}px`;
-        windowElement.style.left = `${startLeft + startWidth - newWidth}px`;
-        windowElement.style.top = `${startTop + startHeight - newHeight}px`;
+        if (startLeft + startWidth - newWidth >= 0) {
+          windowElement.style.width = `${newWidth}px`;
+          windowElement.style.left = `${startLeft + startWidth - newWidth}px`;
+        }
+        if (startTop + startHeight - newHeight >= 0) {
+          windowElement.style.height = `${newHeight}px`;
+          windowElement.style.top = `${startTop + startHeight - newHeight}px`;
+        }
       },
     };
 
