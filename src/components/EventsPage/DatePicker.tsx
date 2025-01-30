@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import events from '@/events.json';
+import { openApplication, setEventDate } from '@/app/ApplicationsSlice.ts';
+import calendarIcon from '@/images/calendar.png';
+import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
+import { useAppDispatch } from '@/app/hooks.ts';
 
-interface DatePickerProps {
-  onDatePicked: (date: Date) => void;
-}
-
-const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
+const DatePicker = () => {
+  const dispatch = useAppDispatch();
   const today = new Date();
   const [currentYear, setCurrentYear] = useState<number>(today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState<number>(
@@ -38,7 +39,17 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
   };
 
   const handleClick = (date: Date) => {
-    onDatePicked(date);
+    dispatch(setEventDate(date.toISOString().split('T')[0]));
+
+    dispatch(
+      openApplication({
+        minimized: false,
+        title: 'EventDisplay',
+        iconPath: calendarIcon,
+        zIndex: DEFAULT_Z_INDEX,
+        focused: false,
+      }),
+    );
   };
 
   const handleMonthChange = (direction: 'Atgal' | 'Kitas') => {
@@ -60,7 +71,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onDatePicked }) => {
   };
 
   return (
-    <div className="p-4 lg:max-w-md lg:mx-auto bg-black shadow-lg rounded-md w-full h-[440px] overflow-y-auto">
+    <div className="p-4 lg:mx-auto bg-black shadow-lg rounded-md w-full min-h-[440px] overflow-y-auto">
       <div className="flex justify-between items-center mb-4">
         <button
           onClick={() => handleMonthChange('Atgal')}
