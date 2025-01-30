@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 import {
   closeApplication,
   minimizeApplication,
@@ -12,6 +12,7 @@ interface ApplicationWindowProps {
   content: ReactNode;
   title: string;
 }
+
 const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   content,
   title,
@@ -24,57 +25,193 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   const isFocused = application?.focused;
   const eventDate = useAppSelector(selectEventDate);
 
-  const noWhiteSpaceTitle = title.replace(' ', '_');
-
-  function dragElement(el: HTMLElement | null) {
-    if (!el) return;
-
-    let pos1 = 0,
-      pos2 = 0,
-      pos3 = 0,
-      pos4 = 0;
-
-    const topBar: HTMLElement | null = document.querySelector(
-      `#top-bar-${noWhiteSpaceTitle}`,
-    );
-    if (topBar) {
-      topBar.onmousedown = dragMouseDown(el);
-    }
-
-    function dragMouseDown(el: HTMLElement) {
-      return (e: MouseEvent) => {
-        e.preventDefault();
-
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = closeDragElement;
-
-        document.onmousemove = elementDrag(el);
-      };
-    }
-
-    function elementDrag(el: HTMLElement) {
-      return (e: MouseEvent) => {
-        e.preventDefault();
-
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-
-        el.style.top = el.offsetTop - pos2 + 'px';
-        el.style.left = el.offsetLeft - pos1 + 'px';
-      };
-    }
-
-    function closeDragElement() {
-      document.onmouseup = null;
-      document.onmousemove = null;
-    }
-  }
+  const noWhiteSpaceTitle = title.replace(/\s+/g, '_');
+  const windowRef = useRef<HTMLDivElement>(null);
+  const applicationWindow = document.querySelector('#graphical-interface');
 
   useEffect(() => {
-    dragElement(document.querySelector(`#application-${noWhiteSpaceTitle}`));
+    const windowElement = windowRef.current;
+    if (!windowElement) return;
+
+    let isDragging = false;
+    let isResizing = false;
+    let startX = 0;
+    let startY = 0;
+    let startTop = 0;
+    let startLeft = 0;
+    let startWidth = 0;
+    let startHeight = 0;
+
+    const topBar = windowElement.querySelector(
+      `#top-bar-${noWhiteSpaceTitle}`,
+    ) as HTMLElement;
+    if (topBar) {
+      topBar.addEventListener('mousedown', (e: MouseEvent) => {
+        if ((e.target as HTMLElement).tagName === 'BUTTON') return;
+
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        startLeft = windowElement.offsetLeft;
+        startTop = windowElement.offsetTop;
+
+        const handleDragMove = (e: MouseEvent) => {
+          if (!isDragging) return;
+          if (!applicationWindow) return;
+
+          const deltaX = e.clientX - startX;
+          const deltaY = e.clientY - startY;
+
+          const newLeft = Math.max(
+            0,
+            Math.min(
+              applicationWindow.clientWidth - windowElement.offsetWidth,
+              startLeft + deltaX,
+            ),
+          );
+
+          const newTop = Math.max(
+            0,
+            Math.min(
+              applicationWindow.clientHeight - windowElement.offsetHeight,
+              startTop + deltaY,
+            ),
+          );
+
+          windowElement.style.left = `${newLeft}px`;
+          windowElement.style.top = `${newTop}px`;
+        };
+
+        const handleDragEnd = () => {
+          isDragging = false;
+          document.removeEventListener('mousemove', handleDragMove);
+          document.removeEventListener('mouseup', handleDragEnd);
+        };
+
+        document.addEventListener('mousemove', handleDragMove);
+        document.addEventListener('mouseup', handleDragEnd);
+      });
+    }
+
+    const resizeHandlers: { [key: string]: (e: MouseEvent) => void } = {
+      se: (e: MouseEvent) => {
+        if (!applicationWindow) return;
+        if (!isResizing) return;
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
+
+        if (
+          windowElement.offsetLeft + startWidth + deltaX <=
+          applicationWindow.clientWidth
+        )
+          windowElement.style.width = `${Math.max(200, startWidth + deltaX)}px`;
+        if (
+          windowElement.offsetTop + startHeight + deltaY <=
+          applicationWindow.clientHeight
+        )
+          windowElement.style.height = `${Math.max(200, startHeight + deltaY)}px`;
+      },
+      sw: (e: MouseEvent) => {
+        if (!applicationWindow) return;
+        if (!isResizing) return;
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
+
+        const newWidth = Math.max(200, startWidth - deltaX);
+        if (startLeft + startWidth - newWidth >= 0) {
+          windowElement.style.width = `${newWidth}px`;
+          windowElement.style.left = `${startLeft + startWidth - newWidth}px`;
+        }
+        if (
+          windowElement.offsetTop + startHeight + deltaY <=
+          applicationWindow.clientHeight
+        )
+          windowElement.style.height = `${Math.max(200, startHeight + deltaY)}px`;
+      },
+      ne: (e: MouseEvent) => {
+        if (!applicationWindow) return;
+        if (!isResizing) return;
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
+        const newHeight = Math.max(200, startHeight - deltaY);
+
+        if (
+          windowElement.offsetLeft + startWidth + deltaX <=
+          applicationWindow.clientWidth
+        )
+          windowElement.style.width = `${Math.max(200, startWidth + deltaX)}px`;
+        if (startTop + startHeight - newHeight >= 0) {
+          windowElement.style.height = `${newHeight}px`;
+          windowElement.style.top = `${startTop + startHeight - newHeight}px`;
+        }
+      },
+      nw: (e: MouseEvent) => {
+        if (!applicationWindow) return;
+        if (!isResizing) return;
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
+        const newWidth = Math.max(200, startWidth - deltaX);
+        const newHeight = Math.max(200, startHeight - deltaY);
+        if (startLeft + startWidth - newWidth >= 0) {
+          windowElement.style.width = `${newWidth}px`;
+          windowElement.style.left = `${startLeft + startWidth - newWidth}px`;
+        }
+        if (startTop + startHeight - newHeight >= 0) {
+          windowElement.style.height = `${newHeight}px`;
+          windowElement.style.top = `${startTop + startHeight - newHeight}px`;
+        }
+      },
+    };
+
+    const handleResizeStart = (corner: string) => (e: MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      isResizing = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      startWidth = windowElement.offsetWidth;
+      startHeight = windowElement.offsetHeight;
+      startLeft = windowElement.offsetLeft;
+      startTop = windowElement.offsetTop;
+
+      const handleResizeMove = resizeHandlers[corner];
+
+      const handleResizeEnd = () => {
+        isResizing = false;
+        document.removeEventListener('mousemove', handleResizeMove);
+        document.removeEventListener('mouseup', handleResizeEnd);
+      };
+
+      document.addEventListener('mousemove', handleResizeMove);
+      document.addEventListener('mouseup', handleResizeEnd);
+    };
+
+    const corners = ['se', 'sw', 'ne', 'nw'];
+    const resizeListeners = new Map();
+
+    corners.forEach(corner => {
+      const element = windowElement.querySelector(
+        `.resizer-${corner}`,
+      ) as HTMLElement;
+      if (element) {
+        const listener = handleResizeStart(corner);
+        resizeListeners.set(corner, listener);
+        element.addEventListener('mousedown', listener);
+      }
+    });
+
+    return () => {
+      corners.forEach(corner => {
+        const element = windowElement.querySelector(
+          `.resizer-${corner}`,
+        ) as HTMLElement;
+        const listener = resizeListeners.get(corner);
+        if (element && listener) {
+          element.removeEventListener('mousedown', listener);
+        }
+      });
+    };
   }, [noWhiteSpaceTitle]);
 
   useEffect(() => {
@@ -91,10 +228,21 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   return (
     <div
       id={`application-${noWhiteSpaceTitle}`}
-      className={`absolute ${application?.minimized ? 'hidden' : 'flex flex-col'}
-        bg-gray-700 rounded w-[80%] h-[80%] max-w-full max-h-full overflow-hidden`}
-      style={{ zIndex: zIndex }}
-      onMouseDown={() => dispatch(setFocusedApplication(title))}
+      ref={windowRef}
+      className={`absolute ${
+        application?.minimized ? 'hidden' : 'flex flex-col'
+      } bg-gray-700 rounded border border-gray-400 pointer-events-auto max-w-full max-h-full overflow-hidden`}
+      style={{
+        zIndex: zIndex,
+        width: '80%',
+        height: '80%',
+        top: '10%',
+        left: '10%',
+      }}
+      onMouseDown={e => {
+        e.stopPropagation();
+        dispatch(setFocusedApplication(title));
+      }}
       onContextMenu={e => {
         e.preventDefault();
         e.stopPropagation();
@@ -102,7 +250,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     >
       <div
         id={`top-bar-${noWhiteSpaceTitle}`}
-        className="h-6 bg-gray-800 rounded-t flex justify-between items-center flex-shrink-0"
+        className="h-6 bg-gray-800 rounded-t flex justify-between items-center cursor-move select-none flex-shrink-0"
       >
         <div className="w-8"></div>
         <p>{title === 'EventDisplay' ? eventDate : title}</p>
@@ -128,7 +276,12 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
           isFocused: isFocused,
         })}
       </div>
+      <div className="absolute top-0 left-0 w-4 h-4 cursor-nw-resize resizer resizer-nw z-50"></div>
+      <div className="absolute top-0 right-0 w-4 h-4 cursor-ne-resize resizer resizer-ne z-50"></div>
+      <div className="absolute bottom-0 left-0 w-4 h-4 cursor-sw-resize resizer resizer-sw z-50"></div>
+      <div className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize resizer resizer-se z-50"></div>
     </div>
   );
 };
+
 export default ApplicationWindow;
