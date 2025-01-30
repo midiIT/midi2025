@@ -40,7 +40,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
 
   return (
     <div
-      className={`flex items-center justify-center h-screen w-screen bg-gray-900 overflow-hidden ${className}`}
+      className={`flex items-center justify-center h-screen w-screen bg-gray-900 overflow-scroll ${className}`}
     >
       {/* Phone box */}
       <div
@@ -67,7 +67,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
 
         {/* Screen Area */}
         <div
-          className={`absolute h-[82vh] w-[90vw] left-[2.5vw] top-[7vh] bg-black rounded-[1rem] border-4 border-gray-600
+          className={`absolute h-[88vh] w-[90vw] left-[2.5vw] top-[7vh] bg-black rounded-[1rem] border-4 border-gray-600
                      overflow-hidden transition-opacity duration-500 landscape:h-[80vh] landscape:w-[80vw] shadow-inner
                      landscape:left-[8vw] landscape:top-[2.5vh]`}
           style={{

@@ -68,7 +68,7 @@ export const PagesList = ({
     />,
 
     // 3 Page: Countdown and Date Picker
-    <div className="w-full h-full flex flex-col items-center justify-center space-y-0 translate-y-[4vh] landscape:translate-y-[7vh]">
+    <div className="absolute top-0 w-full h-full flex flex-col items-center justify-center space-y-0">
       <CountdownComponent />
       <DatePicker onDatePicked={() => setShowEventInfo(true)} />
     </div>,
