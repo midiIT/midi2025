@@ -12,8 +12,30 @@ const applications: Application[] = [
     windowContent: <EventDisplay />,
     hidden: true,
     data: {
-      title: 'Kalendorius',
+      title: 'EventDisplay',
       iconPath: calendarPng,
+      minimized: false,
+      zIndex: DEFAULT_Z_INDEX,
+      focused: false,
+    },
+  },
+  {
+    windowContent: <TeamPage />,
+    hidden: false,
+    data: {
+      title: 'Komanda',
+      iconPath: teamAppIcon,
+      minimized: false,
+      zIndex: DEFAULT_Z_INDEX,
+      focused: false,
+    },
+  },
+  {
+    windowContent: <TeamPage />,
+    hidden: false,
+    data: {
+      title: 'Komanda',
+      iconPath: teamAppIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
       focused: false,

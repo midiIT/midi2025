@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect } from 'react';
 import {
   closeApplication,
   minimizeApplication,
+  selectEventDate,
   selectOpenApplications,
   setFocusedApplication,
 } from '@/app/ApplicationsSlice.ts';
@@ -21,6 +22,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
   );
   const zIndex = application?.zIndex;
   const isFocused = application?.focused;
+  const eventDate = useAppSelector(selectEventDate);
 
   const noWhiteSpaceTitle = title.replace(' ', '_');
 
@@ -100,24 +102,24 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     >
       <div
         id={`top-bar-${noWhiteSpaceTitle}`}
-        className="h-10 bg-gray-800 rounded-t flex justify-between items-center flex-shrink-0"
+        className="h-6 bg-gray-800 rounded-t flex justify-between items-center flex-shrink-0"
       >
         <div className="w-8"></div>
-        <p>{title}</p>
+        <p>{title === 'EventDisplay' ? eventDate : title}</p>
         {/* Buttons */}
-        <div>
-          <button
-            className="w-8 h-8 bg-blue-500 text-white mr-1 rounded font-bold"
+        <div className="flex">
+          <div
+            className="w-5 h-5 bg-blue-500 text-white mr-1 rounded font-bold text-center"
             onClick={() => dispatch(minimizeApplication(title))}
           >
-            —
-          </button>
-          <button
-            className="w-8 h-8 bg-red-500 text-white mr-1 rounded font-bold"
+            <span className="relative -top-0.5 left-0">—</span>
+          </div>
+          <div
+            className="w-5 h-5 bg-red-500 text-white mr-1 rounded font-bold text-center"
             onClick={() => dispatch(closeApplication(title))}
           >
-            X
-          </button>
+            <span className="relative -top-0.5 left-0">X</span>
+          </div>
         </div>
       </div>
       <div className="flex-1 overflow-y-auto overflow-x-hidden">
