@@ -31,28 +31,6 @@ const applications: Application[] = [
     },
   },
   {
-    windowContent: <TeamPage />,
-    hidden: false,
-    data: {
-      title: 'Komanda',
-      iconPath: teamAppIcon,
-      minimized: false,
-      zIndex: DEFAULT_Z_INDEX,
-      focused: false,
-    },
-  },
-  {
-    windowContent: <TeamPage />,
-    hidden: false,
-    data: {
-      title: 'Komanda',
-      iconPath: teamAppIcon,
-      minimized: false,
-      zIndex: DEFAULT_Z_INDEX,
-      focused: false,
-    },
-  },
-  {
     windowContent: <TerminalInterfaceContent />,
     hidden: false,
     data: {
