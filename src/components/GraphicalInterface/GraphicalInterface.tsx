@@ -64,7 +64,7 @@ const GraphicalInterface: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Check out MIDI on Facebook!
+                  Sekti MIDI Facebook!
                 </a>
               </div>,
               <div key="ig">
@@ -73,7 +73,7 @@ const GraphicalInterface: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Check out MIDI on Instagram!
+                  Sekti MIDI Instagram!
                 </a>
               </div>,
             ]}

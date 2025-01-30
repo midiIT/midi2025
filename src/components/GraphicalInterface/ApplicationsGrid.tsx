@@ -59,7 +59,7 @@ const ApplicationsGrid = () => {
                 dispatch(openApplication(app.data));
               }}
             >
-              Open {contextMenuData.title}
+              Atidaryti {contextMenuData.title}
             </div>,
           ]}
         />
