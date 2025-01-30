@@ -12,40 +12,16 @@
     "email": "hr@midi.lt"
   },
   {
-    "picture": "images/komanda/3.png",
-    "name": "Austėja Bendikaitė",
-    "position": "Komunikacijos vadovė",
-    "email": "info@midi.lt"
-  },
-  {
     "picture": "images/komanda/4.png",
     "name": "Deimantė Balčiūtė",
     "position": "Administratorė",
     "email": "admin@midi.lt"
   },
   {
-    "picture": "images/komanda/5.png",
-    "name": "Saule Gilytė",
-    "position": "Marketingo ir įmonių mugės vadovė",
-    "email": "marketingas@midi.lt"
-  },
-  {
     "picture": "images/komanda/6.png",
     "name": "Rokas Baltrušaitis",
     "position": "Organizacinės srities vadovas",
     "email": "org@midi.lt"
-  },
-  {
-    "picture": "images/komanda/7.png",
-    "name": "Emilija Abromaitytė",
-    "position": "Organizacinės srities vadovė",
-    "email": "dienine@midi.lt"
-  },
-  {
-    "picture": "images/komanda/8.png",
-    "name": "Daniel Gurvič",
-    "position": "Organizacinės srities vadovas",
-    "email": "vakarine@midi.lt"
   },
   {
     "picture": "images/komanda/9.png",
@@ -72,6 +48,30 @@
     "email": "ro.vadovas@midi.lt"
   },
   {
+    "picture": "images/komanda/19.png",
+    "name": "Eglė Gurklytė",
+    "position": "Minecraft vadovė",
+    "email": "minecraft@midi.lt"
+  },
+  {
+    "picture": "images/komanda/5.png",
+    "name": "Saule Gilytė",
+    "position": "Marketingo ir įmonių mugės vadovė",
+    "email": "marketingas@midi.lt"
+  },
+  {
+    "picture": "images/komanda/7.png",
+    "name": "Emilija Abromaitytė",
+    "position": "Organizacinės srities vadovė",
+    "email": "dienine@midi.lt"
+  },
+  {
+    "picture": "images/komanda/8.png",
+    "name": "Daniel Gurvič",
+    "position": "Organizacinės srities vadovas",
+    "email": "vakarine@midi.lt"
+  },
+  {
     "picture": "images/komanda/14.png",
     "name": "Nika Bukolovaitė",
     "position": "Uždarymo vakaro vadovė",
@@ -90,28 +90,10 @@
     "email": "sportas@midi.lt"
   },
   {
-    "picture": "images/komanda/17.png",
-    "name": "Šarūnas Gikys",
-    "position": "Mažųjų turnyrų vadovas",
-    "email": "lan.turnyrai@midi.lt"
-  },
-  {
     "picture": "images/komanda/18.png",
     "name": "Monika Tamelytė",
     "position": "Protmūšio vadovė",
     "email": "protmusis@midi.lt"
-  },
-  {
-    "picture": "images/komanda/19.png",
-    "name": "Eglė Gurklytė",
-    "position": "Minecraft vadovė",
-    "email": "minecraft@midi.lt"
-  },
-  {
-    "picture": "images/komanda/20.png",
-    "name": "Mindaugas Tolušis",
-    "position": "Discord vadovas",
-    "email": "discord@midi.lt"
   },
   {
     "picture": "images/komanda/21.png",
@@ -124,6 +106,18 @@
     "name": "Jokūbas Jurgaitis",
     "position": "Šachamatų turnyro vadovas",
     "email": "sachmatai@midi.lt"
+  },
+  {
+    "picture": "images/komanda/30.png",
+    "name": "Justas Aleknavičius",
+    "position": "Tinklinio ir futbolo turnyrų ir foto vadovas",
+    "email": "foto@midi.lt"
+  },
+  {
+    "picture": "images/komanda/3.png",
+    "name": "Austėja Bendikaitė",
+    "position": "Komunikacijos vadovė",
+    "email": "info@midi.lt"
   },
   {
     "picture": "images/komanda/23.png",
@@ -156,6 +150,18 @@
     "email": "press@midi.lt"
   },
   {
+    "picture": "images/komanda/17.png",
+    "name": "Šarūnas Gikys",
+    "position": "Mažųjų turnyrų vadovas",
+    "email": "lan.turnyrai@midi.lt"
+  },
+  {
+    "picture": "images/komanda/20.png",
+    "name": "Mindaugas Tolušis",
+    "position": "Discord vadovas",
+    "email": "discord@midi.lt"
+  },
+  {
     "picture": "images/komanda/28.png",
     "name": "Artūras Semenčiuk",
     "position": "Pagrindinių turnyrų vadovas",
@@ -166,12 +172,6 @@
     "name": "Augustas Kniška",
     "position": "Stream vadovas",
     "email": "stream@midi.lt"
-  },
-  {
-    "picture": "images/komanda/30.png",
-    "name": "Justas Aleknavičius",
-    "position": "Tinklinio ir futbolo turnyrų ir foto vadovas",
-    "email": "foto@midi.lt"
   },
   {
     "picture": "images/komanda/31.png",
