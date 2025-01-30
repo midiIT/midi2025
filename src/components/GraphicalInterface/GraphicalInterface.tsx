@@ -34,7 +34,7 @@ const GraphicalInterface: React.FC = () => {
   });
 
   return (
-    <CRTDisplay initialPowerState={true}>
+    <CRTDisplay>
       <div
         id="graphical-interface"
         className="flex flex-col justify-between content-center h-full"

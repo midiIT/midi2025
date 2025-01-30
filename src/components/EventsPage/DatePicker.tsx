@@ -5,7 +5,11 @@ import calendarIcon from '@/images/calendar.png';
 import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 import { useAppDispatch } from '@/app/hooks.ts';
 
-const DatePicker = () => {
+interface DatePickerProps {
+  onDatePicked?: () => void;
+}
+
+const DatePicker = ({ onDatePicked }: DatePickerProps) => {
   const dispatch = useAppDispatch();
   const today = new Date();
   const [currentYear, setCurrentYear] = useState<number>(today.getFullYear());
@@ -50,6 +54,8 @@ const DatePicker = () => {
         focused: false,
       }),
     );
+
+    if (onDatePicked) onDatePicked();
   };
 
   const handleMonthChange = (direction: 'Atgal' | 'Kitas') => {

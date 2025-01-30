@@ -1,31 +1,20 @@
-import React, { useEffect, useState, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import './styles.module.css';
-import PowerIcon from '@/components/CTRDisplay/PowerIcon.tsx';
+import { useAppSelector } from '@/app/hooks.ts';
+import { selectPowerState } from '@/app/DisplaySlice.ts';
 
 interface CRTDisplayProps {
   children: ReactNode;
   className?: string;
-  initialPowerState?: boolean;
-  onPowerChange?: (isOn: boolean) => void;
 }
 
-const CRTDisplay: React.FC<CRTDisplayProps> = ({
-  children,
-  className = '',
-  initialPowerState = true,
-  onPowerChange,
-}) => {
-  const [powerOn, setPowerOn] = useState<boolean>(initialPowerState);
+const CRTDisplay = ({ children, className = '' }: CRTDisplayProps) => {
+  // const dispatch = useAppDispatch();
+  const powerState = useAppSelector(selectPowerState);
 
-  useEffect(() => {
-    setPowerOn(initialPowerState);
-  }, [initialPowerState]);
-
-  const handlePowerToggle = (): void => {
-    const newPowerState = !powerOn;
-    setPowerOn(newPowerState);
-    onPowerChange?.(newPowerState);
-  };
+  // const handlePowerToggle = (): void => {
+  //   dispatch(changePowerState());
+  // };
 
   return (
     <div id="ctr-display" className="fixed inset-0 bg-black p-8">
@@ -54,23 +43,23 @@ const CRTDisplay: React.FC<CRTDisplayProps> = ({
           />
 
           {/* Control Panel */}
-          <div className="absolute bottom-2 right-2 z-50">
-            <div className="relative">
-              <button
-                onClick={handlePowerToggle}
-                className={`p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-gray-400 transition-colors duration-200 text-white shadow-lg
-                  ${powerOn ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'}`}
-                style={{
-                  boxShadow:
-                    '2px 2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(255, 255, 255, 0.1)',
-                }}
-                aria-label="Power"
-                type="button"
-              >
-                <PowerIcon />
-              </button>
-            </div>
-          </div>
+          {/*<div className="absolute bottom-2 right-2 z-50">*/}
+          {/*  <div className="relative">*/}
+          {/*    <button*/}
+          {/*      onClick={handlePowerToggle}*/}
+          {/*      className={`p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-gray-400 transition-colors duration-200 text-white shadow-lg*/}
+          {/*        ${powerState ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'}`}*/}
+          {/*      style={{*/}
+          {/*        boxShadow:*/}
+          {/*          '2px 2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(255, 255, 255, 0.1)',*/}
+          {/*      }}*/}
+          {/*      aria-label="Power"*/}
+          {/*      type="button"*/}
+          {/*    >*/}
+          {/*      <PowerIcon />*/}
+          {/*    </button>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
 
           {/* Screen container with inner shadow */}
           <div
@@ -81,12 +70,12 @@ const CRTDisplay: React.FC<CRTDisplayProps> = ({
           >
             {/* Black screen when powered off */}
             <div
-              className={`absolute inset-0 bg-black z-40 transition-opacity duration-1000 ${powerOn ? 'opacity-0' : 'opacity-100'}`}
+              className={`absolute inset-0 bg-black z-40 transition-opacity duration-1000 ${powerState ? 'opacity-0' : 'opacity-100'}`}
             />
 
             {/* Screen content - only rendered when powered on */}
             <div
-              className={`relative w-full h-full transition-opacity duration-1000 ${powerOn ? 'opacity-100' : 'opacity-0'}`}
+              className={`relative w-full h-full transition-opacity duration-1000 ${powerState ? 'opacity-100' : 'opacity-0'}`}
             >
               {/* Scan lines overlay */}
               <div
