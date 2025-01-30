@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import events from '@/events.json';
 import { openApplication, setEventDate } from '@/app/ApplicationsSlice.ts';
-import calendarIcon from '@/images/calendar.png';
+import calendarIcon from '@/images/kalendorius.png';
 import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 import { useAppDispatch } from '@/app/hooks.ts';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PageWithApplications from './ApplicationComponents/PageWithApplications';
 
 // Photos
-import RandomTerminalPng from '@/images/random_terminal.png';
+import terminalIcon from '@/images/terminalas.png';
 import Sponsors from '@/images/MobileImages/sponsors.png';
 import Settings from '@/images/MobileImages/settings.png';
 import Anonymous from '@/images/MobileImages/anonymous.png';
@@ -42,7 +42,7 @@ export const PagesList = ({
       title="Pagrindinis"
       applications={[
         {
-          iconPath: RandomTerminalPng,
+          iconPath: terminalIcon,
           appText: 'Komanda',
           windowContent: TeamPage,
         },

@@ -1,11 +1,11 @@
 import { Application } from '@/components/GraphicalInterface/types.ts';
-import calendarPng from '@/images/calendar.png';
 import EventDisplay from '@/components/EventsPage/EventDisplay.tsx';
-import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 import TeamPage from '@/components/TeamPage/TeamPage.tsx';
-import teamAppIcon from '@/images/TeamAppIcon.jpg';
-import randomTerminal from '@/images/random_terminal.png';
 import TerminalInterfaceContent from '../TerminalInterface/TerminalInterfaceContent';
+import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
+import calendarIcon from '@/images/kalendorius.png';
+import teamAppIcon from '@/images/komanda.png';
+import terminalIcon from '@/images/terminalas.png';
 
 const applications: Application[] = [
   {
@@ -13,7 +13,7 @@ const applications: Application[] = [
     hidden: true,
     data: {
       title: 'EventDisplay',
-      iconPath: calendarPng,
+      iconPath: calendarIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
       focused: false,
@@ -57,7 +57,7 @@ const applications: Application[] = [
     hidden: false,
     data: {
       title: 'Terminalas',
-      iconPath: randomTerminal,
+      iconPath: terminalIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
       focused: true,
