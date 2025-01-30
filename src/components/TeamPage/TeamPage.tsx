@@ -13,9 +13,7 @@ interface TeamMember {
 
 function TeamPage() {
   return (
-    <div className="min-h-screen w-full bg-[#4E4A59]">
-      {' '}
-      {/* Changed to min-h-screen and added background */}
+    <div className="min-h-screen w-full bg-[#4e3852]">
       <div className="container mx-auto px-16 py-16">
         <h1 className="text-9xl sm:text-4xl md:text-5xl font-extrabold text-center text-purple mb-8 md:mb-16">
           MIDI 2025 komanda
@@ -30,7 +28,6 @@ function TeamPage() {
 const TeamGrid = () => {
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
-  // Divide team members into three equal sections of 4 elements each
   const section1 = teamMembers.slice(0, 11);
   const section2 = teamMembers.slice(11, 20);
   const section3 = teamMembers.slice(20, 23);
@@ -86,9 +83,6 @@ const TeamGrid = () => {
 
   return (
     <div className="flex flex-col gap-16">
-      {' '}
-      {/* Increased gap between sections */}
-      {/* Management Section */}
       <section>
         <h2 className="text-4xl font-bold text-center mb-8 text-[#839073]">
           MIDI Vadovai
@@ -99,7 +93,7 @@ const TeamGrid = () => {
           ))}
         </div>
       </section>
-      {/* Development Section */}
+
       <section>
         <h2 className="text-4xl font-bold text-center mb-8 text-[#839073]">
           MIDI Renginių vadovai
@@ -114,7 +108,7 @@ const TeamGrid = () => {
           ))}
         </div>
       </section>
-      {/* Support Section */}
+
       <section>
         <h2 className="text-4xl font-bold text-center mb-8 text-[#839073]">
           MIDI LAN Party vadovai
