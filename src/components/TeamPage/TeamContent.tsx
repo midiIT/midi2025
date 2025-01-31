@@ -1,4 +1,3 @@
-import './PixelImage.module.css';
 import teamMembers from '@/data/team.json';
 
 interface TeamMember {
