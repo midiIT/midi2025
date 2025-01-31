@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { calculateTimeLeft } from '@/utils/timeUtils';
+import { useAppDispatch } from '@/app/hooks.ts';
+import { closeApplication } from '@/app/ApplicationsSlice.ts';
 
 interface TerminalInterfaceContentProps {
   windowTitle?: string;
@@ -17,6 +19,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
   const lastLineRef = useRef<HTMLDivElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const targetDate = import.meta.env.VITE_MIDI_DATE;
+  const dispatch = useAppDispatch();
 
   const printingCommand = (s: string) => '  ' + s;
   const printingCommands = (arr: string[]): string[] =>
@@ -25,7 +28,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.stopPropagation();
     if (e.key === 'Enter') {
-      const handleCommand = (): string[] => {
+      const handleCommand = (): string[] | undefined => {
         switch (currentInput.trim().toLowerCase()) {
           case '?': {
             return printingCommands([
@@ -34,6 +37,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
               "2. 'veiklos'",
               '3. <veiklos pavadinimas>',
               "4. 'laikas'",
+              "5. 'iseiti'",
             ]);
           }
           case 'komanda': {
@@ -208,6 +212,13 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
               `Laikas iki MIDI: ${timeLeft.days} dien, ${timeLeft.hours} val, ${timeLeft.minutes} min, ${timeLeft.seconds} sek`,
             ]);
           }
+          case 'iseiti':
+          case 'išeiti':
+          case 'uzdaryti':
+          case 'uždaryti':
+          case 'exit':
+            dispatch(closeApplication('Terminalas'));
+            break;
           default:
             return printingCommands([
               "Tokios komandos nėra, jei reikia galimų komandų sąrašo, irašyk '?'",
@@ -215,11 +226,10 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
         }
       };
 
-      setLines(prevLines => [
-        ...prevLines,
-        `>>> ${currentInput}`,
-        ...handleCommand(),
-      ]);
+      const command = handleCommand();
+      if (!command) return;
+
+      setLines(prevLines => [...prevLines, `>>> ${currentInput}`, ...command]);
       setCommandHistory(prevHistory => [...prevHistory, currentInput]);
       setCurrentInput('');
       setHistoryIndex(null);
@@ -309,11 +319,12 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
             '>>> Sveiki prisijungę! Šiame terminale galite sužinoti apie MIDI 2025 rėmėjus, komandą, veiklas ir kt.\n'
           }
           {'>>> Galimos komandos:\n'}
-          {"  'rėmėjai'\n"}
+          {/*{"  'rėmėjai'\n"}*/}
           {"  'komanda'\n"}
           {"  'veiklos'\n"}
           {'  <veiklos pavadinimas>\n'}
           {"  'laikas'\n"}
+          {"  'iseiti'\n"}
           {lines.map((line, index) => (
             <div
               key={index}
