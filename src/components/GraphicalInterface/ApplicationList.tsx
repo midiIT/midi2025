@@ -7,6 +7,8 @@ import teamAppIcon from '@/images/TeamAppIcon.jpg';
 import randomTerminal from '@/images/random_terminal.png';
 import TerminalInterfaceContent from '../TerminalInterface/TerminalInterfaceContent';
 
+import AllForms from '../RegistrationForms/AllForms';
+
 const applications: Application[] = [
   {
     windowContent: <EventDisplay />,
@@ -39,6 +41,16 @@ const applications: Application[] = [
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
       focused: true,
+    },
+  },
+  {
+    windowContent: <AllForms />,
+    hidden: false,
+    data: {
+      title: 'Registracija',
+      iconPath: teamAppIcon,
+      minimized: false,
+      zIndex: DEFAULT_Z_INDEX,
     },
   },
 ];
