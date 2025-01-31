@@ -23,7 +23,7 @@ const Taskbar = () => {
   );
 
   return (
-    <div>
+    <div className="z-[500]">
       <div
         className="flex h-14 bg-[#27364a] w-[95%] mb-4 mx-auto rounded shadow-2xl"
         onContextMenu={e => {
@@ -44,14 +44,14 @@ const Taskbar = () => {
                 dispatch(minimizeApplication(contextMenuData.title))
               }
             >
-              {contextMenuApplication?.minimized ? 'Open' : 'Minimize'}{' '}
+              {contextMenuApplication?.minimized ? 'Atidaryti' : 'Sumažinti'}{' '}
               {contextMenuData.title}
             </div>,
             <div
               key="close"
               onClick={() => dispatch(closeApplication(contextMenuData.title))}
             >
-              Close {contextMenuData.title}
+              Uždaryti {contextMenuData.title}
             </div>,
           ]}
         />

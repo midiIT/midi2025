@@ -60,13 +60,25 @@ const Clock: React.FC = () => {
     <div>
       {/* Time and Date */}
       <div className="absolute top-16 left-1/2 transform -translate-x-1/2 text-center landscape:rotate-[270deg] landscape:-translate-x-[85vh] landscape:top-[19vh]">
-        <p className="text-blue-400 text-5xl md:text-7xl font-bold leading-none drop-shadow-md">
+        <p
+          style={{
+            textShadow:
+              '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
+          }}
+          className="text-white text-5xl md:text-7xl font-bold leading-none drop-shadow-md"
+        >
           {time.toLocaleTimeString('lt-LT', {
             hour: '2-digit',
             minute: '2-digit',
           })}
         </p>
-        <p className="text-blue-400 text-2xl md:text-4xl mt-4 font-medium drop-shadow-md">
+        <p
+          style={{
+            textShadow:
+              '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
+          }}
+          className="text-white text-2xl md:text-4xl mt-4 font-medium drop-shadow-md"
+        >
           {time.toLocaleDateString('lt-LT', {
             weekday: 'long',
             day: 'numeric',
@@ -77,13 +89,31 @@ const Clock: React.FC = () => {
 
       {/* Weather Information */}
       <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-center landscape:rotate-[270deg] landscape:-translate-[20vh] landscape:bottom-[23vh] landscape:left-[145vh]">
-        <p className="text-gray-300 text-xl md:text-3xl font-medium drop-shadow-md">
+        <p
+          style={{
+            textShadow:
+              '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
+          }}
+          className="text-white text-xl md:text-3xl font-medium drop-shadow-md"
+        >
           {city}
         </p>
-        <p className="text-gray-400 text-3xl  font-medium drop-shadow-md landscape">
+        <p
+          style={{
+            textShadow:
+              '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
+          }}
+          className="text-white text-3xl  font-medium drop-shadow-md landscape"
+        >
           {weather}
         </p>
-        <p className="text-blue-400 text-2xl mt-2 font-medium drop-shadow-md">
+        <p
+          style={{
+            textShadow:
+              '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
+          }}
+          className="text-white text-2xl mt-2 font-medium drop-shadow-md"
+        >
           {temperature}
         </p>
       </div>
