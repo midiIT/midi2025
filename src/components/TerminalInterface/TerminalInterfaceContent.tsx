@@ -34,8 +34,8 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
             return printingCommands([
               'Galimos komandos:',
               "1. 'komanda'",
-              "2. 'veiklos'",
-              '3. <veiklos pavadinimas>',
+              "2. 'renginiai'",
+              '3. <renginio pavadinimas>',
               "4. 'laikas'",
               "5. 'iseiti'",
             ]);
@@ -44,17 +44,17 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
             return printingCommands([
               'MIDI komanda:',
               '- Ugnė Vaičiūnaitė:        MIDI 2025 vadovė                                  vadovas@midi.lt',
-              '- Kasparas Šumskis:        Žmogiškūjų išteklių vadovas                       hr@midi.lt',
+              '- Kasparas Šumskis:        Žmogiškųjų išteklių vadovas                       hr@midi.lt',
               '- Austėja Bendikaitė:      Komunikacijos vadovė                              info@midi.lt',
               '- Deimantė Balčiūtė:       Administratorė                                    admin@midi.lt',
-              '- Saule Gilytė:            Marketingo ir įmonių mugės vadovė                 marketingas@midi.lt',
+              '- Saule Gylyte:            Marketingo ir įmonių mugės vadovė                 marketingas@midi.lt',
               '- Rokas Baltrušaitis:      Organizacinės srities vadovas                     org@midi.lt',
               '- Emilija Abromaitytė:     Organizacinės srities vadovė                      dienine@midi.lt',
-              '- Daniel Gurvič:           Organizacinės srities vadovas                     vakarine@midi.lt',
+              '- Danielius Gurvič:        Organizacinės srities vadovas                     vakarine@midi.lt',
               '- Astrida Jablonskytė:     Barterių rėmėjų vadovė                            reklama@midi.lt',
               '- Domas Klimavičius:       IT srities vadovas                                it@midi.lt',
-              '- Gytis Mockevičius:       LAN party vadovas                                 lan@midi.lt',
-              '- Gabrielė Drungilaitė:    MIDI roko operos 2025 vadovė                      ro.vadovas@midi.lt',
+              '- Gytis Mockevičius:       LAN Party vadovas                                 lan@midi.lt',
+              '- Gabrielė Drungilaitė:    MIDI Roko Operos vadovė                           ro.vadovas@midi.lt',
               '- Nika Bukolovaitė:        Uždarymo vakaro vadovė                            uzdarymas@midi.lt',
               '- Tadas Baltrūnas:         Bėgimo vadovas                                    sportas@midi.lt',
               '- Matas Bruson:            Krepšinio turnyro vadovas                         sportas@midi.lt',
@@ -62,8 +62,8 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
               '- Monika Tamelytė:         Protmūšio vadovė                                  protmusis@midi.lt',
               '- Eglė Gurklytė:           Minecraft vadovė                                  minecraft@midi.lt',
               '- Mindaugas Tolušis:       Discord vadovas                                   discord@midi.lt',
-              '- Gintaras Ubanavičius:    Sportinio pokerio turnyro vadovas                 pokeris@midi.lt',
-              '- Jokūbas Jurgaitis:       Šachamatų turnyro vadovas                         sachmatai@midi.lt',
+              '- Gintaras Ubavičius:      Sportinio pokerio turnyro vadovas                 pokeris@midi.lt',
+              '- Jokūbas Jurgaitis:       Šachmatų turnyro vadovas                          sachmatai@midi.lt',
               '- Augustė Ostrauskaitė:    PR vadovė                                         pr@midi.lt',
               '- Gabija Kondrataitė:      Dizaino srities vadovė                            dizainas@midi.lt',
               '- Jūris Galvosas:          Video vadovas                                     video@midi.lt',
@@ -71,15 +71,16 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
               '- Urtė Gedvilaitė:         Press vadovė                                      press@midi.lt',
               '- Artūras Semenčiuk:       Pagrindinių turnyrų vadovas                       lan.turnyrai@midi.lt',
               '- Augustas Kniška:         Stream vadovas                                    stream@midi.lt',
-              '- Justas Aleknavičius:     Tinklinio ir futbolo turnyrų ir foto vadovas      foto@midi.lt',
+              '- Justas Aleknavičius:     Tinklinio ir futbolo turnyrų, foto vadovas        sportas@midi.lt ir foto@midi.lt',
               '- Ričardas Čubukinas:      LAN party mentorius                               lan@midi.lt',
               '- Lukas Jakonis:           Komunikacijos mentorius                           info@midi.lt',
               '- Gabija Burokaitė:        Marketingo mentorė                                marketingas@midi.lt',
             ]);
           }
-          case 'veiklos': {
+          case 'veiklos':
+          case 'renginiai': {
             return printingCommands([
-              'MIDI veiklos:',
+              'MIDI renginiai:',
               '- Sportinis pokeris:       2025-04-10',
               '- LAN Party:               2025-04-12 ir 2025-04-13',
               '- Šachmatai:               2025-04-12',
@@ -312,22 +313,21 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
         tabIndex={0}
         onKeyDown={handleKeyDown}
       >
-        <div className="whitespace-pre text-lg text-midi-blue break-words">
+        <div className="whitespace-pre-wrap text-lg text-midi-blue break-words">
           {
-            'Sveiki prisijungę! Šiame terminale galite sužinoti apie MIDI 2025 rėmėjus, komandą, veiklas ir kt.\n'
+            'Sveiki prisijungę! Šiame terminale galite sužinoti apie MIDI 2025 rėmėjus, komandą, renginius ir kt.\n'
           }
           {'Galimos komandos:\n'}
           {/*{"  'rėmėjai'\n"}*/}
           {"'komanda'\n"}
-          {"'veiklos'\n"}
-          {'<veiklos pavadinimas>\n'}
+          {"'renginiai'\n"}
+          {'<renginio pavadinimas>\n'}
           {"'laikas'\n"}
           {"'iseiti'\n"}
           {lines.map((line, index) => (
             <div
               key={index}
               ref={index === lines.length - 1 ? lastLineRef : null}
-              className="text-wrap"
             >
               {line}
             </div>
