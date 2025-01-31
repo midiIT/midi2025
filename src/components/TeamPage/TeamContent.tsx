@@ -26,11 +26,11 @@ const TeamGrid = () => {
   };
 
   const sections = {
-    A: teamMembers.slice(0, 9),
-    B: teamMembers.slice(9, 19),
-    C: teamMembers.slice(19, 25),
-    D: teamMembers.slice(25, 29),
-    E: teamMembers.slice(29, 33),
+    A: teamMembers.slice(0, 11),
+    B: teamMembers.slice(11, 19),
+    C: teamMembers.slice(19, 26),
+    D: teamMembers.slice(26, 31),
+    E: teamMembers.slice(31, 34),
   };
 
   return (
