@@ -10,8 +10,7 @@ interface TeamMember {
 
 function TeamContent() {
   return (
-    <div className="relative z-10 flex flex-col justify-center items-center px-4">
-      <div className="absolute inset-0 bg-midi-blue bg-cover bg-center bg-no-repeat"></div>
+    <div className="flex flex-col bg-midi-blue justify-center items-center px-4">
       <TeamGrid />
     </div>
   );
@@ -38,9 +37,9 @@ const TeamGrid = () => {
     <div className="rounded-lg w-full max-w-7xl px-4 sm:px-6 lg:px-8 p-6">
       {Object.entries(sections).map(([sectionName, members]) => (
         <div key={sectionName} className="mb-8">
-          <h2 className="text-xl font-bold text-black mb-4">
+          <div className="text-5xl text-center font-bold text-black mb-4">
             {sectionNames[sectionName as keyof typeof sectionNames]}
-          </h2>
+          </div>
 
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8">
             {members.map((member: TeamMember, index: number) => (
