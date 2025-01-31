@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { openApplication } from '@/app/ApplicationsSlice.ts';
 import { useAppDispatch } from '@/app/hooks.ts';
 import { openContextMenu } from '@/app/ContextMenuSlice.ts';
@@ -6,9 +6,13 @@ import { openContextMenu } from '@/app/ContextMenuSlice.ts';
 interface ApplicationProps {
   iconPath: string;
   title: string;
-  application: ReactNode;
+  focused: boolean;
 }
-const ApplicationIcon: React.FC<ApplicationProps> = ({ iconPath, title }) => {
+const ApplicationIcon: React.FC<ApplicationProps> = ({
+  iconPath,
+  title,
+  focused,
+}) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -21,6 +25,7 @@ const ApplicationIcon: React.FC<ApplicationProps> = ({ iconPath, title }) => {
               title: title,
               iconPath: iconPath,
               zIndex: 300,
+              focused,
             }),
           );
         }}
