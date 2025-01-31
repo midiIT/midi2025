@@ -6,8 +6,7 @@ import { PagesList } from './PagesList';
 import './MobileStyles.css';
 
 // Photos
-import MIDI from '@/images/MobileImages/MIDI.png';
-import LandscapeMIDI from '@/images/MobileImages/LandscapeMIDI.png';
+import backgroundImg from '@/images/MobileImages/fonas.png';
 
 interface PhoneDisplayProps {
   className?: string;
@@ -18,9 +17,6 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
   const [showEventInfo, setShowEventInfo] = useState(false); // Controls when EventDisplay is shown
   const [showWindow, setShowWindow] = useState(false);
   const [showNotification, setShowNotification] = useState(true); // State for the message notification
-  const [isLandscape, setIsLandscape] = useState(
-    window.innerWidth > window.innerHeight,
-  );
   const [time, setTime] = useState(new Date()); // For status bar time
   const [brightness, setBrightness] = useState(80); // Brightness state
 
@@ -42,22 +38,9 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
     };
   }, []);
 
-  // Handle landscape mode
-  useEffect(() => {
-    const handleResize = () => {
-      setIsLandscape(window.innerWidth > window.innerHeight);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   return (
     <div
-      className={`flex items-center justify-center h-screen w-screen bg-gray-900 overflow-hidden ${className}`}
+      className={`flex items-center justify-center h-screen w-screen bg-gray-900 overflow-scroll ${className}`}
     >
       {/* Phone box */}
       <div
@@ -84,15 +67,13 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
 
         {/* Screen Area */}
         <div
-          className={`absolute h-[82vh] w-[90vw] left-[2.5vw] top-[7vh] bg-black rounded-[1rem] border-4 border-gray-600
+          className={`absolute h-[88vh] w-[90vw] left-[2.5vw] top-[7vh] bg-black rounded-[1rem] border-4 border-gray-600
                      overflow-hidden transition-opacity duration-500 landscape:h-[80vh] landscape:w-[80vw] shadow-inner
                      landscape:left-[8vw] landscape:top-[2.5vh]`}
           style={{
-            backgroundImage: isLandscape
-              ? `url(${LandscapeMIDI})`
-              : `url(${MIDI})`,
+            backgroundImage: `url(${backgroundImg})`,
             backgroundColor: 'black',
-            backgroundSize: 'cover',
+            backgroundSize: 'contain',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
             filter: `brightness(${brightness / 100})`,

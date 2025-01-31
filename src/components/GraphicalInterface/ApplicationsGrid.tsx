@@ -29,7 +29,7 @@ const ApplicationsGrid = () => {
             key={app.data.title}
             iconPath={app.data.iconPath}
             title={app.data.title}
-            application={app.windowContent}
+            focused={app.data.focused}
           />
         ))}
 
@@ -59,7 +59,7 @@ const ApplicationsGrid = () => {
                 dispatch(openApplication(app.data));
               }}
             >
-              Open {contextMenuData.title}
+              Atidaryti {contextMenuData.title}
             </div>,
           ]}
         />

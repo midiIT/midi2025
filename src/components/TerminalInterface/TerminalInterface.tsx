@@ -1,12 +1,9 @@
 import CRTDisplay from '@/components/CTRDisplay/CTRDisplay';
 import TerminalInterfaceContent from './TerminalInterfaceContent';
 
-const TerminalInterface: React.FC = () => {
+const TerminalInterface = () => {
   return (
-    <CRTDisplay
-      initialPowerState={true}
-      onPowerChange={isOn => console.log('Power state:', isOn)}
-    >
+    <CRTDisplay>
       <TerminalInterfaceContent />
     </CRTDisplay>
   );
