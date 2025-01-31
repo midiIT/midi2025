@@ -1,4 +1,4 @@
-import './PixelImage.css';
+import './PixelImage.module.css';
 import teamMembers from '@/data/team.json';
 import { useState } from 'react';
 
@@ -43,14 +43,14 @@ const TeamGrid = () => {
             <div className="picture relative pt-[100%]">
               <img
                 src={member.OGpicture}
-                className={`absolute top-0 left-0 w-full h-full object-cover transition duration-500 ease-in-out ${
+                className={`absolute team-member-img top-0 left-0 w-full h-full object-cover transition duration-500 ease-in-out ${
                   hoveredMember === index ? 'opacity-0' : 'opacity-100'
                 }`}
               />
 
               <img
                 src={member.pixelPicture}
-                className={`absolute top-0 left-0 w-full h-full object-cover transition duration-500 ease-in-out ${
+                className={`absolute team-member-img top-0 left-0 w-full h-full object-cover transition duration-500 ease-in-out ${
                   hoveredMember === index
                     ? 'opacity-100 glitch-effect'
                     : 'opacity-0'

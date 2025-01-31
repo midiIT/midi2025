@@ -1,5 +1,6 @@
 import React, { ReactNode, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { BACKEND_URL } from '@/consts.ts';
 
 type Props = {
   element: ReactNode;
@@ -17,7 +18,7 @@ const Tracking: React.FC<Props> = ({ element }) => {
 
     const trackingUrl = searchParams.get('t');
 
-    void fetch(`http://localhost:3001/api/tracking/${trackingUrl}`, {
+    void fetch(`${BACKEND_URL}/tracking/${trackingUrl}`, {
       method: 'PUT',
     });
 

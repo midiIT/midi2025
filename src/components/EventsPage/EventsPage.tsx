@@ -1,17 +1,19 @@
 import EventDisplay from '@/components/EventsPage/EventDisplay.tsx';
 import DatePicker from '@/components/EventsPage/DatePicker.tsx';
-import { useState } from 'react';
-import events from '@/events.json';
+import { useAppDispatch } from '@/app/hooks.ts';
+import { setEventDate } from '@/app/ApplicationsSlice.ts';
 
 function EventsPage() {
-  const [selectedDate, setSelectedDate] = useState<Date>(
-    new Date(events[0].date),
-  );
+  const dispatch = useAppDispatch();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
-      <DatePicker onDatePicked={date => setSelectedDate(date)} />
-      <EventDisplay eventDate={selectedDate.toISOString().split('T')[0]} />
+      <DatePicker
+        onDatePicked={date =>
+          dispatch(setEventDate(date.toISOString().split('T')[0]))
+        }
+      />
+      <EventDisplay />
     </div>
   );
 }
