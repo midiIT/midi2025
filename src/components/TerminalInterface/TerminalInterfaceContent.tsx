@@ -290,14 +290,14 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
   return (
     <div className="space-y-2 flex flex-col overflow-hidden">
       <div className="flex items-center justify-center flex-shrink-0 h-[25%] overflow-hidden">
-        <pre className="text-center text-midi-blue pr-20 whitespace-pre leading-none">
+        <pre className="text-center text-midi-blue whitespace-pre leading-none">
           {`
-                  ____    ____ _____ ______   _____ 
-                  |_   \\  /   _|_   _|_   _ \`.|_   _|
-                    |   \\/   |   | |   | | \`. \\ | |  
-                    | |\\  /| |   | |   | |  | | | |  
-                   _| |_\\/_| |_ _| |_ _| |_.' /_| |_ 
-                  |_____||_____|_____|______.'|_____|`}
+____    ____ _____ ______   _____ 
+|_   \\  /   _|_   _|_   _ \`.|_   _|
+  |   \\/   |   | |   | | \`. \\ | |  
+  | |\\  /| |   | |   | |  | | | |  
+ _| |_\\/_| |_ _| |_ _| |_.' /_| |_ 
+|_____||_____|_____|______.'|_____|`}
         </pre>
       </div>
       <br />
