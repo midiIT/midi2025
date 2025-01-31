@@ -43,7 +43,9 @@
 
 .cell.I {
   background-color: rgb(80, 227, 230); /* Color with transparency */
-  background-image: url('/public/images/pixel_cat.png');
+  /* Sitas erroras visur bus, nes ale nera direktorijos,
+  bet kas yra public direktorijoj galima pasiekti tsg per /*/
+  background-image: url('/images/pixel_cat.png');
   background-blend-mode: multiply;
   background-position: center;
   background-repeat: no-repeat;
@@ -52,7 +54,7 @@
 
 .cell.J {
   background-color: rgb(36, 95, 223);
-  background-image: url('/public/images/pixel_cat.png');
+  background-image: url('/images/pixel_cat.png');
   background-blend-mode: multiply;
   background-position: center;
   background-repeat: no-repeat;
@@ -61,7 +63,7 @@
 
 .cell.L {
   background-color: rgb(223, 173, 36);
-  background-image: url('/public/images/pixel_cat.png');
+  background-image: url('/images/pixel_cat.png');
   background-blend-mode: multiply;
   background-position: center;
   background-repeat: no-repeat;
@@ -70,7 +72,7 @@
 
 .cell.O {
   background-color: rgb(223, 217, 36);
-  background-image: url('/public/images/pixel_cat.png');
+  background-image: url('/images/pixel_cat.png');
   background-blend-mode: multiply;
   background-position: center;
   background-repeat: no-repeat;
@@ -79,7 +81,7 @@
 
 .cell.S {
   background-color: rgb(48, 211, 56);
-  background-image: url('/public/images/pixel_cat.png');
+  background-image: url('/images/pixel_cat.png');
   background-blend-mode: multiply;
   background-position: center;
   background-repeat: no-repeat;
@@ -88,7 +90,7 @@
 
 .cell.T {
   background-color: rgb(132, 61, 198);
-  background-image: url('/public/images/pixel_cat.png');
+  background-image: url('/images/pixel_cat.png');
   background-blend-mode: multiply;
   background-position: center;
   background-repeat: no-repeat;
@@ -97,7 +99,7 @@
 
 .cell.Z {
   background-color: rgb(227, 78, 78);
-  background-image: url('/public/images/pixel_cat.png');
+  background-image: url('/images/pixel_cat.png');
   background-blend-mode: multiply;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,7 +1,7 @@
 import Board from './components/Board';
 import UpcomingBlocks from './components/UpcomingBlocks';
 import { useTetris } from './hooks/useTetris';
-import './index_katris.module.css';
+import './index_katris.css';
 import { useState, useEffect } from 'react';
 
 function App() {
