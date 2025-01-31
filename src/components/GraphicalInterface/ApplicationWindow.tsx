@@ -255,7 +255,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
         <div className="w-8"></div>
         <p>{title === 'EventDisplay' ? eventDate : title}</p>
         {/* Buttons */}
-        <div className="flex">
+        <div className="flex hover:cursor-auto">
           <div
             className="w-5 h-5 bg-blue-500 text-white mr-1 rounded font-bold text-center"
             onClick={() => dispatch(minimizeApplication(title))}
@@ -276,10 +276,10 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
           isFocused: isFocused,
         })}
       </div>
-      <div className="absolute top-0 left-0 w-4 h-4 cursor-nw-resize resizer resizer-nw z-50"></div>
-      <div className="absolute top-0 right-0 w-4 h-4 cursor-ne-resize resizer resizer-ne z-50"></div>
-      <div className="absolute bottom-0 left-0 w-4 h-4 cursor-sw-resize resizer resizer-sw z-50"></div>
-      <div className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize resizer resizer-se z-50"></div>
+      <div className="absolute top-0 left-0 w-2 h-2 cursor-nw-resize resizer resizer-nw z-50"></div>
+      <div className="absolute top-0 right-0 w-2 h-2 cursor-ne-resize resizer resizer-ne z-50"></div>
+      <div className="absolute bottom-0 left-0 w-2 h-2 cursor-sw-resize resizer resizer-sw z-50"></div>
+      <div className="absolute bottom-0 right-0 w-2 h-2 cursor-se-resize resizer resizer-se z-50"></div>
     </div>
   );
 };
