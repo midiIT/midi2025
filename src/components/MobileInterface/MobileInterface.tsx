@@ -73,7 +73,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
           style={{
             backgroundImage: `url(${backgroundImg})`,
             backgroundColor: 'black',
-            backgroundSize: 'contain',
+            backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
             filter: `brightness(${brightness / 100})`,
@@ -89,7 +89,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
           {/* Status bar */}
           <div
             className="absolute top-0 left-0 w-full h-7 flex items-center justify-between px-6
-                     bg-black bg-opacity-90 text-white text-sm font-medium backdrop-blur-sm rounded-t-2xl"
+                     bg-black bg-opacity-90 text-white text-sm font-medium backdrop-blur-sm "
           >
             {/* Time on the Left */}
             <div className="flex items-center">
