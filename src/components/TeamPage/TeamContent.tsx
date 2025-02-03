@@ -26,8 +26,8 @@ const TeamGrid = () => {
 
   const sections = {
     A: teamMembers.slice(0, 11),
-    B: teamMembers.slice(11, 19),
-    C: teamMembers.slice(19, 26),
+    B: teamMembers.slice(12, 20),
+    C: teamMembers.slice(20, 26),
     D: teamMembers.slice(26, 31),
     E: teamMembers.slice(31, 34),
   };
