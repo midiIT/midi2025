@@ -2,7 +2,7 @@ import React from 'react';
 import PageWithApplications from './ApplicationComponents/PageWithApplications';
 
 // Icons
-import teamIcon from '@/images/komanda.png';
+import teamIcon from '@/images/komandaTamsi.png';
 
 // Pages
 import TeamPage from '@/components/TeamPage/TeamPage';
