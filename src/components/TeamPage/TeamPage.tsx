@@ -1,4 +1,3 @@
-import './PixelImage.module.css';
 import TeamContent from './TeamContent';
 
 function TeamPage() {
