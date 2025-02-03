@@ -44,7 +44,7 @@ const TeamGrid = () => {
             {members.map((member: TeamMember, index: number) => (
               <div
                 key={index}
-                className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-4 border-black w-[200px] h-[280px] flex flex-col"
+                className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-4 border-black w-[200px] flex flex-col"
               >
                 <div className="picture relative h-[160px] w-full">
                   <img
