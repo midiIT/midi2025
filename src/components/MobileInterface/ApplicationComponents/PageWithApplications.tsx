@@ -24,9 +24,9 @@ const PageWithApplications: React.FC<PageWithApplicationsProps> = ({
     React.useState<React.ReactNode>(null);
 
   return (
-    <div className="text-center text-black text-base w-full h-full overflow-hidden landscape:translate-y-[6vh]">
+    <div className="text-center text-black text-base w-full h-full overflow-hidden translate-y-[3vh] landscape:translate-y-[6vh]">
       <div className="flex flex-col justify-between h-full">
-        <div className="grid grid-cols-4 gap-4 translate-y-[3vh]">
+        <div className="grid grid-cols-4 gap-4">
           {applications.map((app, index) => (
             <ApplicationMobile
               key={index}
@@ -40,7 +40,7 @@ const PageWithApplications: React.FC<PageWithApplicationsProps> = ({
             />
           ))}
         </div>
-        <div className="mb-2 flex justify-center">
+        <div className="mb-2 flex justify-center -translate-y-[3vh]">
           <CountdownComponent />
         </div>
       </div>
