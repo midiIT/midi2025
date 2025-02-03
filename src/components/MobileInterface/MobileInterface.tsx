@@ -80,11 +80,13 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
           }}
         >
           {/* Notification */}
-          {showNotification && (
-            <Notification
-              dismissNotification={() => setShowNotification(false)}
-            />
-          )}
+          {(localStorage.getItem('notificationAlreadyShown') === null ||
+            localStorage.getItem('notificationAlreadyShown') === '1') &&
+            showNotification && (
+              <Notification
+                dismissNotification={() => setShowNotification(false)}
+              />
+            )}
 
           {/* Status bar */}
           <div
