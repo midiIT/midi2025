@@ -24,6 +24,12 @@ const EventDisplay = () => {
             >
               {event.description}
             </div>
+
+            {window.location.href.includes('mobile') && (
+              <p className="mt-5" style={{ color: '#0175B4' }}>
+                {event.date}
+              </p>
+            )}
             {index < eventsForDate.length - 1 && (
               <hr className="my-2 border-gray-600" />
             )}
