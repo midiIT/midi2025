@@ -77,7 +77,7 @@ const DatePicker = ({ onDatePicked }: DatePickerProps) => {
   };
 
   return (
-    <div className="p-4 lg:mx-auto bg-black shadow-lg md:rounded-md w-full min-h-[440px] overflow-y-auto">
+    <div className="p-4 lg:mx-auto bg-black shadow-lg rounded-md w-[98%] md:w-full h-[392px] md:h-[440px] overflow-y-auto">
       <div className="flex justify-between items-center mb-4">
         <button
           onClick={() => handleMonthChange('Atgal')}
