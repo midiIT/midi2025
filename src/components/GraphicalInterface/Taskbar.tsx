@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import TaskbarIcon from '@/components/GraphicalInterface/TaskbarIcon.tsx';
 import ContextMenu from '@/components/GraphicalInterface/ContextMenu.tsx';
 import {
@@ -14,7 +15,6 @@ import {
 
 const Taskbar = () => {
   const dispatch = useAppDispatch();
-
   const openApplications = useAppSelector(selectOpenApplications);
   const contextMenuOpen = useAppSelector(selectContextMenuOpen);
   const contextMenuData = useAppSelector(selectContextMenuData);
@@ -22,19 +22,55 @@ const Taskbar = () => {
     selectApplication(contextMenuData.title),
   );
 
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [showDate, setShowDate] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formattedTime = currentTime.toLocaleTimeString('lt-LT', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+
+  const formattedDate = currentTime.toLocaleDateString('lt-LT', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
   return (
     <div className="z-[500]">
       <div
-        className="flex h-14 bg-[#27364a] w-[95%] mb-4 mx-auto rounded shadow-2xl"
+        className="flex h-14 bg-[#27364a] w-[95%] mb-4 mx-auto rounded shadow-2xl items-center px-4"
         onContextMenu={e => {
           e.preventDefault();
           e.stopPropagation();
         }}
       >
+        {/* Application Icons */}
         {openApplications.map(app => (
           <TaskbarIcon key={app.title} icon={app.iconPath} title={app.title} />
         ))}
+
+        <div
+          className="ml-auto relative text-white text-lg px-4 cursor-pointer"
+          onMouseEnter={() => setShowDate(true)}
+          onMouseLeave={() => setShowDate(false)}
+        >
+          {showDate && (
+            <div className="absolute bottom-10 left-1 -translate-x-1/2 bg-[#1e293b] text-white text-base px-4 py-2 min-w-[180px] rounded shadow-lg text-center">
+              {formattedDate}
+            </div>
+          )}
+          {formattedTime}
+        </div>
       </div>
+
       {contextMenuOpen && contextMenuData.owner == 'taskbarIcon' && (
         <ContextMenu
           content={[
