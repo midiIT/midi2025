@@ -7,7 +7,8 @@ interface Props {
 function UpcomingBlocks({ upcomingBlocks }: Props) {
   return (
     <div className="upcoming">
-      {upcomingBlocks.map((block, blockIndex) => {
+      {upcomingBlocks.slice(0, 1).map((block, blockIndex) => {
+        // shows just one upcoming block
         const shape = SHAPES[block].shape.filter(row => row.some(cell => cell));
         return (
           <div key={blockIndex}>

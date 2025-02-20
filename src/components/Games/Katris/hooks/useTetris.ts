@@ -35,7 +35,7 @@ export function useTetris() {
 
   const resetGame = useCallback(() => {
     setScore(0);
-    setUpcomingBlocks([]);
+    setUpcomingBlocks([getRandomBlock(), getRandomBlock(), getRandomBlock()]);
     setIsCommitting(false);
     setIsPlaying(false);
     setTickSpeed(null);
@@ -48,8 +48,8 @@ export function useTetris() {
       getRandomBlock(),
       getRandomBlock(),
     ];
-    setScore(0);
     setUpcomingBlocks(startingBlocks);
+    setScore(0);
     setIsCommitting(false);
     setIsPlaying(true);
     setTickSpeed(TickSpeed.Normal);
@@ -80,9 +80,12 @@ export function useTetris() {
       }
     }
 
+    // pop first upcoming and add a new random
     const newUpcomingBlocks = structuredClone(upcomingBlocks) as Block[];
     const newBlock = newUpcomingBlocks.pop() as Block;
     newUpcomingBlocks.unshift(getRandomBlock());
+
+    setUpcomingBlocks(newUpcomingBlocks);
 
     if (hasCollisions(board, SHAPES[newBlock].shape, 0, 3)) {
       setIsPlaying(false);
@@ -90,7 +93,7 @@ export function useTetris() {
     } else {
       setTickSpeed(TickSpeed.Normal);
     }
-    setUpcomingBlocks(newUpcomingBlocks);
+
     setScore(prevScore => prevScore + getPoints(numCleared));
     dispatchBoardState({
       type: 'commit',
@@ -218,7 +221,7 @@ export function useTetris() {
   if (isPlaying) {
     addShapeToBoard(
       renderedBoard,
-      droppingBlock,
+      droppingBlock, // dropping block is displayed??
       droppingShape,
       droppingRow,
       droppingColumn,
