@@ -94,6 +94,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
     }
 
     const resizeHandlers: { [key: string]: (e: MouseEvent) => void } = {
+      // Corner handlers
       se: (e: MouseEvent) => {
         if (!applicationWindow) return;
         if (!isResizing) return;
@@ -161,9 +162,49 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
           windowElement.style.top = `${startTop + startHeight - newHeight}px`;
         }
       },
+      n: (e: MouseEvent) => {
+        if (!applicationWindow) return;
+        if (!isResizing) return;
+        const deltaY = e.clientY - startY;
+        const newHeight = Math.max(200, startHeight - deltaY);
+        if (startTop + startHeight - newHeight >= 0) {
+          windowElement.style.height = `${newHeight}px`;
+          windowElement.style.top = `${startTop + startHeight - newHeight}px`;
+        }
+      },
+      s: (e: MouseEvent) => {
+        if (!applicationWindow) return;
+        if (!isResizing) return;
+        const deltaY = e.clientY - startY;
+        if (
+          windowElement.offsetTop + startHeight + deltaY <=
+          applicationWindow.clientHeight
+        )
+          windowElement.style.height = `${Math.max(200, startHeight + deltaY)}px`;
+      },
+      e: (e: MouseEvent) => {
+        if (!applicationWindow) return;
+        if (!isResizing) return;
+        const deltaX = e.clientX - startX;
+        if (
+          windowElement.offsetLeft + startWidth + deltaX <=
+          applicationWindow.clientWidth
+        )
+          windowElement.style.width = `${Math.max(200, startWidth + deltaX)}px`;
+      },
+      w: (e: MouseEvent) => {
+        if (!applicationWindow) return;
+        if (!isResizing) return;
+        const deltaX = e.clientX - startX;
+        const newWidth = Math.max(200, startWidth - deltaX);
+        if (startLeft + startWidth - newWidth >= 0) {
+          windowElement.style.width = `${newWidth}px`;
+          windowElement.style.left = `${startLeft + startWidth - newWidth}px`;
+        }
+      },
     };
 
-    const handleResizeStart = (corner: string) => (e: MouseEvent) => {
+    const handleResizeStart = (direction: string) => (e: MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
 
@@ -175,7 +216,7 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
       startLeft = windowElement.offsetLeft;
       startTop = windowElement.offsetTop;
 
-      const handleResizeMove = resizeHandlers[corner];
+      const handleResizeMove = resizeHandlers[direction];
 
       const handleResizeEnd = () => {
         isResizing = false;
@@ -187,32 +228,32 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
       document.addEventListener('mouseup', handleResizeEnd);
     };
 
-    const corners = ['se', 'sw', 'ne', 'nw'];
+    const resizeDirections = ['n', 's', 'e', 'w', 'se', 'sw', 'ne', 'nw'];
     const resizeListeners = new Map();
 
-    corners.forEach(corner => {
+    resizeDirections.forEach(direction => {
       const element = windowElement.querySelector(
-        `.resizer-${corner}`,
+        `.resizer-${direction}`,
       ) as HTMLElement;
       if (element) {
-        const listener = handleResizeStart(corner);
-        resizeListeners.set(corner, listener);
+        const listener = handleResizeStart(direction);
+        resizeListeners.set(direction, listener);
         element.addEventListener('mousedown', listener);
       }
     });
 
     return () => {
-      corners.forEach(corner => {
+      resizeDirections.forEach(direction => {
         const element = windowElement.querySelector(
-          `.resizer-${corner}`,
+          `.resizer-${direction}`,
         ) as HTMLElement;
-        const listener = resizeListeners.get(corner);
+        const listener = resizeListeners.get(direction);
         if (element && listener) {
           element.removeEventListener('mousedown', listener);
         }
       });
     };
-  }, [noWhiteSpaceTitle]);
+  }, [noWhiteSpaceTitle, applicationWindow]);
 
   useEffect(() => {
     if (isFocused) {
@@ -254,7 +295,6 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
       >
         <div className="w-8"></div>
         <p>{title === 'EventDisplay' ? eventDate : title}</p>
-        {/* Buttons */}
         <div className="flex hover:cursor-auto">
           <div
             className="w-5 h-5 bg-blue-500 text-white mr-1 rounded font-bold text-center"
@@ -276,10 +316,15 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
           isFocused: isFocused,
         })}
       </div>
-      <div className="absolute top-0 left-0 w-2 h-2 cursor-nw-resize resizer resizer-nw z-50"></div>
-      <div className="absolute top-0 right-0 w-2 h-2 cursor-ne-resize resizer resizer-ne z-50"></div>
-      <div className="absolute bottom-0 left-0 w-2 h-2 cursor-sw-resize resizer resizer-sw z-50"></div>
-      <div className="absolute bottom-0 right-0 w-2 h-2 cursor-se-resize resizer resizer-se z-50"></div>
+      <div className="absolute top-0 left-0 w-2 h-2 cursor-nw-resize resizer resizer-nw z-51"></div>
+      <div className="absolute top-0 right-0 w-2 h-2 cursor-ne-resize resizer resizer-ne z-51"></div>
+      <div className="absolute bottom-0 left-0 w-2 h-2 cursor-sw-resize resizer resizer-sw z-51"></div>
+      <div className="absolute bottom-0 right-0 w-2 h-2 cursor-se-resize resizer resizer-se z-51"></div>
+
+      <div className="absolute top-0 left-4 right-4 h-2 cursor-n-resize resizer resizer-n z-50"></div>
+      <div className="absolute bottom-0 left-4 right-4 h-2 cursor-s-resize resizer resizer-s z-50"></div>
+      <div className="absolute left-0 top-4 bottom-4 w-2 cursor-w-resize resizer resizer-w z-50"></div>
+      <div className="absolute right-0 top-4 bottom-4 w-2 cursor-e-resize resizer resizer-e z-50"></div>
     </div>
   );
 };
