@@ -18,7 +18,7 @@ const ApplicationIcon: React.FC<ApplicationProps> = ({
   return (
     <div className="flex items-start h-32">
       <button
-        onDoubleClick={() => {
+        onClick={() => {
           dispatch(
             openApplication({
               minimized: false,

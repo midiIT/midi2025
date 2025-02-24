@@ -1,4 +1,3 @@
-import './PixelImage.module.css';
 import teamMembers from '@/data/team.json';
 
 interface TeamMember {
@@ -26,11 +25,11 @@ const TeamGrid = () => {
   };
 
   const sections = {
-    A: teamMembers.slice(0, 9),
-    B: teamMembers.slice(9, 19),
-    C: teamMembers.slice(19, 25),
-    D: teamMembers.slice(25, 29),
-    E: teamMembers.slice(29, 33),
+    A: teamMembers.slice(0, 11),
+    B: teamMembers.slice(12, 20),
+    C: teamMembers.slice(20, 26),
+    D: teamMembers.slice(26, 31),
+    E: teamMembers.slice(31, 34),
   };
 
   return (
@@ -45,7 +44,7 @@ const TeamGrid = () => {
             {members.map((member: TeamMember, index: number) => (
               <div
                 key={index}
-                className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-4 border-black w-[200px] h-[280px] flex flex-col"
+                className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-4 border-black w-[200px] flex flex-col"
               >
                 <div className="picture relative h-[160px] w-full">
                   <img
