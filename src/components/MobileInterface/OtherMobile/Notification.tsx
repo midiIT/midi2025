@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import midiLogo from '@/images/logo.png';
+
 interface NotificationProps {
   dismissNotification: () => void;
 }
@@ -11,6 +13,10 @@ const Notification: React.FC<NotificationProps> = ({ dismissNotification }) => {
   // Apply styles to body
   useEffect(() => {
     document.body.classList.add('notification');
+    if (localStorage.getItem('notificationAlreadyShown') === null)
+      localStorage.setItem('notificationAlreadyShown', '1');
+    else if (localStorage.getItem('notificationAlreadyShown') === '1')
+      localStorage.setItem('notificationAlreadyShown', '2');
 
     return () => {
       document.body.classList.remove('notification');
@@ -51,10 +57,11 @@ const Notification: React.FC<NotificationProps> = ({ dismissNotification }) => {
     >
       {/* Message Content */}
       <div className="flex items-center space-x-3 animate-pulse">
-        <span className="text-3xl">📩</span>
+        <img src={midiLogo} alt="logo" className="h-12 w-12" />
         <div>
-          <p className="font-bold text-lg">Nauja žinutė iš MIDI 2025</p>
+          <p className="font-bold text-lg">Naujas pranešimas iš MIDI 2025</p>
           <p className="text-sm">Galite eiti per puslapius braukdami ekraną!</p>
+          <p className="text-sm">Uždarykite pranešimą braukdami aukštyn</p>
         </div>
       </div>
 

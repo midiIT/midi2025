@@ -23,7 +23,7 @@ const CountdownComponent: React.FC = () => {
   const padNumber = (num: number) => String(num).padStart(2, '0');
 
   return (
-    <div className="p-6 md:border-4 border-b-4 border-gray-700 md:rounded-lg flex flex-col items-center sm:w-full sm:h-full bg-black">
+    <div className="p-6 md:border-4 border-b-4 border-gray-700 rounded-lg flex flex-col items-center w-[98%] sm:w-full sm:h-full bg-black">
       <h1 className="whitespace-pre text-4xl mb-4 tracking-wide border-b-4 border-midi-blue pb-2 text-midi-blue animate-pulse">
         IKI MIDI LIKO
       </h1>
