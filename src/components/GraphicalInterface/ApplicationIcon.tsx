@@ -43,11 +43,11 @@ const ApplicationIcon: React.FC<ApplicationProps> = ({
         }}
       >
         <img
-          className="relative w-24 h-24 p-2 object-contain max-w-full"
+          className="relative w-[6.5rem] h-[6.5rem] p-2 object-contain max-w-full"
           src={iconPath}
           alt="Icon"
         />
-        <p className="max-w-24 text-center break-words">{title}</p>
+        <p className="max-w-[6.5rem] text-center break-words">{title}</p>
       </button>
     </div>
   );
