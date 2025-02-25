@@ -80,6 +80,13 @@ function addTracking(routes: RouteObject[]): RouteObject[] {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <h1>MIDI įmonių mugė</h1>
+    <h1>MIDI imoniu muge</h1>
+    <h1>MIDI ĮMONIŲ MUGĖ</h1>
+    <h1>MIDI IMONIU MUGE</h1>
+    <h1>MIDI</h1>
+    <h1>imoniu muge</h1>
+    <h1>įmonių mugė</h1>
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
