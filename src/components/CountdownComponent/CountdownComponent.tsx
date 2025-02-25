@@ -34,7 +34,7 @@ const CountdownComponent: React.FC = () => {
               <span className="text-midi-blue text-5xl font-bold">
                 {padNumber(timeLeft.days)}
               </span>
-              <span className="text-midi-blue text-xl">DIEN</span>
+              <span className="text-midi-blue text-xl">D</span>
             </div>
             <div className="flex flex-col">
               <span className="text-midi-blue text-5xl font-bold">
