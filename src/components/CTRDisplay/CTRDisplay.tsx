@@ -129,10 +129,8 @@ const CRTDisplay = ({ children, className = '' }: CRTDisplayProps) => {
 
                   <div className="absolute left-[2.5%] bottom-[5rem] flex flex-col z-[55]">
                     <div className="text-xl text-white">
-                      Organizuojama VU SA MIF
-                    </div>
-                    <div className="text-xl text-white">
-                      Norint susisiekti rašykite vadovas@midi.lt
+                      Norint prisidėti prie renginio rėmimo rašykite
+                      marketingas@midi.lt
                     </div>
                   </div>
                 </div>
