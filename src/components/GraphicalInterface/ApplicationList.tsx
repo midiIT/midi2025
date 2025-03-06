@@ -6,6 +6,7 @@ import TeamContent from '../TeamPage/TeamContent';
 import calendarIcon from '@/images/kalendorius.png';
 import teamAppIcon from '@/images/komanda.png';
 import terminalIcon from '@/images/terminalas.png';
+import bpLogo from '@/images/BP.png';
 import Bp from '@/components/bp/Bp.tsx';
 
 const applications: Application[] = [
@@ -47,7 +48,7 @@ const applications: Application[] = [
     hidden: false,
     data: {
       title: 'Bendradarbiavimo pasiūlymas',
-      iconPath: terminalIcon,
+      iconPath: bpLogo,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
       focused: true,
