@@ -8,20 +8,22 @@ import { ReactNode } from 'react';
  * @focused whether cursor should be focused on the application or no
  */
 export interface ApplicationData {
-  minimized: boolean;
+  minimized?: boolean;
   title: string;
-  zIndex: number;
+  zIndex?: number;
   iconPath: string;
-  focused: boolean;
+  focused?: boolean;
 }
 
 /**
  * @data data for the application
  * @windowContent what to show when application is open
  * @hidden whether the application icon should be on the desktop
+ * @href link to where the application takes you, only used if window content is undefined
  */
 export interface Application {
   data: ApplicationData;
-  windowContent: ReactNode;
+  windowContent?: ReactNode;
   hidden: boolean;
+  href?: string;
 }

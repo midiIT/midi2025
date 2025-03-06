@@ -7,6 +7,8 @@ import calendarIcon from '@/images/kalendorius.png';
 import teamAppIcon from '@/images/komanda.png';
 import terminalIcon from '@/images/terminalas.png';
 import bpLogo from '@/images/BP.png';
+import fbLogo from '@/images/fb.png';
+import igLogo from '@/images/ig.png';
 import Bp from '@/components/bp/Bp.tsx';
 
 const applications: Application[] = [
@@ -53,6 +55,22 @@ const applications: Application[] = [
       zIndex: DEFAULT_Z_INDEX,
       focused: true,
     },
+  },
+  {
+    hidden: false,
+    data: {
+      title: 'Facebook',
+      iconPath: fbLogo,
+    },
+    href: 'https://www.facebook.com/midi.lt/',
+  },
+  {
+    hidden: false,
+    data: {
+      title: 'Instagram',
+      iconPath: igLogo,
+    },
+    href: 'https://www.instagram.com/midi.lt/',
   },
 ];
 

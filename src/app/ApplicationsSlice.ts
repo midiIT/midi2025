@@ -42,14 +42,20 @@ export const applicationsSlice = createSlice({
         !state.openApplications[index].minimized;
 
       state.openApplications = state.openApplications.map(app => {
-        return { ...app, zIndex: app.zIndex - 1 };
+        return {
+          ...app,
+          zIndex: app.zIndex == undefined ? 300 : app.zIndex - 1,
+        };
       });
 
       state.openApplications[index].zIndex = DEFAULT_Z_INDEX;
     },
     setFocusedApplication: (state, action: PayloadAction<string>) => {
       state.openApplications = state.openApplications.map(app => {
-        return { ...app, zIndex: app.zIndex - 1 };
+        return {
+          ...app,
+          zIndex: app.zIndex == undefined ? 300 : app.zIndex - 1,
+        };
       });
 
       const index = state.openApplications.findIndex(

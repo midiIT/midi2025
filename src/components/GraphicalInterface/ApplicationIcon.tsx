@@ -6,12 +6,14 @@ import { openContextMenu } from '@/app/ContextMenuSlice.ts';
 interface ApplicationProps {
   iconPath: string;
   title: string;
-  focused: boolean;
+  focused?: boolean;
+  url?: string;
 }
 const ApplicationIcon: React.FC<ApplicationProps> = ({
   iconPath,
   title,
   focused,
+  url,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -19,15 +21,19 @@ const ApplicationIcon: React.FC<ApplicationProps> = ({
     <div className="flex items-start h-32">
       <button
         onClick={() => {
-          dispatch(
-            openApplication({
-              minimized: false,
-              title: title,
-              iconPath: iconPath,
-              zIndex: 300,
-              focused,
-            }),
-          );
+          if (url) {
+            window.location.href = url;
+          } else {
+            dispatch(
+              openApplication({
+                minimized: false,
+                title: title,
+                iconPath: iconPath,
+                zIndex: 300,
+                focused,
+              }),
+            );
+          }
         }}
         onContextMenu={e => {
           e.preventDefault();
