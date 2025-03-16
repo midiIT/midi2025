@@ -6,10 +6,12 @@ import TeamContent from '../TeamPage/TeamContent';
 import calendarIcon from '@/images/kalendorius.png';
 import teamAppIcon from '@/images/komanda.png';
 import terminalIcon from '@/images/terminalas.png';
+import eventsLogo from '@/images/renginiai.png';
 import bpLogo from '@/images/BP.png';
 import fbLogo from '@/images/fb.png';
 import igLogo from '@/images/ig.png';
 import Bp from '@/components/bp/Bp.tsx';
+import DatePicker from '@/components/EventsPage/DatePicker.tsx';
 
 const applications: Application[] = [
   {
@@ -51,6 +53,17 @@ const applications: Application[] = [
     data: {
       title: 'Bendradarbiavimo pasiūlymas',
       iconPath: bpLogo,
+      minimized: false,
+      zIndex: DEFAULT_Z_INDEX,
+      focused: true,
+    },
+  },
+  {
+    windowContent: <DatePicker eventsMonth={true} />,
+    hidden: false,
+    data: {
+      title: 'Renginiai',
+      iconPath: eventsLogo,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
       focused: true,

@@ -275,8 +275,8 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
       } bg-gray-700 rounded border border-gray-400 pointer-events-auto max-w-full max-h-full overflow-hidden`}
       style={{
         zIndex: zIndex,
-        width: '80%',
-        height: '80%',
+        width: `${application?.title === 'Renginiai' ? '384px' : '80%'}`,
+        height: `${application?.title === 'Renginiai' ? '466px' : '80%'}`,
         top: '10%',
         left: '10%',
       }}

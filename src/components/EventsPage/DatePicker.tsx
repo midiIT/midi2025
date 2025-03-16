@@ -7,14 +7,15 @@ import { useAppDispatch } from '@/app/hooks.ts';
 
 interface DatePickerProps {
   onDatePicked?: () => void;
+  eventsMonth?: boolean;
 }
 
-const DatePicker = ({ onDatePicked }: DatePickerProps) => {
+const DatePicker = ({ onDatePicked, eventsMonth }: DatePickerProps) => {
   const dispatch = useAppDispatch();
   const today = new Date();
   const [currentYear, setCurrentYear] = useState<number>(today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState<number>(
-    today.getMonth() + 1,
+    eventsMonth ? 4 : today.getMonth() + 1,
   );
   // Tooltip state now just tracks which date is being hovered
   const [hoveredDate, setHoveredDate] = useState<string | null>(null);
