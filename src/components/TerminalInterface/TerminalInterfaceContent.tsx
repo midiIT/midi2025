@@ -84,7 +84,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
               '- Sportinis pokeris:       2025-04-10',
               '- LAN Party:               2025-04-12 ir 2025-04-13',
               '- Šachmatai:               2025-04-12',
-              '- Asseco Sporto dienos:           2025-04-13 ir 2025-04-15',
+              '- Asseco Sporto dienos:    2025-04-13 ir 2025-04-15',
               '- Įmonių mugė:             2025-04-14',
               '- Roko opera:              2025-04-16',
               '- Protmūšis:               2025-04-17',
@@ -276,7 +276,10 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
 
   useEffect(() => {
     if (lastLineRef.current) {
-      lastLineRef.current.scrollIntoView({ behavior: 'smooth' });
+      lastLineRef.current.scrollIntoView({
+        block: 'nearest',
+        behavior: 'smooth',
+      });
     }
   }, [lines, currentInput]);
 
@@ -330,14 +333,9 @@ ____    ____ _____ ______   _____
           {"'laikas'\n"}
           {"'iseiti'\n"}
           {lines.map((line, index) => (
-            <div
-              key={index}
-              ref={index === lines.length - 1 ? lastLineRef : null}
-            >
-              {line}
-            </div>
+            <div key={index}>{line}</div>
           ))}
-          <div>
+          <div ref={lastLineRef}>
             {`>>>`} {currentInput}
             <span className="animate-pulse">|</span>
           </div>
