@@ -30,7 +30,7 @@ const Bp = () => {
 
       <div className="flex-1">
         <object
-          data={currentPage === 0 ? 'BP.pdf' : 'BP2.pdf'}
+          data={currentPage === 0 ? 'BP_marketingas.pdf' : 'BP_barterinis.pdf'}
           type="application/pdf"
           width="100%"
           height="100%"
