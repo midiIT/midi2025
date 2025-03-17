@@ -55,6 +55,25 @@ const GraphicalInterface: React.FC = () => {
           <Widgets />
         </div>
         <Taskbar />
+        <div className="flex justify-center mb-4">
+          <div>
+            <div className="text-3xl text-white text-center mb-4">
+              Organizatoriai
+            </div>
+            <div className="flex items-center">
+              <div className="w-[12rem]">
+                <a href="https://midi.lt">
+                  <img src="images/MIDI_logo.webp" alt="MIDI logo" />
+                </a>
+              </div>
+              <div className="w-[10rem]">
+                <a href="https://mif.vusa.lt/lt">
+                  <img src="images/VUSAMIF_logo.webp" alt="VUSA MIF logo" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
         {contextMenuOpen && contextMenuData.owner === 'desktop' && (
           <ContextMenu
             content={[
@@ -79,25 +98,6 @@ const GraphicalInterface: React.FC = () => {
             ]}
           />
         )}
-      </div>
-      <div className="flex justify-center mb-4">
-        <div>
-          <div className="text-3xl text-white text-center mb-4">
-            Organizatoriai
-          </div>
-          <div className="flex items-center">
-            <div className="w-[12rem]">
-              <a href="https://midi.lt">
-                <img src="images/MIDI_logo.webp" alt="MIDI logo" />
-              </a>
-            </div>
-            <div className="w-[10rem]">
-              <a href="https://mif.vusa.lt/lt">
-                <img src="images/VUSAMIF_logo.webp" alt="VUSA MIF logo" />
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </CRTDisplay>
   );

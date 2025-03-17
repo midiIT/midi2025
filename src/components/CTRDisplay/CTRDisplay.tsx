@@ -126,13 +126,6 @@ const CRTDisplay = ({ children, className = '' }: CRTDisplayProps) => {
                 {/* Content */}
                 <div className="relative h-full z-40 font-mono text-green-400 overflow-auto">
                   {children}
-
-                  <div className="absolute left-[2.5%] bottom-[5rem] flex flex-col z-[55]">
-                    <div className="text-xl text-white">
-                      Norint prisidėti prie renginio rėmimo rašykite
-                      marketingas@midi.lt
-                    </div>
-                  </div>
                 </div>
 
                 {/* Screen reflection */}
