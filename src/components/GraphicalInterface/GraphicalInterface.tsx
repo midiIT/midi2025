@@ -85,7 +85,7 @@ const GraphicalInterface: React.FC = () => {
           <div className="text-3xl text-white text-center mb-4">
             Organizatoriai
           </div>
-          <div className="flex items-end">
+          <div className="flex items-center">
             <div className="w-[12rem]">
               <a href="https://midi.lt">
                 <img src="images/MIDI_logo.webp" alt="MIDI logo" />
