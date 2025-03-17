@@ -38,6 +38,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
               '3. <renginio pavadinimas>',
               "4. 'laikas'",
               "5. 'iseiti'",
+              "6. '?'",
             ]);
           }
           case 'komanda': {
@@ -332,6 +333,7 @@ ____    ____ _____ ______   _____
           {'<renginio pavadinimas>\n'}
           {"'laikas'\n"}
           {"'iseiti'\n"}
+          {"'?'\n"}
           {lines.map((line, index) => (
             <div key={index}>{line}</div>
           ))}
