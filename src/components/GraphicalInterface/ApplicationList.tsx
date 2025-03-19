@@ -3,9 +3,11 @@ import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 import EventDisplay from '@/components/EventsPage/EventDisplay.tsx';
 import TerminalInterfaceContent from '../TerminalInterface/TerminalInterfaceContent';
 import TeamContent from '../TeamPage/TeamContent';
+import SponsorsPage from '@/components/SponsorsPage/SponsorsPage';
 import calendarIcon from '@/images/kalendorius.png';
 import teamAppIcon from '@/images/komanda.png';
 import terminalIcon from '@/images/terminalas.png';
+import sponsorIcon from '@/images/Sponsors/sponsor.png'; // CHANGE TO ICON
 
 const applications: Application[] = [
   {
@@ -25,6 +27,17 @@ const applications: Application[] = [
     data: {
       title: 'Komanda',
       iconPath: teamAppIcon,
+      minimized: false,
+      zIndex: DEFAULT_Z_INDEX,
+      focused: false,
+    },
+  },
+  {
+    windowContent: <SponsorsPage />,
+    hidden: false,
+    data: {
+      title: 'Rėmėjai',
+      iconPath: sponsorIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
       focused: false,
