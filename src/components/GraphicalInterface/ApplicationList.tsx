@@ -6,7 +6,7 @@ import TeamContent from '../TeamPage/TeamContent';
 import calendarIcon from '@/images/kalendorius.png';
 import teamAppIcon from '@/images/komanda.png';
 import terminalIcon from '@/images/terminalas.png';
-import photoGalerryIcon from '@/images/nuotraukuGalerija.png';
+import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
 import PhotoGalleryContent from '../PhotoGallery/PhotoGalleryContent';
 
 const applications: Application[] = [
@@ -47,7 +47,7 @@ const applications: Application[] = [
     windowContent: <PhotoGalleryContent />,
     hidden: false,
     data: {
-      title: 'Nuotraukos',
+      title: 'Nuotraukų galerija',
       iconPath: photoGalerryIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
