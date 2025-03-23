@@ -1,21 +1,97 @@
 import { useState, useEffect } from 'react';
-import doggyImage from '@/images/PhotoGallery/doggy.jpeg';
+
+// Import the gallery photos
+import galerijosNuotrauka0 from '@/images/PhotoGallery/galerijosNuotrauka0.webp';
+import galerijosNuotrauka1 from '@/images/PhotoGallery/galerijosNuotrauka1.webp';
+import galerijosNuotrauka2 from '@/images/PhotoGallery/galerijosNuotrauka2.webp';
+import galerijosNuotrauka3 from '@/images/PhotoGallery/galerijosNuotrauka3.webp';
+import galerijosNuotrauka4 from '@/images/PhotoGallery/galerijosNuotrauka4.webp';
+import galerijosNuotrauka5 from '@/images/PhotoGallery/galerijosNuotrauka5.webp';
+import galerijosNuotrauka6 from '@/images/PhotoGallery/galerijosNuotrauka6.webp';
+import galerijosNuotrauka7 from '@/images/PhotoGallery/galerijosNuotrauka7.webp';
+import galerijosNuotrauka8 from '@/images/PhotoGallery/galerijosNuotrauka8.webp';
+import galerijosNuotrauka9 from '@/images/PhotoGallery/galerijosNuotrauka9.webp';
+import galerijosNuotrauka10 from '@/images/PhotoGallery/galerijosNuotrauka10.webp';
+import galerijosNuotrauka11 from '@/images/PhotoGallery/galerijosNuotrauka11.webp';
+import galerijosNuotrauka12 from '@/images/PhotoGallery/galerijosNuotrauka12.webp';
+import galerijosNuotrauka13 from '@/images/PhotoGallery/galerijosNuotrauka13.webp';
+import galerijosNuotrauka14 from '@/images/PhotoGallery/galerijosNuotrauka14.webp';
 
 const galleryPhotos = [
   {
-    src: doggyImage,
-    alt: 'ciucikas juokingas',
-    caption: 'Ciucikas<3',
+    src: galerijosNuotrauka0,
+    alt: 'Galerijos nuotrauka 0',
+    caption: 'Koncertai',
   },
   {
-    src: doggyImage,
-    alt: 'ciucikas juokingas',
-    caption: 'Ciucikas<3',
+    src: galerijosNuotrauka1,
+    alt: 'Galerijos nuotrauka 1',
+    caption: 'Tinklinis',
   },
   {
-    src: doggyImage,
-    alt: 'ciucikas juokingas',
-    caption: 'Ciucikas<3',
+    src: galerijosNuotrauka2,
+    alt: 'Galerijos nuotrauka 2',
+    caption: 'Krepšinis',
+  },
+  {
+    src: galerijosNuotrauka3,
+    alt: 'Galerijos nuotrauka 3',
+    caption: 'Šachmatai',
+  },
+  {
+    src: galerijosNuotrauka4,
+    alt: 'Galerijos nuotrauka 4',
+    caption: 'Sportinis pokeris',
+  },
+  {
+    src: galerijosNuotrauka5,
+    alt: 'Galerijos nuotrauka 5',
+    caption: '????',
+  },
+  {
+    src: galerijosNuotrauka6,
+    alt: 'Galerijos nuotrauka 6',
+    caption: 'LAN party',
+  },
+  {
+    src: galerijosNuotrauka7,
+    alt: 'Galerijos nuotrauka 7',
+    caption: '?????',
+  },
+  {
+    src: galerijosNuotrauka8,
+    alt: 'Galerijos nuotrauka 8',
+    caption: '?????',
+  },
+  {
+    src: galerijosNuotrauka9,
+    alt: 'Galerijos nuotrauka 9',
+    caption: 'Futbolas',
+  },
+  {
+    src: galerijosNuotrauka10,
+    alt: 'Galerijos nuotrauka 10',
+    caption: '?????',
+  },
+  {
+    src: galerijosNuotrauka11,
+    alt: 'Galerijos nuotrauka 11',
+    caption: '?????',
+  },
+  {
+    src: galerijosNuotrauka12,
+    alt: 'Galerijos nuotrauka 12',
+    caption: 'Protmūšis',
+  },
+  {
+    src: galerijosNuotrauka13,
+    alt: 'Galerijos nuotrauka 13',
+    caption: 'Stand up',
+  },
+  {
+    src: galerijosNuotrauka14,
+    alt: 'Galerijos nuotrauka 14',
+    caption: 'Muzika',
   },
 ];
 
