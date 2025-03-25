@@ -3,6 +3,9 @@ import { DEFAULT_Z_INDEX } from '@/components/GraphicalInterface/consts.ts';
 import EventDisplay from '@/components/EventsPage/EventDisplay.tsx';
 import TerminalInterfaceContent from '../TerminalInterface/TerminalInterfaceContent';
 import TeamContent from '../TeamPage/TeamContent';
+import Bp from '@/components/bp/Bp.tsx';
+import DatePicker from '@/components/EventsPage/DatePicker.tsx';
+import PhotoGalleryContent from '../PhotoGallery/PhotoGalleryContent';
 import calendarIcon from '@/images/kalendorius.png';
 import teamAppIcon from '@/images/komanda.png';
 import terminalIcon from '@/images/terminalas.png';
@@ -10,10 +13,7 @@ import eventsLogo from '@/images/renginiai.png';
 import bpLogo from '@/images/BP.png';
 import fbLogo from '@/images/fb.png';
 import igLogo from '@/images/ig.png';
-import Bp from '@/components/bp/Bp.tsx';
-import DatePicker from '@/components/EventsPage/DatePicker.tsx';
 import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
-import PhotoGalleryContent from '../PhotoGallery/PhotoGalleryContent';
 
 const applications: Application[] = [
   {

@@ -3,11 +3,18 @@ import PageWithApplications from './ApplicationComponents/PageWithApplications';
 
 // Icons
 import teamIcon from '@/images/komanda.png';
+import eventsLogo from '@/images/renginiai.png';
+import bpLogo from '@/images/BP.png';
+import fbLogo from '@/images/fb.png';
+import igLogo from '@/images/ig.png';
+import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
 
 // Pages
 import TeamPage from '@/components/TeamPage/TeamPage';
 import Clock from './OtherMobile/Clock';
-import DatePicker from '@/components/EventsPage/DatePicker';
+import Bp from '@/components/bp/Bp.tsx';
+import DatePicker from '@/components/EventsPage/DatePicker.tsx';
+import PhotoGalleryContent from '../PhotoGallery/PhotoGalleryContent';
 
 interface PagesProps {
   brightness: number;
@@ -38,6 +45,31 @@ export const PagesList = ({
           appText: 'Komanda',
           windowContent: TeamPage,
         },
+        {
+          iconPath: eventsLogo,
+          appText: 'Renginiai',
+          windowContent: DatePicker,
+        },
+        {
+          iconPath: photoGalerryIcon,
+          appText: 'Nuotraukų galerija',
+          windowContent: PhotoGalleryContent,
+        },
+        {
+          iconPath: bpLogo,
+          appText: 'Bendradarbiavimo pasiūlymas',
+          windowContent: Bp,
+        },
+        // {
+        //   iconPath: fbLogo,
+        //   appText: 'Facebook',
+        //   windowContent: TeamPage,
+        // },
+        // {
+        //   iconPath: igLogo,
+        //   appText: 'Instagram',
+        //   windowContent: TeamPage,
+        // },
       ]}
       showWindow={showWindow}
       setShowWindow={setShowWindow}
