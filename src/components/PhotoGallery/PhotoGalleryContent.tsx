@@ -21,32 +21,32 @@ const galleryPhotos = [
   {
     src: galerijosNuotrauka0,
     alt: 'Galerijos nuotrauka 0',
-    caption: 'Koncertai',
+    caption: 'Uždarymo vakaras',
   },
   {
     src: galerijosNuotrauka1,
     alt: 'Galerijos nuotrauka 1',
-    caption: 'Tinklinis',
+    caption: 'Tinklinio turnyras',
   },
   {
     src: galerijosNuotrauka2,
     alt: 'Galerijos nuotrauka 2',
-    caption: 'Krepšinis',
+    caption: 'Krepšinio turnyras',
   },
   {
     src: galerijosNuotrauka3,
     alt: 'Galerijos nuotrauka 3',
-    caption: 'Šachmatai',
+    caption: 'Šachmatų turnyras',
   },
   {
     src: galerijosNuotrauka4,
     alt: 'Galerijos nuotrauka 4',
-    caption: 'Sportinis pokeris',
+    caption: 'Sportinio pokerio turnyras',
   },
   {
     src: galerijosNuotrauka5,
     alt: 'Galerijos nuotrauka 5',
-    caption: '????',
+    caption: 'Įmonių mugė',
   },
   {
     src: galerijosNuotrauka6,
@@ -56,27 +56,27 @@ const galleryPhotos = [
   {
     src: galerijosNuotrauka7,
     alt: 'Galerijos nuotrauka 7',
-    caption: '?????',
+    caption: 'Uždarymo vakaras',
   },
   {
     src: galerijosNuotrauka8,
     alt: 'Galerijos nuotrauka 8',
-    caption: '?????',
+    caption: 'Protmūšis',
   },
   {
     src: galerijosNuotrauka9,
     alt: 'Galerijos nuotrauka 9',
-    caption: 'Futbolas',
+    caption: 'Futbolo turnyras',
   },
   {
     src: galerijosNuotrauka10,
     alt: 'Galerijos nuotrauka 10',
-    caption: '?????',
+    caption: 'Roko Opera',
   },
   {
     src: galerijosNuotrauka11,
     alt: 'Galerijos nuotrauka 11',
-    caption: '?????',
+    caption: 'Roko Opera',
   },
   {
     src: galerijosNuotrauka12,
@@ -86,12 +86,12 @@ const galleryPhotos = [
   {
     src: galerijosNuotrauka13,
     alt: 'Galerijos nuotrauka 13',
-    caption: 'Stand up',
+    caption: 'Uždarymo vakaras',
   },
   {
     src: galerijosNuotrauka14,
     alt: 'Galerijos nuotrauka 14',
-    caption: 'Muzika',
+    caption: 'Uždarymo vakaras',
   },
 ];
 
