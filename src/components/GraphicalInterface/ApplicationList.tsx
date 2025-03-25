@@ -61,17 +61,6 @@ const applications: Application[] = [
     },
   },
   {
-    windowContent: <PhotoGalleryContent />,
-    hidden: false,
-    data: {
-      title: 'Nuotraukų galerija',
-      iconPath: photoGalerryIcon,
-      minimized: false,
-      zIndex: DEFAULT_Z_INDEX,
-      focused: true,
-    },
-  },
-  {
     windowContent: <Bp />,
     hidden: false,
     data: {
