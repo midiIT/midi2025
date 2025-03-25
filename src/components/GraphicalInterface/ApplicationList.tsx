@@ -12,6 +12,8 @@ import fbLogo from '@/images/fb.png';
 import igLogo from '@/images/ig.png';
 import Bp from '@/components/bp/Bp.tsx';
 import DatePicker from '@/components/EventsPage/DatePicker.tsx';
+import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
+import PhotoGalleryContent from '../PhotoGallery/PhotoGalleryContent';
 
 const applications: Application[] = [
   {
@@ -42,6 +44,17 @@ const applications: Application[] = [
     data: {
       title: 'Terminalas',
       iconPath: terminalIcon,
+      minimized: false,
+      zIndex: DEFAULT_Z_INDEX,
+      focused: true,
+    },
+  },
+  {
+    windowContent: <PhotoGalleryContent />,
+    hidden: false,
+    data: {
+      title: 'Nuotraukų galerija',
+      iconPath: photoGalerryIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
       focused: true,
