@@ -14,8 +14,6 @@ import Bp from '@/components/bp/Bp.tsx';
 import DatePicker from '@/components/EventsPage/DatePicker.tsx';
 import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
 import PhotoGalleryContent from '../PhotoGallery/PhotoGalleryContent';
-import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
-import PhotoGalleryContent from '../PhotoGallery/PhotoGalleryContent';
 
 const applications: Application[] = [
   {
