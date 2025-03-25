@@ -21,7 +21,7 @@ const ApplicationsGrid = () => {
   const contextMenuData = useAppSelector(selectContextMenuData);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 h-64">
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 h-64">
       {applications
         .filter(app => !app.hidden)
         .map(app => (
@@ -29,7 +29,8 @@ const ApplicationsGrid = () => {
             key={app.data.title}
             iconPath={app.data.iconPath}
             title={app.data.title}
-            focused={app.data.focused}
+            focused={app.data.focused ?? false}
+            url={app.href}
           />
         ))}
 

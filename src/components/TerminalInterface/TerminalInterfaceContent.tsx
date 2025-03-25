@@ -38,6 +38,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
               '3. <renginio pavadinimas>',
               "4. 'laikas'",
               "5. 'iseiti'",
+              "6. '?'",
             ]);
           }
           case 'komanda': {
@@ -84,7 +85,7 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
               '- Sportinis pokeris:       2025-04-10',
               '- LAN Party:               2025-04-12 ir 2025-04-13',
               '- Šachmatai:               2025-04-12',
-              '- Sporto dienos:           2025-04-13 ir 2025-04-15',
+              '- Asseco Sporto dienos:    2025-04-13 ir 2025-04-15',
               '- Įmonių mugė:             2025-04-14',
               '- Roko opera:              2025-04-16',
               '- Protmūšis:               2025-04-17',
@@ -123,13 +124,18 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
               'Daugiau informacijos jau netrukus.',
             ];
           }
+          case 'asseco sporto dienos':
+          case 'asseco':
+          case 'asseco sporto':
+          case 'asseco sportas':
+          case 'asseco dienos':
           case 'sporto dienos':
           case 'sporto':
           case 'sportas': {
             return [
               '2025-04-13 ir 2025-04-15',
               'Ar pasiruošęs pasinerti į sportišką nuotykį ir pajusti komandinės dvasios jėgą?',
-              'MIDI Sporto dienos – tai metas, kai visi pamiršta savo užrašus bei kompiuterius, ir susitinka aikštelėje dėl smagaus laiko ir sveikos konkurencijos!',
+              'MIDI Asseco Sporto dienos – tai metas, kai visi pamiršta savo užrašus bei kompiuterius, ir susitinka aikštelėje dėl smagaus laiko ir sveikos konkurencijos!',
               'Šio renginio metu tavęs laukia įvairių sporto šakų turnyrai. Nesvarbu, ar esi atletiškas profesionalas, ar tiesiog mėgėjas, šios dienos skirtos visiems!',
               'Pradėk rinkti komandą ir kartu įrodykite, kad sportas – tai ne tik varžybos, bet ir puiki proga užmegzti naujus ryšius bei tiesiog gerai praleisti laiką!',
               'Daugiau informacijos jau netrukus.',
@@ -271,7 +277,10 @@ const TerminalInterfaceContent: React.FC<TerminalInterfaceContentProps> = ({
 
   useEffect(() => {
     if (lastLineRef.current) {
-      lastLineRef.current.scrollIntoView({ behavior: 'smooth' });
+      lastLineRef.current.scrollIntoView({
+        block: 'nearest',
+        behavior: 'smooth',
+      });
     }
   }, [lines, currentInput]);
 
@@ -324,15 +333,11 @@ ____    ____ _____ ______   _____
           {'<renginio pavadinimas>\n'}
           {"'laikas'\n"}
           {"'iseiti'\n"}
+          {"'?'\n"}
           {lines.map((line, index) => (
-            <div
-              key={index}
-              ref={index === lines.length - 1 ? lastLineRef : null}
-            >
-              {line}
-            </div>
+            <div key={index}>{line}</div>
           ))}
-          <div>
+          <div ref={lastLineRef}>
             {`>>>`} {currentInput}
             <span className="animate-pulse">|</span>
           </div>

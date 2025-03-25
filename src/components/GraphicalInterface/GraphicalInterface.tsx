@@ -35,50 +35,71 @@ const GraphicalInterface: React.FC = () => {
 
   return (
     <CRTDisplay>
-      <div
-        id="graphical-interface"
-        className="flex flex-col justify-between content-center h-full"
-        onContextMenu={e => {
-          e.preventDefault();
-          dispatch(
-            openContextMenu({
-              x: e.pageX,
-              y: e.pageY,
-              title: '',
-              owner: 'desktop',
-            }),
-          );
-        }}
-      >
-        <div className="flex justify-between m-4">
-          <ApplicationsGrid />
-          <Widgets />
+      <div className="flex flex-col">
+        <div
+          id="graphical-interface"
+          className="flex flex-col content-center justify-between min-h-[91vh]"
+          onContextMenu={e => {
+            e.preventDefault();
+            dispatch(
+              openContextMenu({
+                x: e.pageX,
+                y: e.pageY,
+                title: '',
+                owner: 'desktop',
+              }),
+            );
+          }}
+        >
+          <div className="flex justify-between m-4">
+            <ApplicationsGrid />
+            <Widgets />
+          </div>
+          <Taskbar />
+          {contextMenuOpen && contextMenuData.owner === 'desktop' && (
+            <ContextMenu
+              content={[
+                <div key="fb">
+                  <a
+                    href="https://www.facebook.com/midi.lt/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Sekti MIDI Facebook!
+                  </a>
+                </div>,
+                <div key="ig">
+                  <a
+                    href="https://www.instagram.com/midi.lt/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Sekti MIDI Instagram!
+                  </a>
+                </div>,
+              ]}
+            />
+          )}
         </div>
-        <Taskbar />
-        {contextMenuOpen && contextMenuData.owner === 'desktop' && (
-          <ContextMenu
-            content={[
-              <div key="fb">
-                <a
-                  href="https://www.facebook.com/midi.lt/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Sekti MIDI Facebook!
+        <div className="flex justify-center mb-4">
+          <div>
+            <div className="text-3xl text-white text-center mb-4">
+              Organizatoriai
+            </div>
+            <div className="flex items-center">
+              <div className="w-[12rem]">
+                <a href="https://midi.lt">
+                  <img src="images/MIDI_logo.webp" alt="MIDI logo" />
                 </a>
-              </div>,
-              <div key="ig">
-                <a
-                  href="https://www.instagram.com/midi.lt/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Sekti MIDI Instagram!
+              </div>
+              <div className="w-[10rem]">
+                <a href="https://mif.vusa.lt/lt">
+                  <img src="images/VUSAMIF_logo.webp" alt="VUSA MIF logo" />
                 </a>
-              </div>,
-            ]}
-          />
-        )}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </CRTDisplay>
   );

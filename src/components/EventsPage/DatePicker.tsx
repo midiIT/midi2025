@@ -7,15 +7,18 @@ import { useAppDispatch } from '@/app/hooks.ts';
 
 interface DatePickerProps {
   onDatePicked?: () => void;
+  eventsMonth?: boolean;
 }
 
-const DatePicker = ({ onDatePicked }: DatePickerProps) => {
+const DatePicker = ({ onDatePicked, eventsMonth }: DatePickerProps) => {
   const dispatch = useAppDispatch();
   const today = new Date();
   const [currentYear, setCurrentYear] = useState<number>(today.getFullYear());
   const [currentMonth, setCurrentMonth] = useState<number>(
-    today.getMonth() + 1,
+    eventsMonth ? 4 : today.getMonth() + 1,
   );
+  // Tooltip state now just tracks which date is being hovered
+  const [hoveredDate, setHoveredDate] = useState<string | null>(null);
 
   const weekdayHeaders = ['Pr', 'An', 'Tr', 'Kt', 'Pn', 'Š', 'Sk'];
 
@@ -76,6 +79,17 @@ const DatePicker = ({ onDatePicked }: DatePickerProps) => {
     }
   };
 
+  const getEventTitleForDate = (dateString: string): string | undefined => {
+    const filteredEvents = events.filter(event => event.date === dateString);
+    if (filteredEvents?.length > 0) {
+      return filteredEvents.length > 1
+        ? filteredEvents[0].title + ' ir ' + filteredEvents[1].title
+        : filteredEvents[0].title;
+    } else {
+      return undefined;
+    }
+  };
+
   return (
     <div className="p-4 lg:mx-auto bg-black shadow-lg rounded-md w-[98%] md:w-full h-[392px] md:h-[440px] overflow-y-auto">
       <div className="flex justify-between items-center mb-4">
@@ -111,45 +125,57 @@ const DatePicker = ({ onDatePicked }: DatePickerProps) => {
         ))}
       </div>
       <div className="grid grid-cols-7 gap-2">
-        {getDaysInMonth(currentYear, currentMonth).map((date, index) => (
-          <div
-            key={index}
-            onClick={() => {
-              if (
-                date &&
-                events.find(
-                  event => event.date === date.toISOString().split('T')[0],
-                )
-              )
-                handleClick(date);
-            }}
-            style={{ color: '#0175B4' }}
-            className={`rounded-full w-10 h-10 flex flex-col items-center justify-center sm:w-12 sm:h-12
-                        ${date ? 'border-2 bg-black' : 'bg-black-300'}
-                        ${
-                          date &&
-                          events.find(
-                            event =>
-                              event.date === date.toISOString().split('T')[0],
-                          )
-                            ? 'cursor-pointer border-4 border-[#0175B4] hover:bg-gray-900'
-                            : 'cursor-default border-[#466b7f]'
-                        }`}
-          >
-            <span
-              className={`
-                        ${
-                          date &&
-                          date.getDate() === new Date().getDate() &&
-                          currentMonth === new Date().getMonth() + 1
-                            ? 'relative top-0.5 border-[#0175B4] border-[3px] rounded-full'
-                            : ''
-                        }
-            `}
-            ></span>
-            <span>{date ? date.getDate() : ''}</span>
-          </div>
-        ))}
+        {getDaysInMonth(currentYear, currentMonth).map((date, index) => {
+          if (!date) return <div key={index} className="bg-black-300"></div>;
+
+          const dateString = date.toISOString().split('T')[0];
+          const hasEvent = events.some(event => event.date === dateString);
+          const isHovered = hoveredDate === dateString;
+          const eventTitle = getEventTitleForDate(dateString);
+
+          return (
+            <div key={index} className="relative">
+              <div
+                onClick={() => hasEvent && handleClick(date)}
+                onMouseEnter={() => hasEvent && setHoveredDate(dateString)}
+                onMouseLeave={() => setHoveredDate(null)}
+                style={{ color: '#0175B4' }}
+                className={`rounded-full w-10 h-10 flex flex-col items-center justify-center sm:w-12 sm:h-12
+                          ${date ? 'border-2 bg-black' : 'bg-black-300'}
+                          ${
+                            hasEvent
+                              ? 'cursor-pointer border-4 border-[#0175B4] hover:bg-gray-900'
+                              : 'cursor-default border-[#466b7f]'
+                          }`}
+              >
+                <span
+                  className={`
+                            ${
+                              date.getDate() === new Date().getDate() &&
+                              currentMonth === new Date().getMonth() + 1
+                                ? 'relative top-0.5 border-[#0175B4] border-[3px] rounded-full'
+                                : ''
+                            }
+                `}
+                ></span>
+                <span>{date.getDate()}</span>
+              </div>
+
+              {isHovered && eventTitle && (
+                <div
+                  className="absolute bottom-full mb-1 bg-gray-800 text-white px-2 py-1 rounded whitespace-nowrap"
+                  style={{
+                    left: index % 7 >= 6 ? 'auto' : '50%',
+                    right: index % 7 >= 6 ? '0' : 'auto',
+                    transform: index % 7 >= 6 ? 'none' : 'translateX(-50%)',
+                  }}
+                >
+                  {eventTitle}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

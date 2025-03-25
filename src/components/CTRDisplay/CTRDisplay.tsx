@@ -124,7 +124,7 @@ const CRTDisplay = ({ children, className = '' }: CRTDisplayProps) => {
                 />
 
                 {/* Content */}
-                <div className="relative h-full z-40 font-mono text-green-400 overflow-auto">
+                <div className="relative h-full z-40 font-mono text-green-400 overflow-y-scroll overflow-x-hidden">
                   {children}
                 </div>
 

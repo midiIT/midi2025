@@ -23,9 +23,14 @@ const Taskbar = () => {
   );
 
   return (
-    <div className="z-[500]">
+    <div>
+      <div className="h-0 relative left-[2.5%] bottom-[2rem] flex flex-col z-[55]">
+        <div className="text-xl text-white">
+          Norint prisidėti prie renginio rėmimo rašykite marketingas@midi.lt
+        </div>
+      </div>
       <div
-        className="flex h-14 bg-[#27364a] w-[95%] mb-4 mx-auto rounded shadow-2xl"
+        className="relative flex h-14 bg-[#27364a] w-[95%] mb-4 mx-auto rounded shadow-2xl z-[500]"
         onContextMenu={e => {
           e.preventDefault();
           e.stopPropagation();
