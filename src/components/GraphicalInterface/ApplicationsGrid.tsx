@@ -29,7 +29,7 @@ const ApplicationsGrid = () => {
             key={app.data.title}
             iconPath={app.data.iconPath}
             title={app.data.title}
-            focused={app.data.focused}
+            focused={app.data.focused ?? false}
             url={app.href}
           />
         ))}

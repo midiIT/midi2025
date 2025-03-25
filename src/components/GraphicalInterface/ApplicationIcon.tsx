@@ -22,7 +22,7 @@ const ApplicationIcon: React.FC<ApplicationProps> = ({
       <button
         onClick={() => {
           if (url) {
-            window.location.href = url;
+            window.open(url, '_blank');
           } else {
             dispatch(
               openApplication({
