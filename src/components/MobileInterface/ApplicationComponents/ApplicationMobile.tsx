@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface ApplicationProps {
   iconPath: string;
-  appText: string;
-  windowContent: React.FC;
-  onClick: (windowContent: React.FC) => void;
+  windowContent?: ReactNode;
+  href?: string;
+  onClick: () => void;
 }
 const ApplicationMobile: React.FC<ApplicationProps> = ({
   iconPath,
-  appText,
   windowContent,
+  href,
   onClick,
 }) => {
   const handleTouch = () => {
-    onClick(windowContent);
+    if (href) window.open(href, '_blank');
+    else if (windowContent) onClick();
   };
 
   return (
@@ -24,7 +25,6 @@ const ApplicationMobile: React.FC<ApplicationProps> = ({
           src={iconPath}
           alt="Application Icon"
         />
-        <p className="text-center break-words max-w-18 mt-2">{appText}</p>
       </button>
     </div>
   );
