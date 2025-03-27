@@ -44,17 +44,13 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
     >
       {/* Phone box */}
       <div
-        className="relative w-[100vw] h-[100%] landscape:w-[100%] landscape:h-[90%]
+        className="relative w-[100vw] h-[100%]
                    flex flex-row justify-between items-center 
                    bg-gradient-to-br from-gray-800 to-gray-900 rounded-[2rem] shadow-2xl border-[10px]
                    border-gray-600 p-4"
       >
         {/* Speaker Slot */}
-        <div
-          className="portrait:absolute top-2 w-[25%] h-2 bg-gray-600 rounded-full left-[37%]
-                     landscape:rotate-[270deg] landscape:w-[10%] landscape:top-1/2 landscape:left-1/2
-                     landscape:transform landscape:-translate-x-1/2"
-        ></div>
+        <div className="portrait:absolute top-2 w-[25%] h-2 bg-gray-600 rounded-full left-[37%]" />
 
         {/* MIDI */}
         <div
@@ -68,8 +64,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
         {/* Screen Area */}
         <div
           className={`absolute h-[88vh] w-[90vw] left-[2.5vw] top-[7vh] bg-black rounded-[1rem] border-4 border-gray-600
-                     overflow-hidden transition-opacity duration-500 landscape:h-[80vh] landscape:w-[80vw] shadow-inner
-                     landscape:left-[8vw] landscape:top-[2.5vh]`}
+                     transition-opacity duration-500 shadow-inner`}
           style={{
             backgroundImage: `url(${backgroundImg})`,
             backgroundColor: 'black',
@@ -126,7 +121,7 @@ const MobileInterface: React.FC<PhoneDisplayProps> = ({ className = '' }) => {
           </div>
 
           {
-            <div className="relative h-full w-full overflow-y-auto scrollbar-hide">
+            <div className="h-full w-full scrollbar-hide">
               {/* Pages */}
               <SwipeablePages
                 pages={PagesList({

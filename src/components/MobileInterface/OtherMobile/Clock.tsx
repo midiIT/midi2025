@@ -57,9 +57,9 @@ const Clock: React.FC = () => {
   }, [loadWeather]);
 
   return (
-    <div>
+    <div className="flex flex-col w-full h-[88vh] justify-between">
       {/* Time and Date */}
-      <div className="absolute top-16 left-1/2 transform -translate-x-1/2 text-center landscape:rotate-[270deg] landscape:-translate-x-[85vh] landscape:top-[19vh]">
+      <div className="text-center mt-20 mx-auto">
         <p
           style={{
             textShadow:
@@ -88,7 +88,7 @@ const Clock: React.FC = () => {
       </div>
 
       {/* Weather Information */}
-      <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-center landscape:rotate-[270deg] landscape:-translate-[20vh] landscape:bottom-[23vh] landscape:left-[145vh]">
+      <div className="text-center mx-auto mb-16">
         <p
           style={{
             textShadow:

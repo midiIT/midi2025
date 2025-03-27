@@ -29,8 +29,21 @@ export const PagesList = ({
 }: PagesProps): React.ReactElement[] => {
   return [
     // 1 Page: Clock
-    <div className="absolute inset-0 w-full h-full overflow-hidden">
+    <div className="h-[88vh] overflow-y-scroll">
       <Clock />
+      <div className="text-5xl text-center">Organizatoriai</div>
+      <div className="flex flex-col items-center gap-10 mt-10">
+        <div className="w-[12rem] bg-white rounded-lg">
+          <a href="https://midi.lt">
+            <img src="images/MIDI_logo.webp" alt="MIDI logo" />
+          </a>
+        </div>
+        <div className="w-[10rem]">
+          <a href="https://mif.vusa.lt/lt">
+            <img src="images/VUSAMIF_logo.webp" alt="VUSA MIF logo" />
+          </a>
+        </div>
+      </div>
     </div>,
 
     // 2 Page: Applications
