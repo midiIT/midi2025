@@ -14,6 +14,7 @@ import bpLogo from '@/images/BP.png';
 import fbLogo from '@/images/fb.png';
 import igLogo from '@/images/ig.png';
 import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
+import volunteersIcon from '@/images/savanoriai.png';
 
 const applications: Application[] = [
   {
@@ -97,6 +98,14 @@ const applications: Application[] = [
       iconPath: igLogo,
     },
     href: 'https://www.instagram.com/midi.lt/',
+  },
+  {
+    hidden: false,
+    data: {
+      title: 'Prisijunk prie MIDI!',
+      iconPath: volunteersIcon,
+    },
+    href: 'https://forms.office.com/pages/responsepage.aspx?id=XVfIeiHvL0yhJSx6Ldsk1ozdT6lf8khCpJGHuI2p37JUQUpQRFlBMEtWV0hLU0JCUlI2Uk9IOFVYTS4u&route=shorturl',
   },
 ];
 

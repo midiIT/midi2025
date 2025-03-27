@@ -7,6 +7,7 @@ import eventsLogo from '@/images/renginiai.png';
 import fbLogo from '@/images/fb.png';
 import igLogo from '@/images/ig.png';
 import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
+import volunteersIcon from '@/images/savanoriai.png';
 
 // Pages
 import TeamPage from '@/components/TeamPage/TeamPage';
@@ -68,6 +69,11 @@ export const PagesList = ({
           iconPath: photoGalerryIcon,
           appText: 'Nuotraukų galerija',
           windowContent: <PhotoGalleryContent />,
+        },
+        {
+          iconPath: volunteersIcon,
+          appText: 'Prisijunk prie MIDI!',
+          href: 'https://forms.office.com/pages/responsepage.aspx?id=XVfIeiHvL0yhJSx6Ldsk1ozdT6lf8khCpJGHuI2p37JUQUpQRFlBMEtWV0hLU0JCUlI2Uk9IOFVYTS4u&route=shorturl',
         },
         {
           iconPath: fbLogo,
