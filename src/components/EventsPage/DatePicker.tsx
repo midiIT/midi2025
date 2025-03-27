@@ -8,9 +8,10 @@ import { useAppDispatch } from '@/app/hooks.ts';
 interface DatePickerProps {
   onDatePicked?: () => void;
   eventsMonth?: boolean;
+  isApp?: boolean;
 }
 
-const DatePicker = ({ onDatePicked, eventsMonth }: DatePickerProps) => {
+const DatePicker = ({ onDatePicked, eventsMonth, isApp }: DatePickerProps) => {
   const dispatch = useAppDispatch();
   const today = new Date();
   const [currentYear, setCurrentYear] = useState<number>(today.getFullYear());
@@ -78,7 +79,6 @@ const DatePicker = ({ onDatePicked, eventsMonth }: DatePickerProps) => {
       }
     }
   };
-
   const getEventTitleForDate = (dateString: string): string | undefined => {
     const filteredEvents = events.filter(event => event.date === dateString);
     if (filteredEvents?.length > 0) {
@@ -91,7 +91,11 @@ const DatePicker = ({ onDatePicked, eventsMonth }: DatePickerProps) => {
   };
 
   return (
-    <div className="p-4 lg:mx-auto bg-black shadow-lg rounded-md md:w-full h-[392px] md:h-[440px] overflow-y-auto">
+    <div
+      className={`p-4 lg:mx-auto bg-black shadow-lg md:w-full h-[392px] md:h-[440px] overflow-y-auto
+      ${isApp ? '' : 'rounded-md'}
+      `}
+    >
       <div className="flex justify-between items-center mb-4">
         {!eventsMonth && (
           <button

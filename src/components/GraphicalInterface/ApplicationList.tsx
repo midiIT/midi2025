@@ -72,7 +72,7 @@ const applications: Application[] = [
     },
   },
   {
-    windowContent: <DatePicker eventsMonth={true} />,
+    windowContent: <DatePicker eventsMonth={true} isApp={true} />,
     hidden: false,
     data: {
       title: 'Renginiai',
