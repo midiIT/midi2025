@@ -1,15 +1,17 @@
-import AuksasSponsor1 from '@/images/Sponsors/Auksas/nasa.png';
-import AuksasSponsor2 from '@/images/Sponsors/Auksas/uni.png';
+import CyberCareLogo from '@/images/Sponsors/Auksas/cybercareLogo.pdf';
+import AssecoLogo from '@/images/Sponsors/Auksas/assecoLogo.pdf';
 
-import SidabrasSponsor1 from '@/images/Sponsors/Sidabras/pepsi.png';
-import SidabrasSponsor2 from '@/images/Sponsors/Sidabras/koksas.png';
+// Updated Bronza sponsors with actual company names
+import AccLogo from '@/images/Sponsors/Bronza/accLogo.png';
+import BentleyLogo from '@/images/Sponsors/Bronza/bentleyLogo.png';
+import LuminorLogo from '@/images/Sponsors/Bronza/LuminorLogo.png';
+import CornerCaseLogo from '@/images/Sponsors/Bronza/cornerCaseLogo.png';
+import KpmgLogo from '@/images/Sponsors/Bronza/kpmgLogo.png';
+import WesternUnionLogo from '@/images/Sponsors/Bronza/WesternUnionLogo.png';
 
-import BronzaSponsor1 from '@/images/Sponsors/Bronza/apple.png';
-import BronzaSponsor2 from '@/images/Sponsors/Bronza/google.png';
-
-import StandartinisSponsor1 from '@/images/Sponsors/Standartinis/kfc.png';
-
-import PartneriaiSponsor1 from '@/images/Sponsors/Partneriai/bk.png';
+// Updated Standartinis sponsor with actual company names
+import OxylabsLogo from '@/images/Sponsors/Standartinis/Oxylabs_LOGO_Color_Light_Horizontal.pdf';
+import NearaLogo from '@/images/Sponsors/Standartinis/nearaLogo.png';
 
 enum SponsorTier {
   auksas,
@@ -29,64 +31,72 @@ interface Sponsor {
 const sponsors: Sponsor[] = [
   // Auksas sponsors
   {
-    href: 'https://sponsor1-website.com',
-    src: AuksasSponsor1,
-    alt: 'Koksas',
+    href: 'https://cybercare.cc',
+    src: CyberCareLogo,
+    alt: 'CyberCare',
     tier: SponsorTier.auksas,
   },
 
   {
-    href: 'https://sponsor1-website.com',
-    src: AuksasSponsor2,
-    alt: 'Koksas',
+    href: 'https://asseco.com',
+    src: AssecoLogo,
+    alt: 'Asseco',
     tier: SponsorTier.auksas,
-  },
-
-  // Sidabras sponsors
-  {
-    href: 'https://sidabras-sponsor1-website.com',
-    src: SidabrasSponsor1,
-    alt: 'Sidabras Sponsor 1',
-    tier: SponsorTier.sidabras,
-  },
-
-  {
-    href: 'https://sidabras-sponsor2-website.com',
-    src: SidabrasSponsor2,
-    alt: 'Sidabras Sponsor 2',
-    tier: SponsorTier.sidabras,
   },
 
   // Bronza sponsors
   {
-    href: 'https://bronza-sponsor1-website.com',
-    src: BronzaSponsor1,
-    alt: 'Bronza Sponsor 1',
+    href: 'https://www.accenture.com',
+    src: AccLogo,
+    alt: 'Accenture',
     tier: SponsorTier.bronza,
   },
-
   {
-    href: 'https://bronza-sponsor2-website.com',
-    src: BronzaSponsor2,
-    alt: 'Bronza Sponsor 2',
+    href: 'https://www.bentley.com',
+    src: BentleyLogo,
+    alt: 'Bentley',
+    tier: SponsorTier.bronza,
+  },
+  {
+    href: 'https://www.luminor.lt',
+    src: LuminorLogo,
+    alt: 'Luminor',
+    tier: SponsorTier.bronza,
+  },
+  {
+    href: 'https://www.cornercasetech.com',
+    src: CornerCaseLogo,
+    alt: 'Corner Case',
+    tier: SponsorTier.bronza,
+  },
+  {
+    href: 'https://kpmg.com',
+    src: KpmgLogo,
+    alt: 'KPMG',
+    tier: SponsorTier.bronza,
+  },
+  {
+    href: 'https://www.westernunion.com',
+    src: WesternUnionLogo,
+    alt: 'Western Union',
     tier: SponsorTier.bronza,
   },
 
   // Standartinis sponsors
   {
-    href: 'https://standartinis-sponsor1-website.com',
-    src: StandartinisSponsor1,
-    alt: 'Standartinis Sponsor 1',
+    href: 'https://oxylabs.io',
+    src: OxylabsLogo,
+    alt: 'Oxylabs',
+    tier: SponsorTier.standartinis,
+  },
+  {
+    href: 'https://neara.com',
+    src: NearaLogo,
+    alt: 'Neara',
     tier: SponsorTier.standartinis,
   },
 
   // Partneriai
-  {
-    href: 'https://partneriai-sponsor1-website.com',
-    src: PartneriaiSponsor1,
-    alt: 'Partneriai Sponsor 1',
-    tier: SponsorTier.partneriai,
-  },
 ];
 
 function renderSponsorSection(tier: SponsorTier, sponsors: Sponsor[]) {
@@ -134,7 +144,7 @@ function renderSponsorSection(tier: SponsorTier, sponsors: Sponsor[]) {
             <img
               src={sponsor.src}
               alt={sponsor.alt}
-              className="w-40 h-40 m-4 object-contain hover:opacity-80"
+              className="w-56 h-56 m-5 object-contain hover:opacity-80"
             />
           </a>
         ))}
