@@ -1,5 +1,5 @@
-import CyberCareLogo from '@/images/Sponsors/Auksas/cybercareLogo.pdf';
-import AssecoLogo from '@/images/Sponsors/Auksas/assecoLogo.pdf';
+import CyberCareLogo from '@/images/Sponsors/Auksas/cyber_care.svg';
+import AssecoLogo from '@/images/Sponsors/Auksas/asseco.svg';
 
 // Updated Bronza sponsors with actual company names
 import AccLogo from '@/images/Sponsors/Bronza/accLogo.png';
@@ -10,7 +10,7 @@ import KpmgLogo from '@/images/Sponsors/Bronza/kpmgLogo.png';
 import WesternUnionLogo from '@/images/Sponsors/Bronza/WesternUnionLogo.png';
 
 // Updated Standartinis sponsor with actual company names
-import OxylabsLogo from '@/images/Sponsors/Standartinis/Oxylabs_LOGO_Color_Light_Horizontal.pdf';
+import OxylabsLogo from '@/images/Sponsors/Standartinis/oxylabs.png';
 import NearaLogo from '@/images/Sponsors/Standartinis/nearaLogo.png';
 
 enum SponsorTier {
