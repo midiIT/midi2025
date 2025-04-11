@@ -6,6 +6,7 @@ import TeamContent from '../TeamPage/TeamContent';
 import Bp from '@/components/bp/Bp.tsx';
 import DatePicker from '@/components/EventsPage/DatePicker.tsx';
 import PhotoGalleryContent from '../PhotoGallery/PhotoGalleryContent';
+import SponsorsPage from '@/components/SponsorsPage/SponsorsPage';
 import calendarIcon from '@/images/kalendorius.png';
 import teamAppIcon from '@/images/komanda.png';
 import terminalIcon from '@/images/terminalas.png';
@@ -15,6 +16,7 @@ import fbLogo from '@/images/fb.png';
 import igLogo from '@/images/ig.png';
 import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
 import volunteersIcon from '@/images/savanoriai.png';
+import sponsorIcon from '@/images/Sponsors/sponsor.png'; // CHANGE TO ICON
 
 const applications: Application[] = [
   {
@@ -34,6 +36,17 @@ const applications: Application[] = [
     data: {
       title: 'Komanda',
       iconPath: teamAppIcon,
+      minimized: false,
+      zIndex: DEFAULT_Z_INDEX,
+      focused: false,
+    },
+  },
+  {
+    windowContent: <SponsorsPage />,
+    hidden: false,
+    data: {
+      title: 'Rėmėjai',
+      iconPath: sponsorIcon,
       minimized: false,
       zIndex: DEFAULT_Z_INDEX,
       focused: false,

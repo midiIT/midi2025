@@ -8,12 +8,14 @@ import fbLogo from '@/images/fb.png';
 import igLogo from '@/images/ig.png';
 import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
 import volunteersIcon from '@/images/savanoriai.png';
+import sponsorIcon from '@/images/Sponsors/sponsor.png'; // CHANGE TO ICON
 
 // Pages
 import TeamPage from '@/components/TeamPage/TeamPage';
 import Clock from './OtherMobile/Clock';
 import DatePicker from '@/components/EventsPage/DatePicker.tsx';
 import PhotoGalleryContent from '../PhotoGallery/PhotoGalleryContent';
+import SponsorsPage from '@/components/SponsorsPage/SponsorsPage';
 
 interface PagesProps {
   brightness: number;
@@ -74,6 +76,11 @@ export const PagesList = ({
           iconPath: volunteersIcon,
           appText: 'Prisijunk prie MIDI!',
           href: 'https://forms.office.com/pages/responsepage.aspx?id=XVfIeiHvL0yhJSx6Ldsk1ozdT6lf8khCpJGHuI2p37JUQUpQRFlBMEtWV0hLU0JCUlI2Uk9IOFVYTS4u&route=shorturl',
+        },
+        {
+          iconPath: sponsorIcon,
+          appText: 'Rėmėjai',
+          windowContent: <SponsorsPage />,
         },
         {
           iconPath: fbLogo,

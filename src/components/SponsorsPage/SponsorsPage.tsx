@@ -1,13 +1,24 @@
-import goldImage from '@/images/gold.png';
-import silverImage from '@/images/silver.png';
-import bronzeImage from '@/images/bronze.png';
-import standardImage from '@/images/standard.png';
+import CyberCareLogo from '@/images/Sponsors/Auksas/cyber_care.svg';
+import AssecoLogo from '@/images/Sponsors/Auksas/asseco.svg';
+
+// Updated Bronza sponsors with actual company names
+import AccLogo from '@/images/Sponsors/Bronza/accLogo.png';
+import BentleyLogo from '@/images/Sponsors/Bronza/bentleyLogo.png';
+import LuminorLogo from '@/images/Sponsors/Bronza/LuminorLogo.png';
+import CornerCaseLogo from '@/images/Sponsors/Bronza/cornerCaseLogo.png';
+import KpmgLogo from '@/images/Sponsors/Bronza/kpmgLogo.png';
+import WesternUnionLogo from '@/images/Sponsors/Bronza/WesternUnionLogo.png';
+
+// Updated Standartinis sponsor with actual company names
+import OxylabsLogo from '@/images/Sponsors/Standartinis/oxylabs.png';
+import NearaLogo from '@/images/Sponsors/Standartinis/nearaLogo.png';
 
 enum SponsorTier {
-  gold,
-  silver,
-  bronze,
-  standard,
+  auksas,
+  sidabras,
+  bronza,
+  standartinis,
+  partneriai,
 }
 
 interface Sponsor {
@@ -18,30 +29,74 @@ interface Sponsor {
 }
 
 const sponsors: Sponsor[] = [
+  // Auksas sponsors
   {
-    href: 'https://lt.wikipedia.org/wiki/Auksas',
-    src: goldImage,
-    alt: 'Gold Sponsor',
-    tier: SponsorTier.gold,
+    href: 'https://cybercare.cc',
+    src: CyberCareLogo,
+    alt: 'CyberCare',
+    tier: SponsorTier.auksas,
+  },
+
+  {
+    href: 'https://asseco.com',
+    src: AssecoLogo,
+    alt: 'Asseco',
+    tier: SponsorTier.auksas,
+  },
+
+  // Bronza sponsors
+  {
+    href: 'https://www.accenture.com',
+    src: AccLogo,
+    alt: 'Accenture',
+    tier: SponsorTier.bronza,
   },
   {
-    href: 'https://lt.wikipedia.org/wiki/Sidabras',
-    src: silverImage,
-    alt: 'Silver Sponsor',
-    tier: SponsorTier.silver,
+    href: 'https://www.bentley.com',
+    src: BentleyLogo,
+    alt: 'Bentley',
+    tier: SponsorTier.bronza,
   },
   {
-    href: 'https://lt.wikipedia.org/wiki/Bronza',
-    src: bronzeImage,
-    alt: 'Bronze Sponsor',
-    tier: SponsorTier.bronze,
+    href: 'https://www.luminor.lt',
+    src: LuminorLogo,
+    alt: 'Luminor',
+    tier: SponsorTier.bronza,
   },
   {
-    href: 'https://lt.wikipedia.org/wiki/Standartas',
-    src: standardImage,
-    alt: 'Standard Sponsor',
-    tier: SponsorTier.standard,
+    href: 'https://www.cornercasetech.com',
+    src: CornerCaseLogo,
+    alt: 'Corner Case',
+    tier: SponsorTier.bronza,
   },
+  {
+    href: 'https://kpmg.com',
+    src: KpmgLogo,
+    alt: 'KPMG',
+    tier: SponsorTier.bronza,
+  },
+  {
+    href: 'https://www.westernunion.com',
+    src: WesternUnionLogo,
+    alt: 'Western Union',
+    tier: SponsorTier.bronza,
+  },
+
+  // Standartinis sponsors
+  {
+    href: 'https://oxylabs.io',
+    src: OxylabsLogo,
+    alt: 'Oxylabs',
+    tier: SponsorTier.standartinis,
+  },
+  {
+    href: 'https://neara.com',
+    src: NearaLogo,
+    alt: 'Neara',
+    tier: SponsorTier.standartinis,
+  },
+
+  // Partneriai
 ];
 
 function renderSponsorSection(tier: SponsorTier, sponsors: Sponsor[]) {
@@ -49,19 +104,35 @@ function renderSponsorSection(tier: SponsorTier, sponsors: Sponsor[]) {
 
   if (filteredSponsors.length === 0) return null;
 
-  const tierTitle = `${SponsorTier[tier][0].toUpperCase()}${SponsorTier[tier].slice(1)}`;
+  const tierTitles = {
+    [SponsorTier.auksas]: 'Auksiniai rėmėjai',
+    [SponsorTier.sidabras]: 'Sidabriniai rėmėjai',
+    [SponsorTier.bronza]: 'Bronziniai rėmėjai',
+    [SponsorTier.standartinis]: 'Standartiniai rėmėjai',
+    [SponsorTier.partneriai]: 'Partneriai',
+  };
 
   const tierClasses = {
-    [SponsorTier.gold]: 'text-gold border-gold',
-    [SponsorTier.silver]: 'text-silver border-silver',
-    [SponsorTier.bronze]: 'text-bronze border-bronze',
-    [SponsorTier.standard]: 'text-standard border-standard',
+    [SponsorTier.auksas]: 'text-gold border-gold',
+    [SponsorTier.sidabras]: 'text-silver border-silver',
+    [SponsorTier.bronza]: 'text-bronze border-bronze',
+    [SponsorTier.standartinis]: 'text-standard border-standard',
+    [SponsorTier.partneriai]: 'text-partner border-partner',
   };
 
   return (
-    <div key={tier} className={`my-8 p-4 border-l-4 ${tierClasses[tier]}`}>
-      <h2 className="text-2xl font-bold mb-4">{tierTitle} Sponsors</h2>
-      <div className="flex flex-wrap gap-6">
+    <div key={tier} className="my-12">
+      <div className={`flex items-center justify-center mb-6`}>
+        <div className={`border-t-4 ${tierClasses[tier]} flex-grow mx-4`}></div>
+        <h2
+          className={`text-4xl px-6 text-center ${tierClasses[tier].split(' ')[0]}`}
+        >
+          {tierTitles[tier]}
+        </h2>
+        <div className={`border-t-4 ${tierClasses[tier]} flex-grow mx-4`}></div>
+      </div>
+
+      <div className="flex flex-wrap gap-1 justify-center">
         {filteredSponsors.map((sponsor, index) => (
           <a
             key={index}
@@ -73,7 +144,7 @@ function renderSponsorSection(tier: SponsorTier, sponsors: Sponsor[]) {
             <img
               src={sponsor.src}
               alt={sponsor.alt}
-              className="w-20 h-20 object-contain hover:opacity-80"
+              className="w-56 h-56 m-5 object-contain hover:opacity-80"
             />
           </a>
         ))}
@@ -85,7 +156,6 @@ function renderSponsorSection(tier: SponsorTier, sponsors: Sponsor[]) {
 function SponsorsPage() {
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold text-center mb-10">Sponsors Page</h1>
       {Object.values(SponsorTier).map(tier =>
         renderSponsorSection(tier as SponsorTier, sponsors),
       )}
