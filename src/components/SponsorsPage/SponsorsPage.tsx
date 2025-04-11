@@ -8,6 +8,7 @@ import LuminorLogo from '@/images/Sponsors/Bronza/LuminorLogo.png';
 import CornerCaseLogo from '@/images/Sponsors/Bronza/cornerCaseLogo.png';
 import KpmgLogo from '@/images/Sponsors/Bronza/kpmgLogo.png';
 import WesternUnionLogo from '@/images/Sponsors/Bronza/WesternUnionLogo.png';
+import sebLogo from '@/images/Sponsors/Bronza/seb.png';
 
 // Updated Standartinis sponsor with actual company names
 import OxylabsLogo from '@/images/Sponsors/Standartinis/oxylabs.png';
@@ -79,6 +80,12 @@ const sponsors: Sponsor[] = [
     href: 'https://www.westernunion.com',
     src: WesternUnionLogo,
     alt: 'Western Union',
+    tier: SponsorTier.bronza,
+  },
+  {
+    href: 'https://www.seb.lt/',
+    src: sebLogo,
+    alt: 'SEB',
     tier: SponsorTier.bronza,
   },
 
