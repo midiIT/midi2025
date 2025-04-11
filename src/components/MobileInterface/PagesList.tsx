@@ -9,6 +9,7 @@ import igLogo from '@/images/ig.png';
 import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
 import volunteersIcon from '@/images/savanoriai.png';
 import sponsorIcon from '@/images/Sponsors/sponsor.png'; // CHANGE TO ICON
+import rokoOperaIcon from '@/images/roko_opera.png';
 
 // Pages
 import TeamPage from '@/components/TeamPage/TeamPage';
@@ -91,6 +92,11 @@ export const PagesList = ({
           iconPath: igLogo,
           appText: 'Instagram',
           href: 'https://www.instagram.com/midi.lt/',
+        },
+        {
+          iconPath: rokoOperaIcon,
+          appText: 'MIDI Roko Opera',
+          href: 'https://www.facebook.com/events/622614794023338',
         },
       ]}
       showWindow={showWindow}

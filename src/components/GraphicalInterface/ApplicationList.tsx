@@ -16,7 +16,8 @@ import fbLogo from '@/images/fb.png';
 import igLogo from '@/images/ig.png';
 import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
 import volunteersIcon from '@/images/savanoriai.png';
-import sponsorIcon from '@/images/Sponsors/sponsor.png'; // CHANGE TO ICON
+import sponsorIcon from '@/images/Sponsors/sponsor.png';
+import rokoOperaIcon from '@/images/roko_opera.png';
 
 const applications: Application[] = [
   {
@@ -119,6 +120,14 @@ const applications: Application[] = [
       iconPath: volunteersIcon,
     },
     href: 'https://forms.office.com/pages/responsepage.aspx?id=XVfIeiHvL0yhJSx6Ldsk1ozdT6lf8khCpJGHuI2p37JUQUpQRFlBMEtWV0hLU0JCUlI2Uk9IOFVYTS4u&route=shorturl',
+  },
+  {
+    hidden: false,
+    data: {
+      title: 'MIDI Roko Opera',
+      iconPath: rokoOperaIcon,
+    },
+    href: 'https://www.facebook.com/events/622614794023338',
   },
 ];
 
