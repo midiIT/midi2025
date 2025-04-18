@@ -57,7 +57,7 @@ const sponsors: Sponsor[] = [
   },
 
   {
-    href: 'https://asseco.com',
+    href: 'https://lt.asseco.com/',
     src: AssecoLogo,
     alt: 'Asseco',
     tier: SponsorTier.auksas,
