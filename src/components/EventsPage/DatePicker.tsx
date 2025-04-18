@@ -82,9 +82,15 @@ const DatePicker = ({ onDatePicked, eventsMonth, isApp }: DatePickerProps) => {
   const getEventTitleForDate = (dateString: string): string | undefined => {
     const filteredEvents = events.filter(event => event.date === dateString);
     if (filteredEvents?.length > 0) {
-      return filteredEvents.length > 1
-        ? filteredEvents[0].title + ' ir ' + filteredEvents[1].title
-        : filteredEvents[0].title;
+      return filteredEvents.length == 3
+        ? filteredEvents[0].title +
+            ', ' +
+            filteredEvents[1].title +
+            ' ir ' +
+            filteredEvents[2].title
+        : filteredEvents.length == 2
+          ? filteredEvents[0].title + ' ir ' + filteredEvents[1].title
+          : filteredEvents[0].title;
     } else {
       return undefined;
     }

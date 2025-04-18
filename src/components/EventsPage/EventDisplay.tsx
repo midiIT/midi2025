@@ -11,6 +11,7 @@ interface Event {
   url_tickets?: string;
   url_tickets1?: string;
   url_discord?: string;
+  url_location?: string;
 }
 
 const EventDisplay = () => {
@@ -51,6 +52,10 @@ const EventDisplay = () => {
                   .replace(
                     /url_tickets/g,
                     `<a style="color: #0275B4" href="${currEvent.url_tickets ?? ''}">${currEvent.url_tickets ?? ''}</a>`,
+                  )
+                  .replace(
+                    /url_location/g,
+                    `<a style="color: #0275B4" href="${currEvent.url_location ?? ''}">${currEvent.url_location ?? ''}</a>`,
                   )
                   .replace(
                     /url_discord/g,
