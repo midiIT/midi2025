@@ -1,7 +1,8 @@
+// Auksas
 import CyberCareLogo from '@/images/Sponsors/Auksas/cyber_care.svg';
 import AssecoLogo from '@/images/Sponsors/Auksas/asseco.svg';
 
-// Updated Bronza sponsors with actual company names
+// Bronza
 import AccLogo from '@/images/Sponsors/Bronza/accLogo.png';
 import BentleyLogo from '@/images/Sponsors/Bronza/bentleyLogo.png';
 import LuminorLogo from '@/images/Sponsors/Bronza/LuminorLogo.png';
@@ -10,9 +11,26 @@ import KpmgLogo from '@/images/Sponsors/Bronza/kpmgLogo.png';
 import WesternUnionLogo from '@/images/Sponsors/Bronza/WesternUnionLogo.png';
 import sebLogo from '@/images/Sponsors/Bronza/seb.png';
 
-// Updated Standartinis sponsor with actual company names
+// Standartiniai
 import OxylabsLogo from '@/images/Sponsors/Standartinis/oxylabs.png';
 import NearaLogo from '@/images/Sponsors/Standartinis/nearaLogo.png';
+
+// Partneriai
+import backToBlackKeramikaLogo from '@/images/Sponsors/Partneriai/backToBlackKeramika.png';
+import coffeeLabLogo from '@/images/Sponsors/Partneriai/coffeeLab.png';
+import elmenhorsterLogo from '@/images/Sponsors/Partneriai/elmenhorster.png';
+import formosaLogo from '@/images/Sponsors/Partneriai/formosa.png';
+import gaidelisLogo from '@/images/Sponsors/Partneriai/gaidelis.png';
+import nomedaLogo from '@/images/Sponsors/Partneriai/nomeda.png';
+import krunchasLogo from '@/images/Sponsors/Partneriai/krunchas.png';
+import lemonGymLogo from '@/images/Sponsors/Partneriai/lemonGym.svg';
+import me2uLogo from '@/images/Sponsors/Partneriai/me2u.png';
+import oyakataLogo from '@/images/Sponsors/Partneriai/oyakata.png';
+import pauzeKeramikaLogo from '@/images/Sponsors/Partneriai/pauzeKeramika.png';
+import pepsiLogo from '@/images/Sponsors/Partneriai/pepsi.png';
+import pizzaVerdeLogo from '@/images/Sponsors/Partneriai/pizzaVerde.png';
+import savaipSkinLogo from '@/images/Sponsors/Partneriai/savaipSkin.png';
+import zaliZaliLogo from '@/images/Sponsors/Partneriai/zaliZali.png';
 
 enum SponsorTier {
   auksas,
@@ -104,6 +122,96 @@ const sponsors: Sponsor[] = [
   },
 
   // Partneriai
+  {
+    href: 'https://zalizali.lt/',
+    src: zaliZaliLogo,
+    alt: 'Žali Žali',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://pauzekeramika.com/',
+    src: pauzeKeramikaLogo,
+    alt: 'Pauzė keramika',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://www.instagram.com/backtoblack.ceramics/',
+    src: backToBlackKeramikaLogo,
+    alt: 'backtoblack.ceramics',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://coffeelab.lt/',
+    src: coffeeLabLogo,
+    alt: 'Coffee Lab',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://savaipskin.com/',
+    src: savaipSkinLogo,
+    alt: 'Savaip Skin',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://www.formosa.lt/',
+    src: formosaLogo,
+    alt: 'Formosa',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://www.elmenhorster.lt/',
+    src: elmenhorsterLogo,
+    alt: 'Elmenhorster',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://www.pepsi.com/',
+    src: pepsiLogo,
+    alt: 'Pepsi',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://www.lemongym.lt/en/',
+    src: lemonGymLogo,
+    alt: 'Lemon Gym',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://krunchas.lt/lt/',
+    src: krunchasLogo,
+    alt: 'Krunchas',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://gaidelisklasika.lt/',
+    src: gaidelisLogo,
+    alt: 'Gaidelis',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://www.pergale.lt/',
+    src: nomedaLogo,
+    alt: 'Nomeda',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://oyakata.lt/en/',
+    src: oyakataLogo,
+    alt: 'Oyakata',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://me2u.lt/en',
+    src: me2uLogo,
+    alt: 'me2u',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://pizzaverde.lt/',
+    src: pizzaVerdeLogo,
+    alt: 'Pizza Verde',
+    tier: SponsorTier.partneriai,
+  },
 ];
 
 function renderSponsorSection(tier: SponsorTier, sponsors: Sponsor[]) {
@@ -151,7 +259,10 @@ function renderSponsorSection(tier: SponsorTier, sponsors: Sponsor[]) {
             <img
               src={sponsor.src}
               alt={sponsor.alt}
-              className="w-56 h-56 m-5 object-contain hover:opacity-80"
+              className={`
+              ${sponsor.tier === SponsorTier.partneriai ? 'w-36' : 'w-56'}
+              ${sponsor.tier === SponsorTier.partneriai ? 'h-36' : 'h-56'}
+              m-5 object-contain hover:opacity-80`}
             />
           </a>
         ))}
