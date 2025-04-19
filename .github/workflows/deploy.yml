@@ -61,7 +61,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
-      - name: ssh deploy to oracle cloud
+      - name: ssh deploy to midi server
         uses: easingthemes/ssh-deploy@v5.1.0
         with:
           SSH_PRIVATE_KEY: ${{ secrets.KEY }}
