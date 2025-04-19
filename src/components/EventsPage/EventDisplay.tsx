@@ -2,9 +2,23 @@ import events from '@/events.json';
 import { useAppSelector } from '@/app/hooks.ts';
 import { selectEventDate } from '@/app/ApplicationsSlice.ts';
 
+interface Event {
+  title: string;
+  description: string;
+  date: string;
+  url_registration?: string;
+  url_registration1?: string;
+  url_tickets?: string;
+  url_tickets1?: string;
+  url_discord?: string;
+  url_location?: string;
+}
+
 const EventDisplay = () => {
   const eventDate = useAppSelector(selectEventDate);
-  const eventsForDate = events.filter(event => event.date === eventDate);
+  const eventsForDate: Event[] = events.filter(
+    event => event.date === eventDate,
+  );
 
   return (
     <div
@@ -12,22 +26,47 @@ const EventDisplay = () => {
       style={{ maxHeight: '80vh' }}
     >
       {eventsForDate.length > 0 ? (
-        eventsForDate.map((event, index) => (
+        eventsForDate.map((currEvent, index) => (
           <div key={index} className="mb-4">
             <h2 className="text-xl font-semibold" style={{ color: '#0175B4' }}>
-              {event.title}
+              {currEvent.title}
             </h2>
 
             <div
               className="text-gray-400 mt-2"
               style={{ whiteSpace: 'pre-wrap' }}
-            >
-              {event.description}
-            </div>
+              dangerouslySetInnerHTML={{
+                __html: currEvent.description
+                  .replace(
+                    /url_registration1/g,
+                    `<a style="color: #0275B4" href="${currEvent.url_registration1 ?? ''}">${currEvent.url_registration1 ?? ''}</a>`,
+                  )
+                  .replace(
+                    /url_registration/g,
+                    `<a style="color: #0275B4" href="${currEvent.url_registration ?? ''}">${currEvent.url_registration ?? ''}</a>`,
+                  )
+                  .replace(
+                    /url_tickets1/g,
+                    `<a style="color: #0275B4" href="${currEvent.url_tickets1 ?? ''}">${currEvent.url_tickets1 ?? ''}</a>`,
+                  )
+                  .replace(
+                    /url_tickets/g,
+                    `<a style="color: #0275B4" href="${currEvent.url_tickets ?? ''}">${currEvent.url_tickets ?? ''}</a>`,
+                  )
+                  .replace(
+                    /url_location/g,
+                    `<a style="color: #0275B4" href="${currEvent.url_location ?? ''}">${currEvent.url_location ?? ''}</a>`,
+                  )
+                  .replace(
+                    /url_discord/g,
+                    `<a style="color: #0275B4" href="${currEvent.url_discord ?? ''}">${currEvent.url_discord ?? ''}</a>`,
+                  ),
+              }}
+            ></div>
 
             {window.location.href.includes('mobile') && (
               <p className="mt-5" style={{ color: '#0175B4' }}>
-                {event.date}
+                {currEvent.date}
               </p>
             )}
             {index < eventsForDate.length - 1 && (

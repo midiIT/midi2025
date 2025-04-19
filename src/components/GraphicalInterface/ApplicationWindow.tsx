@@ -316,15 +316,19 @@ const ApplicationWindow: React.FC<ApplicationWindowProps> = ({
           isFocused: isFocused,
         })}
       </div>
-      <div className="absolute top-0 left-0 w-2 h-2 cursor-nw-resize resizer resizer-nw z-51"></div>
-      <div className="absolute top-0 right-0 w-2 h-2 cursor-ne-resize resizer resizer-ne z-51"></div>
-      <div className="absolute bottom-0 left-0 w-2 h-2 cursor-sw-resize resizer resizer-sw z-51"></div>
-      <div className="absolute bottom-0 right-0 w-2 h-2 cursor-se-resize resizer resizer-se z-51"></div>
+      {title !== 'Renginiai' && (
+        <div>
+          <div className="absolute top-0 left-0 w-2 h-2 cursor-nw-resize resizer resizer-nw z-51"></div>
+          <div className="absolute top-0 right-0 w-2 h-2 cursor-ne-resize resizer resizer-ne z-51"></div>
+          <div className="absolute bottom-0 left-0 w-2 h-2 cursor-sw-resize resizer resizer-sw z-51"></div>
+          <div className="absolute bottom-0 right-0 w-2 h-2 cursor-se-resize resizer resizer-se z-51"></div>
 
-      <div className="absolute top-0 left-4 right-4 h-2 cursor-n-resize resizer resizer-n z-50"></div>
-      <div className="absolute bottom-0 left-4 right-4 h-2 cursor-s-resize resizer resizer-s z-50"></div>
-      <div className="absolute left-0 top-4 bottom-4 w-2 cursor-w-resize resizer resizer-w z-50"></div>
-      <div className="absolute right-0 top-4 bottom-4 w-2 cursor-e-resize resizer resizer-e z-50"></div>
+          <div className="absolute top-0 left-4 right-4 h-2 cursor-n-resize resizer resizer-n z-50"></div>
+          <div className="absolute bottom-0 left-4 right-4 h-2 cursor-s-resize resizer resizer-s z-50"></div>
+          <div className="absolute left-0 top-4 bottom-4 w-2 cursor-w-resize resizer resizer-w z-50"></div>
+          <div className="absolute right-0 top-4 bottom-4 w-2 cursor-e-resize resizer resizer-e z-50"></div>
+        </div>
+      )}
     </div>
   );
 };

@@ -7,10 +7,11 @@ export default {
         gold: '#FFD700',
         silver: '#C0C0C0',
         bronze: '#CD7F32',
-        standard: '#D3D3D3',
+        standard: '#3B82F6',
         'light-yellow': '#f5f5dc',
         purple: '#c39bd3',
         'midi-blue': '#0175B4',
+        partner: '#10B981',
       },
       screens: {
         es: '360px', // Extra Small (custom)

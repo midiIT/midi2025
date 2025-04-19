@@ -8,9 +8,10 @@ import { useAppDispatch } from '@/app/hooks.ts';
 interface DatePickerProps {
   onDatePicked?: () => void;
   eventsMonth?: boolean;
+  isApp?: boolean;
 }
 
-const DatePicker = ({ onDatePicked, eventsMonth }: DatePickerProps) => {
+const DatePicker = ({ onDatePicked, eventsMonth, isApp }: DatePickerProps) => {
   const dispatch = useAppDispatch();
   const today = new Date();
   const [currentYear, setCurrentYear] = useState<number>(today.getFullYear());
@@ -78,30 +79,41 @@ const DatePicker = ({ onDatePicked, eventsMonth }: DatePickerProps) => {
       }
     }
   };
-
   const getEventTitleForDate = (dateString: string): string | undefined => {
     const filteredEvents = events.filter(event => event.date === dateString);
     if (filteredEvents?.length > 0) {
-      return filteredEvents.length > 1
-        ? filteredEvents[0].title + ' ir ' + filteredEvents[1].title
-        : filteredEvents[0].title;
+      return filteredEvents.length == 3
+        ? filteredEvents[0].title +
+            ', ' +
+            filteredEvents[1].title +
+            ' ir ' +
+            filteredEvents[2].title
+        : filteredEvents.length == 2
+          ? filteredEvents[0].title + ' ir ' + filteredEvents[1].title
+          : filteredEvents[0].title;
     } else {
       return undefined;
     }
   };
 
   return (
-    <div className="p-4 lg:mx-auto bg-black shadow-lg rounded-md w-[98%] md:w-full h-[392px] md:h-[440px] overflow-y-auto">
+    <div
+      className={`p-4 lg:mx-auto bg-black shadow-lg md:w-full h-[392px] md:h-[440px] overflow-y-auto
+      ${isApp ? '' : 'rounded-md'}
+      `}
+    >
       <div className="flex justify-between items-center mb-4">
-        <button
-          onClick={() => handleMonthChange('Atgal')}
-          className="px-2 py-1 bg-black-500 rounded-md"
-          style={{ color: '#466b7f' }}
-        >
-          &lt; Atgal
-        </button>
+        {!eventsMonth && (
+          <button
+            onClick={() => handleMonthChange('Atgal')}
+            className="px-2 py-1 bg-black-500 rounded-md"
+            style={{ color: '#466b7f' }}
+          >
+            &lt; Atgal
+          </button>
+        )}
         <h2
-          className="text-xl font-semibold text-center"
+          className={`text-xl font-semibold text-center ${eventsMonth ? 'w-full' : ''}`}
           style={{ color: '#0175B4' }}
         >
           {new Date(currentYear, currentMonth - 1)
@@ -111,13 +123,15 @@ const DatePicker = ({ onDatePicked, eventsMonth }: DatePickerProps) => {
             .replace(/^\w/, c => c.toUpperCase())}{' '}
           {currentYear}
         </h2>
-        <button
-          onClick={() => handleMonthChange('Kitas')}
-          className="px-2 py-1 bg-black rounded-md"
-          style={{ color: '#466b7f' }}
-        >
-          Pirmyn &gt;
-        </button>
+        {!eventsMonth && (
+          <button
+            onClick={() => handleMonthChange('Kitas')}
+            className="px-2 py-1 bg-black rounded-md"
+            style={{ color: '#466b7f' }}
+          >
+            Pirmyn &gt;
+          </button>
+        )}
       </div>
       <div className="grid grid-cols-7 gap-2 text-center font-semibold text-gray-500 mb-2">
         {weekdayHeaders.map((day, index) => (

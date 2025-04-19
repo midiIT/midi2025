@@ -4,17 +4,19 @@ import PageWithApplications from './ApplicationComponents/PageWithApplications';
 // Icons
 import teamIcon from '@/images/komanda.png';
 import eventsLogo from '@/images/renginiai.png';
-import bpLogo from '@/images/BP.png';
 import fbLogo from '@/images/fb.png';
 import igLogo from '@/images/ig.png';
 import photoGalerryIcon from '@/images/PhotoGalleryLogo.png';
+import volunteersIcon from '@/images/savanoriai.png';
+import sponsorIcon from '@/images/Sponsors/sponsor.png'; // CHANGE TO ICON
+import rokoOperaIcon from '@/images/roko_opera.png';
 
 // Pages
 import TeamPage from '@/components/TeamPage/TeamPage';
 import Clock from './OtherMobile/Clock';
-import Bp from '@/components/bp/Bp.tsx';
 import DatePicker from '@/components/EventsPage/DatePicker.tsx';
 import PhotoGalleryContent from '../PhotoGallery/PhotoGalleryContent';
+import SponsorsPage from '@/components/SponsorsPage/SponsorsPage';
 
 interface PagesProps {
   brightness: number;
@@ -25,16 +27,27 @@ interface PagesProps {
 }
 
 export const PagesList = ({
-  // brightness,
-  // setBrightness,
   setShowEventInfo,
   showWindow,
   setShowWindow,
 }: PagesProps): React.ReactElement[] => {
   return [
     // 1 Page: Clock
-    <div className="absolute inset-0 w-full h-full overflow-hidden">
+    <div className="h-[88vh] overflow-y-scroll">
       <Clock />
+      <div className="text-5xl text-center">Organizatoriai</div>
+      <div className="flex flex-col items-center gap-10 mt-10">
+        <div className="w-[12rem] bg-white rounded-lg">
+          <a href="https://midi.lt">
+            <img src="images/MIDI_logo.webp" alt="MIDI logo" />
+          </a>
+        </div>
+        <div className="w-[10rem]">
+          <a href="https://mif.vusa.lt/lt">
+            <img src="images/VUSAMIF_logo.webp" alt="VUSA MIF logo" />
+          </a>
+        </div>
+      </div>
     </div>,
 
     // 2 Page: Applications
@@ -43,33 +56,48 @@ export const PagesList = ({
         {
           iconPath: teamIcon,
           appText: 'Komanda',
-          windowContent: TeamPage,
+          windowContent: <TeamPage />,
         },
         {
           iconPath: eventsLogo,
           appText: 'Renginiai',
-          windowContent: DatePicker,
+          windowContent: (
+            <DatePicker
+              onDatePicked={() => setShowEventInfo(true)}
+              eventsMonth={true}
+            />
+          ),
         },
         {
           iconPath: photoGalerryIcon,
           appText: 'Nuotraukų galerija',
-          windowContent: PhotoGalleryContent,
+          windowContent: <PhotoGalleryContent />,
         },
         {
-          iconPath: bpLogo,
-          appText: 'Bendradarbiavimo pasiūlymas',
-          windowContent: Bp,
+          iconPath: volunteersIcon,
+          appText: 'Prisijunk prie MIDI!',
+          href: 'https://forms.office.com/pages/responsepage.aspx?id=XVfIeiHvL0yhJSx6Ldsk1ozdT6lf8khCpJGHuI2p37JUQUpQRFlBMEtWV0hLU0JCUlI2Uk9IOFVYTS4u&route=shorturl',
         },
-        // {
-        //   iconPath: fbLogo,
-        //   appText: 'Facebook',
-        //   windowContent: TeamPage,
-        // },
-        // {
-        //   iconPath: igLogo,
-        //   appText: 'Instagram',
-        //   windowContent: TeamPage,
-        // },
+        {
+          iconPath: sponsorIcon,
+          appText: 'Rėmėjai',
+          windowContent: <SponsorsPage />,
+        },
+        {
+          iconPath: fbLogo,
+          appText: 'Facebook',
+          href: 'https://www.facebook.com/midi.lt/',
+        },
+        {
+          iconPath: igLogo,
+          appText: 'Instagram',
+          href: 'https://www.instagram.com/midi.lt/',
+        },
+        {
+          iconPath: rokoOperaIcon,
+          appText: 'MIDI Roko Opera',
+          href: 'https://www.facebook.com/events/622614794023338',
+        },
       ]}
       showWindow={showWindow}
       setShowWindow={setShowWindow}
