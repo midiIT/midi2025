@@ -1,6 +1,6 @@
 // Auksas
 import CyberCareLogo from '@/images/Sponsors/Auksas/cyber_care.svg';
-import AssecoLogo from '@/images/Sponsors/Auksas/asseco.svg';
+import AssecoLogo from '@/images/Sponsors/Auksas/asseco.png';
 
 // Bronza
 import AccLogo from '@/images/Sponsors/Bronza/accLogo.png';
@@ -31,6 +31,7 @@ import pepsiLogo from '@/images/Sponsors/Partneriai/pepsi.png';
 import pizzaVerdeLogo from '@/images/Sponsors/Partneriai/pizzaVerde.png';
 import savaipSkinLogo from '@/images/Sponsors/Partneriai/savaipSkin.png';
 import zaliZaliLogo from '@/images/Sponsors/Partneriai/zaliZali.png';
+import sadmLogo from '@/images/Sponsors/Partneriai/sadm.png';
 
 enum SponsorTier {
   auksas,
@@ -210,6 +211,12 @@ const sponsors: Sponsor[] = [
     href: 'https://pizzaverde.lt/',
     src: pizzaVerdeLogo,
     alt: 'Pizza Verde',
+    tier: SponsorTier.partneriai,
+  },
+  {
+    href: 'https://socmin.lrv.lt/lt/',
+    src: sadmLogo,
+    alt: 'Lietuvos Respublikos socialinės apsaugos ir darbo ministerija',
     tier: SponsorTier.partneriai,
   },
 ];
