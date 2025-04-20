@@ -28,6 +28,7 @@ jobs:
         with:
           name: build-artifact
           path: dist/
+          include-hidden-files: 'true'
 
   lint:
     needs: build
