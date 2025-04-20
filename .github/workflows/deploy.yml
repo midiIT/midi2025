@@ -60,10 +60,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
-      - name: ftp deploy to midi server
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: ssh deploy to midi server
+        uses: easingthemes/ssh-deploy@v5.1.0
         with:
-          server: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.PASSWORD }}
-          server-dir: ${{ secrets.TARGET }}
+          SSH_PRIVATE_KEY: ${{ secrets.KEY }}
+          REMOTE_HOST: ${{ secrets.HOST }}
+          REMOTE_USER: ${{ secrets.USER }}
+          REMOTE_PORT: ${{ secrets.PORT }}
+          TARGET: ${{ secrets.TARGET }}
