@@ -76,7 +76,7 @@ export const PagesList = ({
         {
           iconPath: volunteersIcon,
           appText: 'Prisijunk prie MIDI!',
-          href: 'https://forms.office.com/pages/responsepage.aspx?id=XVfIeiHvL0yhJSx6Ldsk1ozdT6lf8khCpJGHuI2p37JUQUpQRFlBMEtWV0hLU0JCUlI2Uk9IOFVYTS4u&route=shorturl',
+          href: 'https://linktr.ee/mifmidi`~',
         },
         {
           iconPath: sponsorIcon,
