@@ -76,7 +76,7 @@ export const PagesList = ({
         {
           iconPath: volunteersIcon,
           appText: 'Prisijunk prie MIDI!',
-          href: 'https://linktr.ee/mifmidi`~',
+          href: 'https://linktr.ee/mifmidi',
         },
         {
           iconPath: sponsorIcon,
